@@ -78,6 +78,7 @@ components:
           items:
             $ref: "#/components/schemas/MealItem"
 
+
   responses:
     Success:
       description: OK

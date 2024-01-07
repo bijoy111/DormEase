@@ -12,6 +12,7 @@ const create_student = async (req, res, next) => {
         });
     }
 
+
     const { stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident, guardian_name, guardian_phone } = req.body;
 
     copy = auth_model.find_student_by_id(stu_id);
