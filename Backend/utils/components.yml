@@ -9,8 +9,75 @@ components:
     Success:
       type: object
       properties:
-        success:
+        message:
+          type: string
+
+    Post:
+      type: object
+      properties:
+        post_id:
+          type: number
+        stu_id:
+          type: number
+        name:
+          type: string
+        created_at:
+          type: string
+        text:
+          type: string
+        "type":
+          type: string
+        upvote:
+          type: number
+        is_upvoted:
           type: boolean
+        is_mine:
+          type: boolean
+        media:
+          type: array
+          items:
+            type: string
+
+    Notice:
+      type: object
+      properties:
+        notice_id:
+          type: number
+        created_at:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        media:
+          type: array
+          items:
+            type: string
+
+    MealItem:
+      type: object
+      properties:
+        name:
+          type: string
+        price_per_unit:
+          type: number
+        quantity:
+          type: number
+
+    Meal:
+      type: object
+      properties:
+        date:
+          type: string
+        lunch:
+          type: array
+          items:
+            $ref: "#/components/schemas/MealItem"
+        dinner:
+          type: array
+          items:
+            $ref: "#/components/schemas/MealItem"
+
 
   responses:
     Success:
@@ -20,7 +87,6 @@ components:
           schema:
             $ref: "#/components/schemas/Success"
           example:
-            code: 200
             message: OK
     DuplicateID:
       description: Duplicate ID
@@ -54,6 +120,80 @@ components:
             $ref: "#/components/schemas/Error"
           example:
             error: Not found
+
+    Post:
+      description: Post
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Post"
+          example:
+            post_id: 1
+            stu_id: 1905048
+            name: Al Amin Sany
+            created_at: "2024-01-01 00:00:00"
+            text: Hello World
+            type: status
+            upvote: 10
+            is_upvoted: false
+            is_mine: false
+            media:
+              [
+                "https://example.com/image1.jpg",
+                "https://example.com/image2.jpg",
+              ]
+            comments:
+              [
+                {
+                  post_id: 2,
+                  stu_id: 1905052,
+                  name: Bijoy Saiem,
+                  created_at: "2024-01-01 01:00:00",
+                  text: This is a comment,
+                  type: comment,
+                  upvote: 2,
+                  is_upvoted: true,
+                  is_mine: false,
+                  media: ["https://example.com/image1.jpg"],
+                  comments: [],
+                },
+              ]
+
+    Notice:
+      description: Notice
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Notice"
+          example:
+            notice_id: 1
+            created_at: "2024-01-01 00:00:00"
+            title: Notice Title
+            text: Notice Text
+            media:
+              [
+                "https://example.com/image1.jpg",
+                "https://example.com/image2.jpg",
+              ]
+
+    Meal:
+      description: Meal
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Meal"
+          example:
+            date: "2024-01-01"
+            lunch:
+              [
+                { name: Chicken Biriyani, price_per_unit: 80, quantity: 200 },
+                { name: Daal, price_per_unit: 10, quantity: 300 },
+              ]
+            dinner:
+              [
+                { name: Beef Bhuna, price_per_unit: 80, quantity: 250 },
+                { name: Rice, price_per_unit: 10, quantity: 300 },
+              ]
 
   securitySchemes:
     bearerAuth:

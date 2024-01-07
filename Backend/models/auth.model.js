@@ -2,13 +2,13 @@ const { db_query } = require('../db');
 const { hash, compare } = require('bcryptjs');
 
 // creates a new user
-async function create_student(stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident) {
+async function create_student(stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident, guardian_name, guardian_phone) {
     const hashedPassword = await hash(password, 10);
     const sql = `
-        INSERT INTO student (stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        INSERT INTO student (stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident, guardian_name, guardian_phone)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
     `;
-    const result = await db_query(sql, [stu_id, name, dept, level_term, phone, email, hashedPassword, cgpa, photo, room_no, hall, resident]);
+    const result = await db_query(sql, [stu_id, name, dept, level_term, phone, email, hashedPassword, cgpa, photo, room_no, hall, resident, guardian_name, guardian_phone]);
     return result;
 }
 
