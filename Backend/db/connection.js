@@ -1,14 +1,16 @@
 const { Pool } = require("pg");
+const dotenv = require("dotenv");
+dotenv.config();
 
 let pool = null;
 // creates connection pool for oracledb
 async function db_connect() {
     pool = new Pool({
-        user: "postgres",
-        host: "dormease-db.chko264kow3g.eu-north-1.rds.amazonaws.com",
-        database: "",
-        password: "dormease",
-        port: 5432,
+        user: process.env.DB_USER,
+        host: process.env.DB_HOST,
+        database: process.env.DB_NAME,
+        password: process.env.DB_PASS,
+        port: process.env.DB_PORT,
         ssl: true,
         ssl: {
             rejectUnauthorized: false

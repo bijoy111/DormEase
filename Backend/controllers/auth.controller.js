@@ -1,5 +1,4 @@
 const { auth_model } = require('../models');
-const { find_student_by_id } = require('../models/auth.model');
 const { loginUser } = require('../utils/auth-utils');
 
 const create_student = async (req, res, next) => {
@@ -13,16 +12,16 @@ const create_student = async (req, res, next) => {
         });
     }
 
-    const { stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident } = req.body;
+    const { stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident, guardian_name, guardian_phone } = req.body;
 
-    copy = find_student_by_id(stu_id);
+    copy = auth_model.find_student_by_id(stu_id);
     if (copy) {
         res.status(400).json({
             error: 'Student already exists'
         });
     }
 
-    const student = await auth_model.create_student(stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident);
+    const student = await auth_model.create_student(stu_id, name, dept, level_term, phone, email, password, cgpa, photo, room_no, hall, resident, guardian_name, guardian_phone);
 
     if (!student) {
         res.status(500).json({
