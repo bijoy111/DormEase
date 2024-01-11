@@ -22,6 +22,9 @@ module.exports = (router) => {
  *    get:
  *      summary: Show basic user info
  *      tags: [Dashboard]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -68,7 +71,7 @@ module.exports = (router) => {
  *                  hall: Shahid Smriti Hall
  *                  resident: true
  *                  guardian_name: Jane Doe
- *                  guardian_phone: 01700000001
+ *                  guardian_phone: "01700000001"
  */
 
 /**
@@ -77,6 +80,9 @@ module.exports = (router) => {
  *    get:
  *      summary: Show editable user info
  *      tags: [Dashboard]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -110,14 +116,17 @@ module.exports = (router) => {
  *            schema:
  *              type: object
  *              required:
- *                - password
+ *                - old_password
+ *                - new_password
  *                - email
  *                - phone
  *                - photo
  *                - guardian_name
  *                - guardian_phone
  *              properties:
- *                password:
+ *                old_password:
+ *                  type: string
+ *                new_password:
  *                  type: string
  *                email:
  *                  type: string
@@ -130,7 +139,8 @@ module.exports = (router) => {
  *                guardian_phone:
  *                  type: string
  *              example:
- *                  password: password1
+ *                  old_password: password1
+ *                  new_password: password2
  *                  email: johndoe31@gmail.com
  *                  phone: "01700000000"
  *                  photo: "https://example.com/image1.jpg"
@@ -144,12 +154,6 @@ module.exports = (router) => {
 /**
  * @swagger
  * /application/room/apply:
- *    get:
- *      summary: Show room application form
- *      tags: [Dashboard]
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/Success'
  *    post:
  *      summary: Submit room application form
  *      tags: [Dashboard]
@@ -187,11 +191,31 @@ module.exports = (router) => {
  * @swagger
  * /application/room/change:
  *    get:
- *      summary: Show application form for room change
+ *      summary: Show application form for room change with vacant rooms
  *      tags: [Dashboard]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
- *          $ref: '#/components/responses/Success'
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    room_no:
+ *                      type: number
+ *                    seat_no:
+ *                      type: array
+ *                      items:
+ *                        type: number
+ *              example:
+ *               - room_no: 101
+ *                 seat_no: [1, 2]
+ *               - room_no: 102
+ *                 seat_no: [0, 3]
  *    post:
  *      summary: Submit application form for room change
  *      tags: [Dashboard]
@@ -204,21 +228,29 @@ module.exports = (router) => {
  *              required:
  *                - stu_id
  *                - room_no
+ *                - seat_no
  *                - new_room_no
+ *                - new_seat_no
  *                - reason
  *              properties:
  *                  stu_id:
  *                      type: number
  *                  room_no:
  *                      type: number
+ *                  seat_no:
+ *                      type: number
  *                  new_room_no:
+ *                      type: number
+ *                  new_seat_no:
  *                      type: number
  *                  reason:
  *                      type: string
  *              example:
  *                 stu_id: 1905024
  *                 room_no: 101
+ *                 seat_no: 1
  *                 new_room_no: 102
+ *                 new_seat_no: 3
  *                 reason: My roommates are noisy
  *      responses:
  *        "200":

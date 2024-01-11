@@ -77,7 +77,66 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/MealItem"
+    
+    Applicant_apply:
+      type: object
+      properties:
+        stu_id:
+          type: number
+        name:
+          type: string
+        dept:
+          type: string
+        created_at:
+          type: string
+        cgpa:
+          type: number
+        home_district:
+          type: string
+        school:
+          type: string
+        college:
+          type: string
 
+    Applicant_change:
+      allOf:
+        - $ref: "#/components/schemas/Applicant_apply"
+        - type: object
+          properties:
+            room_no:
+              type: number
+            seat_no:
+              type: number
+            new_room_no:
+              type: number
+            new_seat_no:
+              type: number
+            reason:
+              type: string
+
+    SeatAllocation:
+      type: object
+      properties:
+        applicants:
+          type: array
+          items:
+            $ref: "#/components/schemas/Applicant_apply"
+        rooms:
+          type: array
+          items:
+            type: object
+            properties:
+              room_no:
+                type: string
+              allocations:
+                type: array
+                items:
+                  type: number
+
+    SeatChange:
+      type: array
+      items:
+        $ref: "#/components/schemas/Applicant_change"
 
   responses:
     Success:
@@ -195,6 +254,73 @@ components:
                 { name: Rice, price_per_unit: 10, quantity: 300 },
               ]
 
+    SeatAllocation:
+      description: Seat Allocation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SeatAllocation"
+          example:
+            applicants:
+              [
+                {
+                  stu_id: 1905048,
+                  name: John Doe,
+                  dept: CSE,
+                  created_at: "2024-01-01 00:00:00",
+                  cgpa: 3.99,
+                  home_district: Dinaipur,
+                  school: Dinajpur Zilla School,
+                  college: 
+                },
+                {
+                  stu_id: 1905049,
+                  name: Jane Doe,
+                  dept: CSE,
+                  created_at: "2024-01-01 00:00:00",
+                  cgpa: 3.99,
+                  home_district: Dhaka,
+                  school: Dhaka Residential Model School,
+                  college: Notre Dame College
+                }
+              ]
+            rooms:
+              [
+                {
+                  room_no: 101,
+                  allocations: [1905048, 1905052, 1905054, 1905055],
+                },
+                {
+                  room_no: 102,
+                  allocations: [1905049, 1905053, 1905056, 1905057],
+                }
+              ]
+
+    SeatChange:
+      description: Seat Change
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SeatChange"
+          example:
+            [
+              {
+                stu_id: 1905048,
+                name: John Doe,
+                dept: CSE,
+                created_at: "2024-01-01 00:00:00",
+                cgpa: 3.99,
+                home_district: Dinaipur,
+                school: Dinajpur Zilla School,
+                college: Dinajpur Govt. College,
+                room_no: 101,
+                seat_no: 1,
+                new_room_no: 102,
+                new_seat_no: 2,
+                reason: "I want to change my room",
+              }
+            ]
+  
   securitySchemes:
     bearerAuth:
       type: http

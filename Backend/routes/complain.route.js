@@ -19,6 +19,9 @@ module.exports = (router) => {
  *    get:
  *      summary: Show all complaints
  *      tags: [Complaint]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -57,6 +60,16 @@ module.exports = (router) => {
  *    get:
  *      summary: Show all messages of a complaint
  *      tags: [Complaint]
+ *      parameters:
+ *        - in: path
+ *          name: comp_id
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: Complaint ID
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -77,9 +90,18 @@ module.exports = (router) => {
  *                create_time: "2021-05-01 12:00:00"
  *                admin_side: false
  *                text: "My roommates are noisy"
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
  *    post:
  *      summary: Send a message to a complaint
  *      tags: [Complaint]
+ *      parameters:
+ *        - in: path
+ *          name: comp_id
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: Complaint ID
  *      requestBody:
  *        required: true
  *        content:
@@ -104,6 +126,8 @@ module.exports = (router) => {
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
  */
 
 /**

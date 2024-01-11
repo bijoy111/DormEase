@@ -18,6 +18,9 @@ module.exports = (router) => {
  *    get:
  *      summary: Show newsfeed
  *      tags: [Notice]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -58,6 +61,9 @@ module.exports = (router) => {
  *              type: string
  *          required: true
  *          description: Notice ID
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Notice'
