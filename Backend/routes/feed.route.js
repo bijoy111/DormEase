@@ -22,6 +22,9 @@ module.exports = (router) => {
  *    get:
  *      summary: Show newsfeed
  *      tags: [Feed]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -74,6 +77,9 @@ module.exports = (router) => {
  *            type: string
  *          required: true
  *          description: Post ID
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Post'
@@ -135,16 +141,7 @@ module.exports = (router) => {
  *      requestBody:
  *        required: true
  *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              required:
- *                - stu_id
- *              properties:
- *                stu_id:
- *                  type: number
- *              example:
- *                stu_id: 1905024          
+ *          application/json: {}
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
