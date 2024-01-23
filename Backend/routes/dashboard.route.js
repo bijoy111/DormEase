@@ -1,13 +1,15 @@
-const { func } = require('../controllers/dashboard.controller');
+const { get_student_info, get_student_edit_info, update_student_edit_info, apply_for_room, cancel_room_application, get_vacant_rooms, apply_for_room_change, cancel_room_change_application } = require('../controllers/dashboard.controller');
+const { upload } = require('../middlewares/multerjs');
 
 module.exports = (router) => {
-    router.get('/dashboard', func);
-    router.get('/application/rooms', func);
-    router.post('/application/rooms', func);
-    router.get('/application/room_change', func);
-    router.post('/application/room_change', func);
-    router.get('/dashboard/edit', func);
-    router.post('/dashboard/edit', create_student);
+    router.get('/dashboard', get_student_info);
+    router.post('/application/room', apply_for_room);
+    router.delete('/application/room', cancel_room_application);
+    router.get('/application/room_change', get_vacant_rooms);
+    router.post('/application/room_change', apply_for_room_change);
+    router.delete('/application/room_change', cancel_room_change_application);
+    router.get('/dashboard/edit', get_student_edit_info);
+    router.post('/dashboard/edit', upload.single('photo'), update_student_edit_info);
 }
 
 /**
@@ -48,8 +50,6 @@ module.exports = (router) => {
  *                    type: number
  *                  photo:
  *                    type: string
- *                  room_no:
- *                    type: number
  *                  hall:
  *                    type: string
  *                  resident:
@@ -58,6 +58,12 @@ module.exports = (router) => {
  *                    type: string
  *                  guardian_phone:
  *                    type: string
+ *                  room_no:
+ *                    type: number
+ *                  seat_no:
+ *                    type: number
+ *                  applied_for_room:
+ *                    type: boolean
  *              example:
  *                  stu_id: 1905024
  *                  name: John Doe
@@ -66,12 +72,14 @@ module.exports = (router) => {
  *                  level_term: 3-1
  *                  phone: "01700000000"
  *                  cgpa: 3.5
- *                  photo: "https://example.com/image1.jpg"
- *                  room_no: 101
+ *                  photo: "picture.jpg"
  *                  hall: Shahid Smriti Hall
  *                  resident: true
  *                  guardian_name: Jane Doe
  *                  guardian_phone: "01700000001"
+ *                  room_no: 101
+ *                  seat_no: 4
+ *                  applied_for_room: false
  */
 
 /**
@@ -103,26 +111,18 @@ module.exports = (router) => {
  *              example:
  *                email: rakibahsan321@gmail.com
  *                phone: "01710000000"
- *                photo: "https://example.com/image1.jpg"
+ *                photo: "image1.jpg"
  *                guardian_name: John Doe
  *                guardian_phone: "01700000000"
- *    post:
+ *    put:
  *      summary: Update user info
  *      tags: [Dashboard]
  *      requestBody:
  *        required: true
  *        content:
- *          application/json:
+ *          multipart/form-data:
  *            schema:
  *              type: object
- *              required:
- *                - old_password
- *                - new_password
- *                - email
- *                - phone
- *                - photo
- *                - guardian_name
- *                - guardian_phone
  *              properties:
  *                old_password:
  *                  type: string
@@ -134,6 +134,7 @@ module.exports = (router) => {
  *                  type: string
  *                photo:
  *                  type: string
+ *                  format: binary
  *                guardian_name:
  *                  type: string
  *                guardian_phone:
@@ -143,17 +144,46 @@ module.exports = (router) => {
  *                  new_password: password2
  *                  email: johndoe31@gmail.com
  *                  phone: "01700000000"
- *                  photo: "https://example.com/image1.jpg"
+ *                  photo: "image1.jpg"
  *                  guardian_name: Jane Doe
  *                  guardian_phone: "01700000001"
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
+ *        "400":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  error: 
+ *                    type: string
+ *                  form_data:
+ *                    type: object
+ *                    properties:
+ *                      email:
+ *                        type: string
+ *                      phone:
+ *                        type: string
+ *                      photo:
+ *                        type: string
+ *                      guardian_name:
+ *                        type: string
+ *                      guardian_phone:
+ *                        type: string
+ *                example:
+ *                  error: Incorrect password
+ *                  form_data:
+ *                    email: abc@gmail.com
+ *                    phone: "01700000000"
+ *                    photo: "image1.jpg"
+ *                    guardian_name: Jane Doe
+ *                    guardian_phone: "01700000001"
  */
 
 /**
  * @swagger
- * /application/room/apply:
+ * /application/room:
  *    post:
  *      summary: Submit room application form
  *      tags: [Dashboard]
@@ -164,13 +194,10 @@ module.exports = (router) => {
  *            schema:
  *              type: object
  *              required:
- *                - stu_id
  *                - home_district
  *                - school
  *                - college
  *              properties:
- *                  stu_id:
- *                      type: number
  *                  home_district:
  *                      type: string
  *                  school:
@@ -178,18 +205,23 @@ module.exports = (router) => {
  *                  college:
  *                      type: string
  *              example:
- *                  stu_id: 1905024
  *                  home_district: Dhaka
  *                  school: ABC School
  *                  college: ABC College
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
+ *    delete:
+ *      summary: Cancel room application
+ *      tags: [Dashboard] 
+ *      responses:
+ *        "200":
+ *           $ref: '#/components/responses/Success'
  */
 
 /**
  * @swagger
- * /application/room/change:
+ * /application/room_change:
  *    get:
  *      summary: Show application form for room change with vacant rooms
  *      tags: [Dashboard]
@@ -226,15 +258,12 @@ module.exports = (router) => {
  *            schema:
  *              type: object
  *              required:
- *                - stu_id
  *                - room_no
  *                - seat_no
  *                - new_room_no
  *                - new_seat_no
  *                - reason
  *              properties:
- *                  stu_id:
- *                      type: number
  *                  room_no:
  *                      type: number
  *                  seat_no:
@@ -246,7 +275,6 @@ module.exports = (router) => {
  *                  reason:
  *                      type: string
  *              example:
- *                 stu_id: 1905024
  *                 room_no: 101
  *                 seat_no: 1
  *                 new_room_no: 102
@@ -255,4 +283,10 @@ module.exports = (router) => {
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
+ *    delete:
+ *      summary: Cancel room change application
+ *      tags: [Dashboard] 
+ *      responses:
+ *        "200":
+ *           $ref: '#/components/responses/Success'
  */

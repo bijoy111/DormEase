@@ -1,21 +1,23 @@
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
+const { db_user, db_host, db_name, db_pass, db_port} = require("../config/config");
 dotenv.config();
 
 let pool = null;
 // creates connection pool for oracledb
 async function db_connect() {
     pool = new Pool({
-        user: process.env.DB_USER,
-        host: process.env.DB_HOST,
-        database: process.env.DB_NAME,
-        password: process.env.DB_PASS,
-        port: process.env.DB_PORT,
+        user: db_user,
+        host: db_host,
+        database: db_name,
+        password: db_pass,
+        port: db_port,
         ssl: true,
         ssl: {
             rejectUnauthorized: false
         }
     })
+    pool = await pool.connect();
     console.log('pool created');
 }
 
@@ -27,14 +29,11 @@ async function db_disconnect() {
 
 // code to execute sql in postgresql
 async function db_query(text, values) {
-    const client = await pool.connect();
     try {
-        const res = await client.query(text, values);
+        const res = await pool.query(text, values);
         return res;
     } catch (err) {
         console.log(err.stack);
-    } finally {
-        client.release();
     }
 }
 

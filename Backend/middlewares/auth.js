@@ -28,7 +28,6 @@ function auth(req, res, next) {
                     console.log('auth: invalid cookie');    // if user is not logged in
                 }
                 else {
-                    console.log(result);
                     // if logged in, add req.user with minimal necessary info
                     // id, name, image is chosen to show in navbar upper right corner
                     // and role is chosen to check authorization
