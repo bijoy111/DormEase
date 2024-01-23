@@ -26,17 +26,17 @@ module.exports = (router) => {
  *            schema:
  *              type: object
  *              required:
- *                - ID
+ *                - id
  *                - password
  *              properties:
- *                ID:
+ *                id:
  *                  type: number
  *                  format: number
  *                password:
  *                  type: string
  *                  format: password
  *              example:
- *                ID: 1905024
+ *                id: 1905024
  *                password: password1
  *      responses:
  *        "200":
@@ -121,7 +121,7 @@ module.exports = (router) => {
  *                  hall: Shahid Smriti Hall
  *                  resident: true
  *                  guardian_name: Jane Doe
- *                  guardian_phone: 01700000001
+ *                  guardian_phone: "01700000001"
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
