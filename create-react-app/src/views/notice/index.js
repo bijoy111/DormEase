@@ -16,7 +16,7 @@ const SamplePage = () => (
         Date: January 25, 2024 {/* Replace with your actual date */}
       </Typography>
       <div style={{ marginBottom: '5px' }} />
-      <Button variant="contained" color="primary" style={{ marginTop: '10px' }}>
+      <Button variant="contained" color="primary" style={{ marginTop: '10px' }} onClick={() => {window.open("/free/noticeboard","_self")}}>
         View & Download
       </Button>
     </MainCard>
@@ -29,9 +29,11 @@ const SamplePage = () => (
         Date: January 25, 2024 {/* Replace with your actual date */}
       </Typography>
       <div style={{ marginBottom: '5px' }} />
+     
       <Button variant="contained" color="primary" style={{ marginTop: '10px' }}>
         View & Download
       </Button>
+      
     </MainCard>
     <div style={{ margin: '16px' }} />
       <MainCard title="News & Updates">
