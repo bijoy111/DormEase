@@ -1,4 +1,12 @@
-const { get_student_info, get_student_edit_info, update_student_edit_info, apply_for_room, cancel_room_application, get_vacant_rooms, apply_for_room_change, cancel_room_change_application } = require('../controllers/dashboard.controller');
+const { get_student_info,
+    get_student_edit_info,
+    update_student_edit_info,
+    apply_for_room,
+    cancel_room_application,
+    get_vacant_rooms,
+    apply_for_room_change,
+    cancel_room_change_application } = require('../controllers/dashboard.controller');
+    
 const { upload } = require('../middlewares/multerjs');
 
 module.exports = (router) => {
@@ -9,7 +17,7 @@ module.exports = (router) => {
     router.post('/application/room_change', apply_for_room_change);
     router.delete('/application/room_change', cancel_room_change_application);
     router.get('/dashboard/edit', get_student_edit_info);
-    router.post('/dashboard/edit', upload.single('photo'), update_student_edit_info);
+    router.put('/dashboard/edit', upload.single('photo'), update_student_edit_info);
 }
 
 /**
