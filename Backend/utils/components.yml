@@ -41,18 +41,25 @@ components:
     Notice:
       type: object
       properties:
-        notice_id:
+        post_id:
           type: number
-        created_at:
-          type: string
         title:
           type: string
         text:
           type: string
+        created_at:
+          type: string
         media:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              index:
+                type: number
+              media_type:
+                type: string
+              media_link:
+                type: string
 
     MealItem:
       type: object
@@ -198,8 +205,8 @@ components:
             is_mine: false
             media:
               [
-                "https://example.com/image1.jpg",
-                "https://example.com/image2.jpg",
+                "image1.jpg",
+                "image2.jpg",
               ]
             comments:
               [
@@ -213,7 +220,7 @@ components:
                   upvote: 2,
                   is_upvoted: true,
                   is_mine: false,
-                  media: ["https://example.com/image1.jpg"],
+                  media: ["image1.jpg"],
                   comments: [],
                 },
               ]
@@ -225,16 +232,24 @@ components:
           schema:
             $ref: "#/components/schemas/Notice"
           example:
-            notice_id: 1
-            created_at: "2024-01-01 00:00:00"
+            post_id: 1
             title: Notice Title
             text: Notice Text
+            created_at: "2024-01-01 00:00:00"
             media:
               [
-                "https://example.com/image1.jpg",
-                "https://example.com/image2.jpg",
+                {
+                  index: 0,
+                  media_type: image,
+                  media_link: "image1.jpg",
+                },
+                {
+                  index: 1,
+                  media_type: image,
+                  media_link: "image2.jpg",
+                },
               ]
-
+              
     Meal:
       description: Meal
       content:
