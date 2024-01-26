@@ -17,7 +17,8 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 const Notice = Loadable(lazy(() => import('views/notice')));
-
+const Complaint = Loadable(lazy(() => import('views/complaint')));
+const Noticeboard = Loadable(lazy(() => import('views/noticeboard')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -75,6 +76,15 @@ const MainRoutes = {
       ]
     },
     {
+      path: 'complaint',
+      children: [
+        {
+          path: 'default',
+          element: <Complaint />
+        }
+      ]
+    },
+    {
       path: 'icons',
       children: [
         {
@@ -95,6 +105,10 @@ const MainRoutes = {
     {
       path: 'sample-page',
       element: <SamplePage />
+    },
+    {
+      path: 'noticeboard',
+      element: <Noticeboard />
     }
   ]
 };
