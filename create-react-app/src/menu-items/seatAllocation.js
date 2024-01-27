@@ -13,10 +13,10 @@ const seatAllocation = {
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'seatAllocation',
       title: 'Seat Allocation',
       type: 'item',
-      url: '/seatAllocation/default',
+      url: '/seatAllocation',
       icon: icons.IconCircles,
       breadcrumbs: false
     }

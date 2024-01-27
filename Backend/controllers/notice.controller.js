@@ -3,11 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 const get_notice = async (req, res, next) => {
-    if (!req.user) {
-        return res.status(401).json({
-            error: 'Unauthorized'
-        });
-    }
+    // if (!req.user) {
+    //     return res.status(401).json({
+    //         error: 'Unauthorized'
+    //     });
+    // }
 
     const post_id = req.params.post_id;
 
@@ -25,11 +25,11 @@ const get_notice = async (req, res, next) => {
 }
 
 const get_notices = async (req, res, next) => {
-    if (!req.user) {
-        return res.status(401).json({
-            error: 'Unauthorized'
-        });
-    }
+    // if (!req.user) {
+    //     return res.status(401).json({
+    //         error: 'Unauthorized'
+    //     });
+    // }
 
     const notices = await notice_model.get_notices();
     return res.status(200).json([

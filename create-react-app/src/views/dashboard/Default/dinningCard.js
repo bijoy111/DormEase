@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
+import SkeletondinningCard from 'ui-component/cards/Skeleton/dinningCard';
 
 // assets
 
@@ -52,13 +52,13 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-// ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
+// ===========================|| DASHBOARD DEFAULT - dinning CARD ||=========================== //
 
-const EarningCard = ({ isLoading }) => {
+const dinningCard = ({ isLoading }) => {
   return (
     <>
       {isLoading ? (
-        <SkeletonEarningCard />
+        <SkeletondinningCard />
       ) : (
         <CardWrapper border={false} content={false}>
           <Box sx={{ p: 2.25 }}>
@@ -93,8 +93,8 @@ const EarningCard = ({ isLoading }) => {
   );
 };
 
-EarningCard.propTypes = {
+dinningCard.propTypes = {
   isLoading: PropTypes.bool
 };
 
-export default EarningCard;
+export default dinningCard;

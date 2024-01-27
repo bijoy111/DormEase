@@ -13,7 +13,7 @@ const notice = {
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'notice',
       title: 'Notice',
       type: 'item',
       url: '/notice/default',

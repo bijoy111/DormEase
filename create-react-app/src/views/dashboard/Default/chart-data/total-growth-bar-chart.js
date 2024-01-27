@@ -67,21 +67,18 @@ const chartData = {
   },
   series: [
     {
-      name: 'Investment',
-      data: [35, 125, 35, 35, 35, 80, 35, 20, 35, 45, 15, 75]
+      name: 'Present',
+      data: [35, 44, 41, 56, 60, 33, 20, 10, 32, 45, 30, 10]
     },
     {
-      name: 'Loss',
-      data: [35, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75]
+      name: 'Absent',
+      data: [25, 6, 19, 0, 0, 27, 40, 50, 28, 15, 30, 50]
     },
     {
-      name: 'Profit',
-      data: [35, 145, 35, 35, 20, 105, 100, 10, 65, 45, 30, 10]
-    },
-    {
-      name: 'Maintenance',
-      data: [0, 0, 75, 0, 0, 115, 0, 0, 0, 0, 150, 0]
+      name: 'Dinning Off',
+      data: [0, 10, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0]
     }
+   
   ]
 };
 export default chartData;

@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { useTheme, styled } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
 
 // assets
-import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -34,7 +33,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     borderRadius: '50%',
     top: -160,
     right: -130
-  }
+  },
+  height: '135px',
+  padding: '20px'
 }));
 
 // ==============================|| DASHBOARD - TOTAL INCOME LIGHT CARD ||============================== //
@@ -51,7 +52,7 @@ const TotalIncomeLightCard = ({ isLoading }) => {
           <Box sx={{ p: 2 }}>
             <List sx={{ py: 0 }}>
               <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                   <Avatar
                     variant="rounded"
                     sx={{
@@ -63,23 +64,27 @@ const TotalIncomeLightCard = ({ isLoading }) => {
                   >
                     <StorefrontTwoToneIcon fontSize="inherit" />
                   </Avatar>
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText
                   sx={{
                     py: 0,
                     mt: 0.45,
                     mb: 0.45
                   }}
-                  primary={<Typography variant="h4">$203k</Typography>}
+                  primary={<Typography variant="h4">Dinner Item List</Typography>}
                   secondary={
                     <Typography
                       variant="subtitle2"
                       sx={{
                         color: theme.palette.grey[500],
-                        mt: 0.5
+                        mt: 1.25,fontWeight: 600
                       }}
                     >
-                      Total Income
+                      Rice,
+                      Vegetables,
+                      Meat,
+                      Eggs,
+                      Fish
                     </Typography>
                   }
                 />
