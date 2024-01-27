@@ -13,10 +13,10 @@ const dinning = {
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'dinning',
       title: 'Dinning',
       type: 'item',
-      url: '/dinning/default',
+      url: '/dinning',
       icon: icons.IconSalad,
       breadcrumbs: false
     }

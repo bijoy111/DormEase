@@ -13,10 +13,10 @@ const newsfeed = {
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'newsfeed',
       title: 'Newsfeed',
       type: 'item',
-      url: '/newsfeed/default',
+      url: '/newsfeed',
       icon: icons.IconNews,
       breadcrumbs: false
     }

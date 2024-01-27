@@ -13,10 +13,10 @@ const complaint = {
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'complaint',
       title: 'Complaint',
       type: 'item',
-      url: '/complaint/default',
+      url: '/complaint',
       icon: icons.IconKeyboard,
       breadcrumbs: false
     }
