@@ -12,6 +12,7 @@ const Noticeboard = Loadable(lazy(() => import('views/noticeboard')));
 const UpdateProfile = Loadable(lazy(() => import('views/updateprofile')));
 const ViewProfile = Loadable(lazy(() => import('views/viewprofile')));
 const Loginpage = Loadable(lazy(() => import('views/login')));
+const Rootpage= Loadable(lazy(() => import('views/pages/authentication/authentication3/Login3')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -21,10 +22,11 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <Rootpage />
     },
     {
       path: 'dashboard',
+      // element: <MainLayout />,
       children: [
         {
           path: 'default',
@@ -34,6 +36,7 @@ const MainRoutes = {
     },
     {
       path: 'notice',
+      
       children: [
         {
           path: 'default',
