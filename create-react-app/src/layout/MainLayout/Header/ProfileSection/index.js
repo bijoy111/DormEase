@@ -288,6 +288,7 @@ const ProfileSection = () => {
                           selected={selectedIndex === 4}
                           // onClick={handleLogout}
                           onClick={() => window.open('/free/pages/login/login3', '_self')}
+                          // onClick={() => window.open('/free/login', '_self')}
                         >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />

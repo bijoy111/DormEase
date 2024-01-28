@@ -28,7 +28,12 @@ import './style.css';
 
     try {
       // Fetch data from your database API
-      const response = await fetch('http://localhost:3000/notice');
+      const response = await fetch('http://localhost:3000/notice', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       console.log(data);
       // Update the state with the fetched data
@@ -56,7 +61,7 @@ import './style.css';
     ))}
 
 
-    let studentName = cardData.length > 0 ? cardData.map(card => card.title)[0] : '';
+    let studentName = 'Bijoy Ahmed Saiem'
 
 
     
