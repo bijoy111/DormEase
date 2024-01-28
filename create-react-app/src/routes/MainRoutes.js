@@ -11,6 +11,7 @@ const Complaint = Loadable(lazy(() => import('views/complaint')));
 const Noticeboard = Loadable(lazy(() => import('views/noticeboard')));
 const UpdateProfile = Loadable(lazy(() => import('views/updateprofile')));
 const ViewProfile = Loadable(lazy(() => import('views/viewprofile')));
+const Loginpage = Loadable(lazy(() => import('views/login')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -60,6 +61,10 @@ const MainRoutes = {
     {
       path: 'viewprofile',
       element: <ViewProfile />
+    },
+    {
+      path: 'login',
+      element: <Loginpage />
     }
   ]
 };

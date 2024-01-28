@@ -54,9 +54,9 @@ const ProfileSection = () => {
    * anchorRef is used on different componets and specifying one type leads to other components throwing an error
    * */
   const anchorRef = useRef(null);
-  const handleLogout = async () => {
-    console.log('Logout');
-  };
+  // const handleLogout = async () => {
+  //   console.log('Logout');
+  // };
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -286,7 +286,8 @@ const ProfileSection = () => {
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 4}
-                          onClick={handleLogout}
+                          // onClick={handleLogout}
+                          onClick={() => window.open('/free/pages/login/login3', '_self')}
                         >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />
