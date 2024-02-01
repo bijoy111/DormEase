@@ -8,8 +8,6 @@ import { styled, useTheme } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
 
-// assets
-
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   overflow: 'hidden',
@@ -38,7 +36,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   padding: '20px'
 }));
 
-// ==============================|| DASHBOARD - TOTAL INCOME LIGHT CARD ||============================== //
+// ==============================|| DASHBOARD - DINNER ITEM LIST CARD ||============================== //
 
 const TotalIncomeLightCard = ({ isLoading }) => {
   const theme = useTheme();
@@ -52,19 +50,6 @@ const TotalIncomeLightCard = ({ isLoading }) => {
           <Box sx={{ p: 2 }}>
             <List sx={{ py: 0 }}>
               <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
-                {/* <ListItemAvatar>
-                  <Avatar
-                    variant="rounded"
-                    sx={{
-                      ...theme.typography.commonAvatar,
-                      ...theme.typography.largeAvatar,
-                      backgroundColor: theme.palette.warning.light,
-                      color: theme.palette.warning.dark
-                    }}
-                  >
-                    <StorefrontTwoToneIcon fontSize="inherit" />
-                  </Avatar>
-                </ListItemAvatar> */}
                 <ListItemText
                   sx={{
                     py: 0,

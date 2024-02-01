@@ -4,11 +4,10 @@ import { IconCircles } from '@tabler/icons';
 // constant
 const icons = { IconCircles };
 
-// ==============================|| DASHBOARD MENU ITEMS ||============================== //
+// ==============================|| SEATALLOCATION MENU ITEMS ||============================== //
 
 const seatAllocation = {
   id: 'seatAllocation',
-  //title: 'Dashboard',
   title: '',
   type: 'group',
   children: [

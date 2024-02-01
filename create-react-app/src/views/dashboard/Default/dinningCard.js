@@ -1,19 +1,12 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Box, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import SkeletondinningCard from 'ui-component/cards/Skeleton/dinningCard';
 
 // assets
-
-
-import logo from 'assets/images/student.png';
-
-
 
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -52,12 +45,12 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-// ===========================|| DASHBOARD DEFAULT - dinning CARD ||=========================== //
+// ===========================|| IGNORE ||=========================== //
 
 const dinningCard = ({ isLoading }) => {
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <SkeletondinningCard />
       ) : (
         <CardWrapper border={false} content={false}>
@@ -88,7 +81,7 @@ const dinningCard = ({ isLoading }) => {
             </Grid>
           </Box>
         </CardWrapper>
-      )}
+      )} */}
     </>
   );
 };

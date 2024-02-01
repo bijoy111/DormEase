@@ -10,11 +10,7 @@ import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
 
-
 import logo from 'assets/images/student.png';
-
-
-
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
@@ -52,7 +48,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-// ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
+// ===========================|| DASHBOARD - USER PICTURE,NAME,ID SHOWING CARD ||=========================== //
 
 const EarningCard = ({ isLoading }) => {
   return (

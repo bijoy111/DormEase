@@ -4,11 +4,10 @@ import { IconNews } from '@tabler/icons';
 // constant
 const icons = { IconNews };
 
-// ==============================|| DASHBOARD MENU ITEMS ||============================== //
+// ==============================||   NEWSFEED MENU ITEMS ||============================== //
 
 const newsfeed = {
   id: 'newsfeed',
-  //title: 'Dashboard',
   title: '',
   type: 'group',
   children: [
@@ -16,7 +15,7 @@ const newsfeed = {
       id: 'newsfeed',
       title: 'Newsfeed',
       type: 'item',
-      url: '/newsfeed',
+      url: '/newsfeed/default',
       icon: icons.IconNews,
       breadcrumbs: false
     }

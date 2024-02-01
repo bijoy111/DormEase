@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './Newcomplaint.css';
 import { Button, InputAdornment } from '@mui/material';
+import { useState } from 'react';
+import './Newcomplaint.css';
 
 const ComplaintForm = () => {
   const [title, setTitle] = useState('');

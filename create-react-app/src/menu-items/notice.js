@@ -4,11 +4,10 @@ import { IconArticle } from '@tabler/icons';
 // constant
 const icons = { IconArticle };
 
-// ==============================|| DASHBOARD MENU ITEMS ||============================== //
+// ==============================|| NOTICE MENU ITEMS ||============================== //
 
 const notice = {
   id: 'notice',
-  //title: 'Dashboard',
   title: '',
   type: 'group',
   children: [

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 const SamplePage = () => {
 
-
   const handleDownloadClick = (Title, createdAt,Text) => {
     // Store data in localStorage
     localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt,Text }));
@@ -11,10 +10,6 @@ const SamplePage = () => {
     // Navigate to the noticeboard module
     window.open('/free/noticeboard', '_self');
   };
-
-
-
-
 
   // State for storing card data
   const [cardData, setCardData] = useState([]);

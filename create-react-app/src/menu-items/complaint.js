@@ -4,11 +4,10 @@ import { IconKeyboard } from '@tabler/icons';
 // constant
 const icons = { IconKeyboard };
 
-// ==============================|| DASHBOARD MENU ITEMS ||============================== //
+// ==============================|| COMPLAINT MENU ITEMS ||============================== //
 
 const complaint = {
   id: 'complaint',
-  //title: 'Dashboard',
   title: '',
   type: 'group',
   children: [
@@ -16,7 +15,7 @@ const complaint = {
       id: 'complaint',
       title: 'Complaint',
       type: 'item',
-      url: '/complaint',
+      url: '/complaint/default',
       icon: icons.IconKeyboard,
       breadcrumbs: false
     }

@@ -20,7 +20,7 @@ import chartData from './chart-data/total-growth-bar-chart';
 
 
 
-// ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
+// ==============================|| DASHBOARD -  DINNING HISTORY CARD ||============================== //
 
 const TotalGrowthBarChart = ({ isLoading }) => {
   

@@ -1,11 +1,10 @@
 // material-ui
 import { Button } from '@mui/material';
-
 // project imports
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import Newcomplaint from './Newcomplaint';
 import Complaintcard from './Complaintcard';
+import Newcomplaint from './Newcomplaint';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const SamplePage = () => {

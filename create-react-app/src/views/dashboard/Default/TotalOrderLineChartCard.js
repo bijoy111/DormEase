@@ -5,23 +5,12 @@ import { useState } from 'react';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
-// third-party
-
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
-
-// assets
-
-
-
-
 import GiteOutlined from '@mui/icons-material/GiteOutlined';
 import LocalHotelOutlined from '@mui/icons-material/LocalHotelOutlined';
-
-
-
 
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -66,7 +55,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-// ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
+// ==============================|| DASHBOARD - ROOM AND SEAT SHOWING CARD ||============================== //
 
 const TotalOrderLineChartCard = ({ isLoading }) => {
   const theme = useTheme();
@@ -150,11 +139,9 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
               </Grid>
             </Grid>
             <Grid></Grid>
-            
-            <br/>
-            
-            
           
+            <br/>
+              
             <Grid item>
                     <Button
                       disableElevation
