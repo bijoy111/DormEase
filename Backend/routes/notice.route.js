@@ -1,9 +1,15 @@
-const { func } = require('../controllers/notice.controller');
+const { get_notice,
+    get_notices,
+    create_notice,
+    delete_notice } = require('../controllers/notice.controller');
+
+const { upload } = require('../middlewares/multerjs');
 
 module.exports = (router) => {
-    router.get('/notice', func);
-    router.get('/notice/notice_id', func);
-    router.post('/notice/compose', func);
+    router.get('/notice', get_notices);
+    router.get('/notice/:post_id', get_notice);
+    router.delete('/notice/:post_id', delete_notice);
+    router.post('/notice/compose', upload.array('media'), create_notice);
 }
 
 /**
@@ -18,6 +24,9 @@ module.exports = (router) => {
  *    get:
  *      summary: Show newsfeed
  *      tags: [Notice]
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:
@@ -29,18 +38,16 @@ module.exports = (router) => {
  *              example:
  *                 [
  *                     {
- *                         notice_id: 20,
+ *                         post_id: 20,
  *                         created_at: "2024-01-01 01:00:00",
  *                         title: Notice title,
- *                         text: This is a notice,
- *                         media: ["https://example.com/image1.jpg"],
+ *                         text: This is a notice
  *                     },
  *                     {
- *                         notice_id: 30,
+ *                         post_id: 30,
  *                         created_at: "2024-01-01 01:00:00",
  *                         title: Notice title,
- *                         text: This is a notice,
- *                         media: ["https://example.com/image1.jpg"],
+ *                         text: This is a notice
  *                     },
  *                 ]
  */
@@ -53,16 +60,34 @@ module.exports = (router) => {
  *      tags: [Notice]
  *      parameters:
  *        - in: path
- *          name: notice_id
+ *          name: post_id
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: Notice ID
+ *      requestBody:
+ *        content:
+ *          application/json: {}
+ *      responses:
+ *        "200":
+ *          $ref: '#/components/responses/Notice'
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
+ *    delete:
+ *      summary: Delete a notice [Admin privilege required]
+ *      tags: [Notice] 
+ *      parameters:
+ *        - in: path
+ *          name: post_id
  *          schema:
  *              type: string
  *          required: true
  *          description: Notice ID
  *      responses:
  *        "200":
- *          $ref: '#/components/responses/Notice'
+ *           $ref: '#/components/responses/Success'
  *        "404":
- *          $ref: '#/components/responses/NotFound'
+ *           $ref: '#/components/responses/NotFound'
  */
 
 /**
@@ -74,13 +99,9 @@ module.exports = (router) => {
  *      requestBody:
  *        required: true
  *        content:
- *          application/json:
+ *          multipart/form-data:
  *            schema:
  *              type: object
- *              required:
- *                - title
- *                - text
- *                - media
  *              properties:
  *                title:
  *                  type: string
@@ -90,10 +111,11 @@ module.exports = (router) => {
  *                  type: array
  *                  items:
  *                    type: string
+ *                    format: binary
  *              example:
  *                  title: Notice title
  *                  text: This is a post
- *                  media: ["https://www.google.com", "https://www.amazon.com"]
+ *                  media: ["image1", "image2", "video1"]
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'

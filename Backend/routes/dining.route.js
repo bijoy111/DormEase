@@ -26,6 +26,9 @@ module.exports = (router) => {
  *              type: string
  *          required: true
  *          description: Date of the menu
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Meal'
@@ -46,6 +49,9 @@ module.exports = (router) => {
  *              type: string
  *          required: true
  *          description: Date of the menu
+ *      requestBody:
+ *        content:
+ *          application/json: {}
  *      responses:
  *        "200":
  *          content:

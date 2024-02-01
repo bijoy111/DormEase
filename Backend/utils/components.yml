@@ -41,18 +41,25 @@ components:
     Notice:
       type: object
       properties:
-        notice_id:
+        post_id:
           type: number
-        created_at:
-          type: string
         title:
           type: string
         text:
           type: string
+        created_at:
+          type: string
         media:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              index:
+                type: number
+              media_type:
+                type: string
+              media_link:
+                type: string
 
     MealItem:
       type: object
@@ -77,7 +84,66 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/MealItem"
+    
+    Applicant_apply:
+      type: object
+      properties:
+        stu_id:
+          type: number
+        name:
+          type: string
+        dept:
+          type: string
+        created_at:
+          type: string
+        cgpa:
+          type: number
+        home_district:
+          type: string
+        school:
+          type: string
+        college:
+          type: string
 
+    Applicant_change:
+      allOf:
+        - $ref: "#/components/schemas/Applicant_apply"
+        - type: object
+          properties:
+            room_no:
+              type: number
+            seat_no:
+              type: number
+            new_room_no:
+              type: number
+            new_seat_no:
+              type: number
+            reason:
+              type: string
+
+    SeatAllocation:
+      type: object
+      properties:
+        applicants:
+          type: array
+          items:
+            $ref: "#/components/schemas/Applicant_apply"
+        rooms:
+          type: array
+          items:
+            type: object
+            properties:
+              room_no:
+                type: string
+              allocations:
+                type: array
+                items:
+                  type: number
+
+    SeatChange:
+      type: array
+      items:
+        $ref: "#/components/schemas/Applicant_change"
 
   responses:
     Success:
@@ -139,8 +205,8 @@ components:
             is_mine: false
             media:
               [
-                "https://example.com/image1.jpg",
-                "https://example.com/image2.jpg",
+                "image1.jpg",
+                "image2.jpg",
               ]
             comments:
               [
@@ -154,7 +220,7 @@ components:
                   upvote: 2,
                   is_upvoted: true,
                   is_mine: false,
-                  media: ["https://example.com/image1.jpg"],
+                  media: ["image1.jpg"],
                   comments: [],
                 },
               ]
@@ -166,16 +232,24 @@ components:
           schema:
             $ref: "#/components/schemas/Notice"
           example:
-            notice_id: 1
-            created_at: "2024-01-01 00:00:00"
+            post_id: 1
             title: Notice Title
             text: Notice Text
+            created_at: "2024-01-01 00:00:00"
             media:
               [
-                "https://example.com/image1.jpg",
-                "https://example.com/image2.jpg",
+                {
+                  index: 0,
+                  media_type: image,
+                  media_link: "image1.jpg",
+                },
+                {
+                  index: 1,
+                  media_type: image,
+                  media_link: "image2.jpg",
+                },
               ]
-
+              
     Meal:
       description: Meal
       content:
@@ -195,6 +269,73 @@ components:
                 { name: Rice, price_per_unit: 10, quantity: 300 },
               ]
 
+    SeatAllocation:
+      description: Seat Allocation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SeatAllocation"
+          example:
+            applicants:
+              [
+                {
+                  stu_id: 1905048,
+                  name: John Doe,
+                  dept: CSE,
+                  created_at: "2024-01-01 00:00:00",
+                  cgpa: 3.99,
+                  home_district: Dinaipur,
+                  school: Dinajpur Zilla School,
+                  college: 
+                },
+                {
+                  stu_id: 1905049,
+                  name: Jane Doe,
+                  dept: CSE,
+                  created_at: "2024-01-01 00:00:00",
+                  cgpa: 3.99,
+                  home_district: Dhaka,
+                  school: Dhaka Residential Model School,
+                  college: Notre Dame College
+                }
+              ]
+            rooms:
+              [
+                {
+                  room_no: 101,
+                  allocations: [1905048, 1905052, 1905054, 1905055],
+                },
+                {
+                  room_no: 102,
+                  allocations: [1905049, 1905053, 1905056, 1905057],
+                }
+              ]
+
+    SeatChange:
+      description: Seat Change
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SeatChange"
+          example:
+            [
+              {
+                stu_id: 1905048,
+                name: John Doe,
+                dept: CSE,
+                created_at: "2024-01-01 00:00:00",
+                cgpa: 3.99,
+                home_district: Dinaipur,
+                school: Dinajpur Zilla School,
+                college: Dinajpur Govt. College,
+                room_no: 101,
+                seat_no: 1,
+                new_room_no: 102,
+                new_seat_no: 2,
+                reason: "I want to change my room",
+              }
+            ]
+  
   securitySchemes:
     bearerAuth:
       type: http
