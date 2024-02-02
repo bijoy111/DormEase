@@ -32,8 +32,6 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-// ============================|| FIREBASE - LOGIN ||============================ //
-
 const FirebaseLogin = ({ ...others }) => {
   const handleSignInClick = async (values) => {
     try {
@@ -62,7 +60,6 @@ const FirebaseLogin = ({ ...others }) => {
 
   const theme = useTheme();
   const scriptedRef = useScriptRef();
-  // const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
   const customization = useSelector((state) => state.customization);
   const [checked, setChecked] = useState(true);
 
@@ -130,7 +127,6 @@ const FirebaseLogin = ({ ...others }) => {
               setSubmitting(false);
               handleSignInClick(values);
             }
-            // handleSignInClick(values);
           } catch (err) {
             console.error(err);
             if (scriptedRef.current) {

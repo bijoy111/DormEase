@@ -15,7 +15,7 @@ const dinning = {
       id: 'dinning',
       title: 'Dinning',
       type: 'item',
-      url: '/dinning',
+      url: '/dinning/default',
       icon: icons.IconSalad,
       breadcrumbs: false
     }
