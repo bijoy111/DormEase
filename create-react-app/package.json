@@ -1,5 +1,5 @@
 {
-  "name": "berry-free-material-react-cra",
+  "name": "dormEase",
   "version": "3.3.2",
   "private": true,
   "homepage": "https://berrydashboard.io/free",
@@ -35,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [

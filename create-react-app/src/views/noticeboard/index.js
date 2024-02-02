@@ -1,4 +1,3 @@
-
 import { Button, Typography } from '@mui/material';
 import { IconDownload } from '@tabler/icons';
 
@@ -30,7 +29,7 @@ const NoticeboardPage = () => {
   }
 
   return (
-    <div style={{backgroundColor: '#f4f5ff'}}>
+    <div style={{ backgroundColor: '#f4f5ff' }}>
       <div style={{ background: '#555555', padding: '10px', borderRadius: '8px', width: '80%', height: '100px', margin: '0 auto' }}>
         <Typography variant="body2" style={{ color: 'white' }}>
           <h5>{data.createdAt}</h5>
@@ -38,7 +37,16 @@ const NoticeboardPage = () => {
         </Typography>
       </div>
       <div style={{ margin: '16px' }} />
-      <div style={{ background: 'white', padding: '30px', borderRadius: '8px', width: '60%', margin: '0 auto', boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)' }}>
+      <div
+        style={{
+          background: 'white',
+          padding: '30px',
+          borderRadius: '8px',
+          width: '60%',
+          margin: '0 auto',
+          boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)'
+        }}
+      >
         <Button variant="contained" color="primary" style={{ marginTop: '2px', marginLeft: 'auto' }}>
           <IconDownload />
         </Button>

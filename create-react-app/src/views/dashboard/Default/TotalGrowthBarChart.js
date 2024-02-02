@@ -18,12 +18,9 @@ import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowth
 // chart data
 import chartData from './chart-data/total-growth-bar-chart';
 
-
-
 // ==============================|| DASHBOARD -  DINNING HISTORY CARD ||============================== //
 
 const TotalGrowthBarChart = ({ isLoading }) => {
-  
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
 
@@ -86,13 +83,11 @@ const TotalGrowthBarChart = ({ isLoading }) => {
               <Grid container alignItems="center" justifyContent="space-between">
                 <Grid item>
                   <Grid container direction="column" spacing={1}>
-                    
                     <Grid item>
                       <Typography variant="h3">Dinning History</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-                
               </Grid>
             </Grid>
             <Grid item xs={12}>

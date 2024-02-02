@@ -24,16 +24,15 @@ const ProgressBar = () => {
 
   return (
     <div className="progress-bar-container">
-      
       {renderCircle('pending')}
       <div className="line"></div>
-      
+
       {renderCircle('seen')}
       <div className="line"></div>
-      
+
       {renderCircle('processing')}
       <div className="line"></div>
-      
+
       {renderCircle('completed')}
     </div>
   );

@@ -62,12 +62,8 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                     </Typography>
                   }
                   secondary={
-                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 1.25,fontWeight: 600 }}>
-                      Rice,
-                      Vegetables,
-                      Meat,
-                      Eggs,
-                      Fish
+                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 1.25, fontWeight: 600 }}>
+                      Rice, Vegetables, Meat, Eggs, Fish
                     </Typography>
                   }
                 />

@@ -25,36 +25,30 @@ const ComplaintForm = () => {
 
     // Redirect to home page after submission
 
-    window.open("/free/complaint/default","_self");
+    window.open('/free/complaint/default', '_self');
   };
-
 
   return (
     <form onSubmit={handleSubmit}>
       <h3>Enter New Complaint Info</h3>
       <div>
-        <label htmlFor="title"><b>Title: </b></label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={handleTitleChange}
-          required
-        />
+        <label htmlFor="title">
+          <b>Title: </b>
+        </label>
+        <input type="text" id="title" value={title} onChange={handleTitleChange} required />
         <InputAdornment position="start"></InputAdornment>
       </div>
       <br></br>
       <div>
-        <label htmlFor="details"><b>Details: </b></label>
-        <textarea
-          id="details"
-          value={details}
-          onChange={handleDetailsChange}
-          required
-        ></textarea>
+        <label htmlFor="details">
+          <b>Details: </b>
+        </label>
+        <textarea id="details" value={details} onChange={handleDetailsChange} required></textarea>
       </div>
       <br></br>
-      <Button variant="contained" color="primary" type="submit">Submit</Button>
+      <Button variant="contained" color="primary" type="submit">
+        Submit
+      </Button>
     </form>
   );
 };

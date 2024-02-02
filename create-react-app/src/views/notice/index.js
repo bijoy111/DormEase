@@ -2,10 +2,9 @@ import { Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 const SamplePage = () => {
-
-  const handleDownloadClick = (Title, createdAt,Text) => {
+  const handleDownloadClick = (Title, createdAt, Text) => {
     // Store data in localStorage
-    localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt,Text }));
+    localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt, Text }));
 
     // Navigate to the noticeboard module
     window.open('/free/noticeboard', '_self');
@@ -49,7 +48,7 @@ const SamplePage = () => {
               variant="contained"
               color="primary"
               style={{ marginTop: '10px' }}
-              onClick={() => handleDownloadClick(card.title, card.created_at,card.text)}
+              onClick={() => handleDownloadClick(card.title, card.created_at, card.text)}
             >
               View & Download
             </Button>

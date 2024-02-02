@@ -11,7 +11,7 @@ import utilities from './utilities';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard,newsfeed,notice,complaint,seatAllocation,dinning, pages, utilities, other]
+  items: [dashboard, newsfeed, notice, complaint, seatAllocation, dinning, pages, utilities, other]
 };
 
 export default menuItems;

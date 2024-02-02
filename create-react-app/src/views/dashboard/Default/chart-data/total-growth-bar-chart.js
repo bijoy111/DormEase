@@ -78,7 +78,6 @@ const chartData = {
       name: 'Dinning Off',
       data: [0, 10, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0]
     }
-   
   ]
 };
 export default chartData;

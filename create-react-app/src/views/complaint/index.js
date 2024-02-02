@@ -8,35 +8,33 @@ import Newcomplaint from './Newcomplaint';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const SamplePage = () => {
-
   const [isOpen, setIsOpen] = useState(false);
-  const [button_name, setButton_name] = useState("Add Complaint");
+  const [button_name, setButton_name] = useState('Add Complaint');
   //const [complaint_info, setComplaint_info] = useState([{}]);
-  
+
   // variables for the card:
   // title = title of the card
   // details = details of the card
   // date = date of the card
   // status = status of the card
   // others info like room no, stu_id, etc. can be added as well
-  
+
   const toggleDialog = () => {
     setIsOpen(!isOpen);
-    if(isOpen){
-      setButton_name("Add Complaint");
-    }
-    else{
-      setButton_name("Close");
+    if (isOpen) {
+      setButton_name('Add Complaint');
+    } else {
+      setButton_name('Close');
     }
   };
 
-  return(
-  <div>
+  return (
     <div>
-      <Button variant="contained" color="primary" style={{ marginTop: '0px',marginLeft:'1000px' }} onClick={toggleDialog}>
+      <div>
+        <Button variant="contained" color="primary" style={{ marginTop: '0px', marginLeft: '1000px' }} onClick={toggleDialog}>
           {button_name}
-          </Button>
-          {isOpen && (
+        </Button>
+        {isOpen && (
           <div className="dialog-overlay">
             <div className="dialog-content">
               {/* <span className="close" onClick={toggleDialog}>&times;</span> */}
@@ -46,15 +44,14 @@ const SamplePage = () => {
         )}
         <br></br>
         <h1>Your Complaints</h1>
-    </div>
-    
-    <div>
+      </div>
+
+      <div>
+        <Complaintcard />
+      </div>
       <Complaintcard />
     </div>
-    <Complaintcard />
-
-    </div>
-    );
+  );
 };
 
 export default SamplePage;
