@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import {
-  Card,
-  Grid,
-  LinearProgress,
-  linearProgressClasses
-} from '@mui/material';
+import { Card, Grid, LinearProgress, linearProgressClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 // assets
@@ -62,11 +57,7 @@ LinearProgressWithLabel.propTypes = {
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const MenuCard = () => {
-  return (
-    <CardStyle>
-     
-    </CardStyle>
-  );
+  return <CardStyle></CardStyle>;
 };
 
 export default MenuCard;

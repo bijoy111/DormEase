@@ -12,7 +12,6 @@ import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 import GiteOutlined from '@mui/icons-material/GiteOutlined';
 import LocalHotelOutlined from '@mui/icons-material/LocalHotelOutlined';
 
-
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
   color: '#fff',
@@ -74,12 +73,11 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
           <Box sx={{ p: 2.25 }}>
             <Grid container direction="column">
               <Grid item>
-              <br/> 
-                  <br/>
+                <br />
+                <br />
                 <Grid container justifyContent="space-between">
-                
-                <br/> 
-                  <br/>
+                  <br />
+                  <br />
                   <Grid item>
                     <Button
                       disableElevation
@@ -113,7 +111,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                           <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>01</Typography>
                         )}
                       </Grid>
-                     
+
                       <Grid item xs={12}>
                         <Typography
                           sx={{
@@ -128,34 +126,31 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     </Grid>
                   </Grid>
                   <Grid item xs={6}>
-                  <br/>
-                  {timeValue ? 
-                  (<GiteOutlined sx={{ fontSize: 100, color: theme.palette.primary[200] }} />) 
-                  : 
-                  (<LocalHotelOutlined sx={{ fontSize: 100, color: theme.palette.primary[200] }} />)
-                  }
+                    <br />
+                    {timeValue ? (
+                      <GiteOutlined sx={{ fontSize: 100, color: theme.palette.primary[200] }} />
+                    ) : (
+                      <LocalHotelOutlined sx={{ fontSize: 100, color: theme.palette.primary[200] }} />
+                    )}
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
             <Grid></Grid>
-          
-            <br/>
-              
+
+            <br />
+
             <Grid item>
-                    <Button
-                      disableElevation
-                      variant={timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit',backgroundColor: '#0066cc', fontSize: '17px', fontFamily: 'YourDesiredFont, sans-serif' }}
-                      onClick={(e) => handleChangeTime(e, true)}
-                    >
-                      Apply
-      
-                    </Button>
-                   
-                  </Grid>
-            
+              <Button
+                disableElevation
+                variant={timeValue ? 'contained' : 'text'}
+                size="small"
+                sx={{ color: 'inherit', backgroundColor: '#0066cc', fontSize: '17px', fontFamily: 'YourDesiredFont, sans-serif' }}
+                onClick={(e) => handleChangeTime(e, true)}
+              >
+                Apply
+              </Button>
+            </Grid>
           </Box>
         </CardWrapper>
       )}

@@ -62,14 +62,11 @@ const TotalIncomeLightCard = ({ isLoading }) => {
                       variant="subtitle2"
                       sx={{
                         color: theme.palette.grey[500],
-                        mt: 1.25,fontWeight: 600
+                        mt: 1.25,
+                        fontWeight: 600
                       }}
                     >
-                      Rice,
-                      Vegetables,
-                      Meat,
-                      Eggs,
-                      Fish
+                      Rice, Vegetables, Meat, Eggs, Fish
                     </Typography>
                   }
                 />

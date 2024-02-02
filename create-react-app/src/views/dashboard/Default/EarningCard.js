@@ -61,24 +61,23 @@ const EarningCard = ({ isLoading }) => {
             <Grid container direction="column">
               <Grid item>
                 <Grid container justifyContent="space-between">
-                  <Grid item style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}> 
+                  <Grid item style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                     <img
                       src={logo}
                       alt=""
-                      style=
-                      {{
+                      style={{
                         borderRadius: '50%',
                         border: '2px solid grey',
                         width: '150px',
                         height: '150px',
-                        marginTop: '20px',
+                        marginTop: '20px'
                       }}
                     />
                     <div style={{ marginLeft: '20px' }}>
                       <h3 className="user-name">1905052</h3>
                       <h4 className="user-email">Bijoy Ahmed Saiem</h4>
                     </div>
-                  </Grid>    
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

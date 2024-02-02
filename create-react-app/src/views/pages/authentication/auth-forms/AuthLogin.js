@@ -32,25 +32,22 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
-
-
   const handleSignInClick = async (values) => {
     try {
       const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           id: values.id,
-          password: values.password,
-        }),
+          password: values.password
+        })
       });
-  
+
       if (response.ok) {
         // Authentication successful
         window.open('/free/dashboard/default', '_self');
@@ -62,17 +59,12 @@ const FirebaseLogin = ({ ...others }) => {
       console.error('Error during authentication:', error);
     }
   };
-  
-
-
-
 
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   // const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
   const customization = useSelector((state) => state.customization);
   const [checked, setChecked] = useState(true);
-
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -87,8 +79,7 @@ const FirebaseLogin = ({ ...others }) => {
     <>
       <Grid container direction="column" justifyContent="center" spacing={2}>
         <Grid item xs={12}>
-          <AnimateButton>
-          </AnimateButton>
+          <AnimateButton></AnimateButton>
         </Grid>
         <Grid item xs={12}>
           <Box
@@ -221,7 +212,16 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="secondary" onClick={() => handleSignInClick()}>
+                <Button
+                  disableElevation
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleSignInClick()}
+                >
                   Sign in
                 </Button>
               </AnimateButton>
