@@ -1,0 +1,40 @@
+.bg-container-login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  text-align: center;
+}
+
+button {
+  display: inline-block;
+  width: 160px;
+  background-color: #f4364c;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+}
+.img-transition {
+  transition: opacity 2s ease-in;
+}
+
+.fade-in .img-transition {
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

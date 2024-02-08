@@ -15,7 +15,11 @@ const seatAllocation = {
       id: 'seatAllocation',
       title: 'Seat Allocation',
       type: 'item',
+<<<<<<< HEAD
       url: '/seatAllocation',
+=======
+      url: '/seatAllocation/default',
+>>>>>>> 8529f0c (admin basic frontend added)
       icon: icons.IconCircles,
       breadcrumbs: false
     }

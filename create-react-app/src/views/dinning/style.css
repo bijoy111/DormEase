@@ -1,5 +1,6 @@
 .calendar-container {
   display: flex;
+<<<<<<< HEAD
   justify-content: center;
   align-items: center;
   height: 70vh;
@@ -20,6 +21,16 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: #fff;
+=======
+  justify-content: space-between;
+  align-items: flex-start; /* Add this line to align items at the top of each column */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Add this line to center items horizontally in each column */
+>>>>>>> 8529f0c (admin basic frontend added)
 }
 
 .note-card {
@@ -29,6 +40,7 @@
   border-radius: 8px;
   background-color: #fff;
   text-align: center;
+<<<<<<< HEAD
   height:265px;
 }
 
@@ -43,4 +55,121 @@ textarea {
   border-radius: 4px;
   padding: 10px;
   resize: none;
+=======
+  height: 265px;
+}
+
+/* Add this CSS rule to ensure images in the Carousel don't affect the layout below */
+.react-responsive-carousel .carousel .slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.calendar-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(189, 20, 20, 0.4);
+  background-color: #fff;
+}
+
+.calendar-header {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.custom-calendar {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(30, 9, 222, 0.4);
+}
+
+.react-calendar__tile--active {
+  background-color: #007bff;
+  color: #f4f02e;
+  border-radius: 50%;
+}
+
+.react-calendar__tile--now {
+  background-color: #e22810;
+}
+
+.react-calendar__tile--tile {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.react-calendar__month-view__days__day {
+  margin: 5px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.react-calendar__month-view__days__day:hover {
+  background-color: #f2f2f2;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #d9534f;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #999;
+}
+
+.react-calendar__navigation {
+  background-color: #f8f9fa;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.react-calendar__navigation__label {
+  font-size: 18px;
+}
+
+.react-calendar__navigation__arrow {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.react-calendar__navigation__arrow:hover {
+  color: #007bff;
+}
+
+/* Add more styles as needed */
+
+.videoMain{
+  width:100%;
+  height:100vh;
+}
+
+video{
+  width:100%;
+  height:200%;
+  object-fit:cover;
+  border-radius: 20px;
+}
+
+.content{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  
+>>>>>>> 8529f0c (admin basic frontend added)
 }

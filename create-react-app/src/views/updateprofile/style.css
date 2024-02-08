@@ -77,3 +77,37 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values based on your preference */
   padding: 10px; /* Add padding to make the shadow more visible */
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+.input-label {
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.custom-input {
+  font-size: 14px;
+  padding: 12px;
+  border: 1px solid #4CAF50; /* Green border */
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding and border don't increase the width */
+  transition: border-color 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: #2E8B57; /* Darker green on focus */
+  box-shadow: 0 0 8px rgba(46, 139, 87, 0.5); /* Light shadow on focus */
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+>>>>>>> 8529f0c (admin basic frontend added)
