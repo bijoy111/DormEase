@@ -69,19 +69,11 @@ const EarningCard = ({ isLoading }) => {
                         borderRadius: '50%',
                         border: '2px solid grey',
                         width: '150px',
-<<<<<<< HEAD
-                        height: '150px',
-=======
                         height: '148px',
->>>>>>> 8529f0c (admin basic frontend added)
                         marginTop: '20px'
                       }}
                     />
                     <div style={{ marginLeft: '20px' }}>
-<<<<<<< HEAD
-                      <h3 className="user-name">1905052</h3>
-                      <h4 className="user-email">Bijoy Ahmed Saiem</h4>
-=======
                       <div style={{fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px',marginLeft:'5px'}}>
                       {/* <h4 className="user-name">1905052</h4>
                       <h4 className="user-email">Bijoy Ahmed Saiem</h4> */}
@@ -92,7 +84,6 @@ const EarningCard = ({ isLoading }) => {
                       <br/>
                       Bijoy Ahmed Saiem
                       </div>
->>>>>>> 8529f0c (admin basic frontend added)
                     </div>
                   </Grid>
                 </Grid>

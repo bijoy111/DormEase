@@ -10,10 +10,7 @@ const Notice = Loadable(lazy(() => import('views/notice')));
 const Complaint = Loadable(lazy(() => import('views/complaint')));
 const Newsfeed = Loadable(lazy(() => import('views/newsfeed')));
 const Dinning = Loadable(lazy(() => import('views/dinning')));
-<<<<<<< HEAD
-=======
 const Seatallocation = Loadable(lazy(() => import('views/seatallocation')));
->>>>>>> 8529f0c (admin basic frontend added)
 const Noticeboard = Loadable(lazy(() => import('views/noticeboard')));
 const UpdateProfile = Loadable(lazy(() => import('views/updateprofile')));
 const ViewProfile = Loadable(lazy(() => import('views/viewprofile')));
@@ -80,8 +77,6 @@ const MainRoutes = {
       ]
     },
     {
-<<<<<<< HEAD
-=======
       path: 'seatallocation',
       element: <MainLayout />,
       children: [
@@ -92,7 +87,6 @@ const MainRoutes = {
       ]
     },
     {
->>>>>>> 8529f0c (admin basic frontend added)
       path: 'noticeboard',
       element: <MainLayout />,
       children: [

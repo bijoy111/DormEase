@@ -57,20 +57,12 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                     mb: 0.45
                   }}
                   primary={
-<<<<<<< HEAD
-                    <Typography variant="h4" sx={{ color: '#fff' }}>
-=======
                     <Typography variant="h4" sx={{ color: '#fff',fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px' }}>
->>>>>>> 8529f0c (admin basic frontend added)
                       Lunch Item List
                     </Typography>
                   }
                   secondary={
-<<<<<<< HEAD
-                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 1.25, fontWeight: 600 }}>
-=======
                     <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 1.25, fontWeight: 600,fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px' }}>
->>>>>>> 8529f0c (admin basic frontend added)
                       Rice, Vegetables, Meat, Eggs, Fish
                     </Typography>
                   }

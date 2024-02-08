@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import './style.css'; // Import your custom CSS file
-
-const MyCalendar = () => {
-  const [date, setDate] = useState(new Date());
-  const [note, setNote] = useState('');
-=======
 import beef_pic from 'assets/images/beef.png';
 import chicken_pic from 'assets/images/chicken.png';
 import egg_pic from 'assets/images/egg1.png';
@@ -23,39 +13,12 @@ import './style.css';
 const MyCalendar = () => {
   const [date, setDate] = useState(new Date());
   // const [note, setNote] = useState('');
->>>>>>> 8529f0c (admin basic frontend added)
 
   const handleDateChange = (selectedDate) => {
     setDate(selectedDate);
     // Add your custom logic for handling date changes here
   };
 
-<<<<<<< HEAD
-  const handleNoteChange = (event) => {
-    setNote(event.target.value);
-  };
-
-  return (
-    <div>
-      <div style={{ textAlign: 'center', fontSize: '20px' }}>Dining Calendar</div>
-      <div className="calendar-container">
-        <div className="calendar-content">
-          <br/>
-          <div className="calendar">
-            <Calendar
-              onChange={handleDateChange}
-              value={date}
-              className="custom-calendar"
-            />
-          </div>
-          <div className="note-card">
-            <h2>Menu list</h2>
-            <textarea
-              placeholder="No items list available"
-              value={note}
-              onChange={handleNoteChange}
-            />
-=======
   // const handleNoteChange = (event) => {
   //   setNote(event.target.value);
   // };
@@ -181,7 +144,6 @@ const MyCalendar = () => {
                 </div>
               </Carousel>
             </div>
->>>>>>> 8529f0c (admin basic frontend added)
           </div>
         </div>
       </div>

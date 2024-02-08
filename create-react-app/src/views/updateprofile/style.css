@@ -77,8 +77,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values based on your preference */
   padding: 10px; /* Add padding to make the shadow more visible */
 }
-<<<<<<< HEAD
-=======
 
 
 
@@ -110,4 +108,3 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
->>>>>>> 8529f0c (admin basic frontend added)

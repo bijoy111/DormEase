@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-
-=======
 import axios from 'axios';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
->>>>>>> 8529f0c (admin basic frontend added)
 // material-ui
 import {
   Box,
@@ -25,53 +19,16 @@ import {
   Typography
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-<<<<<<< HEAD
-
-// third party
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-
-// project imports
-import useScriptRef from 'hooks/useScriptRef';
-import AnimateButton from 'ui-component/extended/AnimateButton';
-
-=======
 // third party
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 // project imports
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
->>>>>>> 8529f0c (admin basic frontend added)
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-<<<<<<< HEAD
-const FirebaseLogin = ({ ...others }) => {
-  const handleSignInClick = async (values) => {
-    try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: values.id,
-          password: values.password
-        })
-      });
-
-      if (response.ok) {
-        // Authentication successful
-        window.open('/free/dashboard/default', '_self');
-      } else {
-        // Authentication failed
-        console.error('Authentication failed');
-      }
-    } catch (error) {
-      console.error('Error during authentication:', error);
-=======
 
 // ===========================|| <NewCode> ||=========================== //
 import { animated, useSprings } from "react-spring";
@@ -185,7 +142,6 @@ const FirebaseLogin = ({ ...others }) => {
     const response = await axios.post('http://localhost:3000/login',values, {withCredentials: true});
     if(response.status === 200){
       window.open('/free/dashboard/default', '_self');
->>>>>>> 8529f0c (admin basic frontend added)
     }
   };
 
@@ -205,17 +161,10 @@ const FirebaseLogin = ({ ...others }) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <Grid container direction="column" justifyContent="center" spacing={2}>
-        <Grid item xs={12}>
-          <AnimateButton></AnimateButton>
-        </Grid>
-=======
       <Grid container direction="column" justifyContent="center" spacing={0}>
         {/* <Grid item xs={12}>
           <AnimateButton></AnimateButton>
         </Grid> */}
->>>>>>> 8529f0c (admin basic frontend added)
         <Grid item xs={12}>
           <Box
             sx={{
@@ -230,14 +179,6 @@ const FirebaseLogin = ({ ...others }) => {
               sx={{
                 cursor: 'unset',
                 m: 2,
-<<<<<<< HEAD
-                py: 0.5,
-                px: 7,
-                borderColor: `${theme.palette.grey[100]} !important`,
-                color: `${theme.palette.grey[900]}!important`,
-                fontWeight: 700,
-                borderRadius: `${customization.borderRadius}px`
-=======
                 py: 1,
                 px: 10,
                 borderColor: `${theme.palette.grey[100]} !important`,
@@ -245,7 +186,6 @@ const FirebaseLogin = ({ ...others }) => {
                 fontWeight: 900,
                 borderRadius: `${customization.borderRadius}px`,
                 fontSize: '1.4rem'
->>>>>>> 8529f0c (admin basic frontend added)
               }}
               disableRipple
               disabled
@@ -258,8 +198,6 @@ const FirebaseLogin = ({ ...others }) => {
         </Grid>
       </Grid>
 
-<<<<<<< HEAD
-=======
 
       {/* ===========================|| <NewCode> ||=========================== */}
       <Grid>
@@ -483,7 +421,6 @@ const FirebaseLogin = ({ ...others }) => {
       {/* ===========================|| <NewCode> ||=========================== */}
     
 
->>>>>>> 8529f0c (admin basic frontend added)
       <Formik
         initialValues={{
           id: '',
@@ -511,26 +448,15 @@ const FirebaseLogin = ({ ...others }) => {
           }
         }}
       >
-<<<<<<< HEAD
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-          <form noValidate onSubmit={handleSubmit} {...others}>
-            <FormControl fullWidth error={Boolean(touched.id && errors.id)} sx={{ ...theme.typography.customInput }}>
-              <InputLabel htmlFor="outlined-adornment-email-login">Student Id</InputLabel>
-=======
         {({ errors, handleChange,handleBlur,handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>
             <FormControl fullWidth error={Boolean(touched.id && errors.id)} sx={{ ...theme.typography.customInput }}>
               <InputLabel htmlFor="outlined-adornment-email-login sx={{ fontSize: '1.2rem' }} ">Student Id</InputLabel>
->>>>>>> 8529f0c (admin basic frontend added)
               <OutlinedInput
                 id="outlined-adornment-email-login"
                 type="id"
                 value={values.id}
                 name="id"
-<<<<<<< HEAD
-                onBlur={handleBlur}
-                onChange={handleChange}
-=======
                 //onBlur={handleBlur}
                 //onChange={handleChange}
                 // New code
@@ -547,7 +473,6 @@ const FirebaseLogin = ({ ...others }) => {
                 }}
                 autocomplete="off"
               //New code
->>>>>>> 8529f0c (admin basic frontend added)
                 label="Student Id"
                 inputProps={{}}
               />
@@ -559,20 +484,12 @@ const FirebaseLogin = ({ ...others }) => {
             </FormControl>
 
             <FormControl fullWidth error={Boolean(touched.password && errors.password)} sx={{ ...theme.typography.customInput }}>
-<<<<<<< HEAD
-              <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
-=======
               <InputLabel htmlFor="outlined-adornment-password-login sx={{ fontSize: '1.2rem' }} ">Password</InputLabel>
->>>>>>> 8529f0c (admin basic frontend added)
               <OutlinedInput
                 id="outlined-adornment-password-login"
                 type={showPassword ? 'text' : 'password'}
                 value={values.password}
                 name="password"
-<<<<<<< HEAD
-                onBlur={handleBlur}
-                onChange={handleChange}
-=======
                 //onBlur={handleBlur}
                 //onChange={handleChange}
                 //newcode
@@ -588,7 +505,6 @@ const FirebaseLogin = ({ ...others }) => {
                     changeToDefault(event); // Call another function here if needed
                 }}
                 //newcode
->>>>>>> 8529f0c (admin basic frontend added)
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -611,11 +527,7 @@ const FirebaseLogin = ({ ...others }) => {
                 </FormHelperText>
               )}
             </FormControl>
-<<<<<<< HEAD
-            <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-=======
             <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={0}>
->>>>>>> 8529f0c (admin basic frontend added)
               <FormControlLabel
                 control={
                   <Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />
@@ -642,10 +554,7 @@ const FirebaseLogin = ({ ...others }) => {
                   type="submit"
                   variant="contained"
                   color="secondary"
-<<<<<<< HEAD
-=======
                   borderRadius="15px"
->>>>>>> 8529f0c (admin basic frontend added)
                   onClick={() => handleSignInClick()}
                 >
                   Sign in

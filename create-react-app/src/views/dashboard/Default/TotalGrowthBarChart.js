@@ -84,13 +84,9 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                 <Grid item>
                   <Grid container direction="column" spacing={1}>
                     <Grid item>
-<<<<<<< HEAD
-                      <Typography variant="h3">Dinning History</Typography>
-=======
                        <div style={{ bfontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px',lineHeight: '1.5'}}>
                       <Typography variant="h1">Dinning History</Typography>
                       </div>
->>>>>>> 8529f0c (admin basic frontend added)
                     </Grid>
                   </Grid>
                 </Grid>

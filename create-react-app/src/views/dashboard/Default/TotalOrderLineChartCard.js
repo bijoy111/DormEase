@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // material-ui
-<<<<<<< HEAD
-import { Box, Button, Grid, Typography } from '@mui/material';
-=======
 import { Box, Button, Grid, Menu, Typography } from '@mui/material';
->>>>>>> 8529f0c (admin basic frontend added)
 import { styled, useTheme } from '@mui/material/styles';
 
 // project imports
@@ -15,10 +11,7 @@ import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 import GiteOutlined from '@mui/icons-material/GiteOutlined';
 import LocalHotelOutlined from '@mui/icons-material/LocalHotelOutlined';
-<<<<<<< HEAD
-=======
 import './roomChange.css';
->>>>>>> 8529f0c (admin basic frontend added)
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -68,16 +61,11 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = useState(false);
-<<<<<<< HEAD
-=======
   const [anchorEl, setAnchorEl] = useState(null);
->>>>>>> 8529f0c (admin basic frontend added)
   const handleChangeTime = (event, newValue) => {
     setTimeValue(newValue);
   };
 
-<<<<<<< HEAD
-=======
   const handleApplyButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -86,7 +74,6 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
     setAnchorEl(null);
   };
 
->>>>>>> 8529f0c (admin basic frontend added)
   return (
     <>
       {isLoading ? (
@@ -105,11 +92,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     <Button
                       disableElevation
                       variant={timeValue ? 'contained' : 'text'}
-<<<<<<< HEAD
-                      size="small"
-=======
                       size="large"
->>>>>>> 8529f0c (admin basic frontend added)
                       sx={{ color: 'inherit' }}
                       onClick={(e) => handleChangeTime(e, true)}
                     >
@@ -118,11 +101,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     <Button
                       disableElevation
                       variant={!timeValue ? 'contained' : 'text'}
-<<<<<<< HEAD
-                      size="small"
-=======
                       size="large"
->>>>>>> 8529f0c (admin basic frontend added)
                       sx={{ color: 'inherit' }}
                       onClick={(e) => handleChangeTime(e, false)}
                     >
@@ -137,30 +116,18 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     <Grid container alignItems="center">
                       <Grid item>
                         {timeValue ? (
-<<<<<<< HEAD
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>2001</Typography>
-                        ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>01</Typography>
-=======
                           <Typography sx={{ fontSize: '2.5rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>2001</Typography>
                         ) : (
                           <Typography sx={{ fontSize: '2.5rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>01</Typography>
->>>>>>> 8529f0c (admin basic frontend added)
                         )}
                       </Grid>
 
                       <Grid item xs={12}>
                         <Typography
                           sx={{
-<<<<<<< HEAD
-                            fontSize: '1rem',
-                            fontWeight: 500,
-                            color: theme.palette.primary[200]
-=======
                             fontSize: '1.4rem',
                             fontWeight: 500,
                             color: theme.palette.primary[200],
->>>>>>> 8529f0c (admin basic frontend added)
                           }}
                         >
                           Resident
@@ -181,24 +148,12 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
             </Grid>
             <Grid></Grid>
 
-<<<<<<< HEAD
-            <br />
-=======
             {/* <br /> */}
->>>>>>> 8529f0c (admin basic frontend added)
 
             <Grid item>
               <Button
                 disableElevation
                 variant={timeValue ? 'contained' : 'text'}
-<<<<<<< HEAD
-                size="small"
-                sx={{ color: 'inherit', backgroundColor: '#0066cc', fontSize: '17px', fontFamily: 'YourDesiredFont, sans-serif' }}
-                onClick={(e) => handleChangeTime(e, true)}
-              >
-                Apply
-              </Button>
-=======
                 size="large"
                 sx={{ color: 'inherit', backgroundColor: '#0066cc', fontSize: '20px', fontFamily: 'Helvetica, Arial, sans-serif' }}
                 onClick={handleApplyButtonClick}
@@ -269,7 +224,6 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     Submit
                   </Button>
               </Menu>
->>>>>>> 8529f0c (admin basic frontend added)
             </Grid>
           </Box>
         </CardWrapper>

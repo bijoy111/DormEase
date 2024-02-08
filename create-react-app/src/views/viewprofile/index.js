@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import { Grid } from '@mui/material';
-import logo from 'assets/images/student.png';
-import React, { useEffect, useState } from 'react';
-=======
 import { Button } from "@material-tailwind/react";
 import { Grid } from '@mui/material';
 import logo from 'assets/images/student.png';
 import { useEffect, useState } from 'react';
->>>>>>> 8529f0c (admin basic frontend added)
 import MainCard from 'ui-component/cards/MainCard';
 import './style.css';
 <link
@@ -16,25 +10,11 @@ import './style.css';
   integrity="sha384-3YFGMh3Hy9LlNfO63C3CcapF3Kf5c6Rr6s49peF8w7v69YFdVPMEvaybSj8e6xY2"
 />;
 
-<<<<<<< HEAD
-// ==============================|| SAMPLE PAGE ||============================== //
-
-const SamplePage = () => {
-  const handleDownloadClick = () => {
-    // Store data in localStorage
-    // localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt,Text }));
-
-    // Navigate to the noticeboard module
-    window.open('/free/updateprofile', '_self');
-
-    // window.open('/free/pages/login/login3', '_self');
-=======
 // ==============================|| VIEW PROFILE PAGE ||============================== //
 
 const SamplePage = () => {
   const handleDownloadClick = () => {
     window.open('/free/updateprofile', '_self');
->>>>>>> 8529f0c (admin basic frontend added)
   };
 
   // State for storing card data
@@ -45,14 +25,6 @@ const SamplePage = () => {
     console.log('hello');
 
     try {
-<<<<<<< HEAD
-      // Fetch data from your database API
-      const response = await fetch('http://localhost:3000/notice', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-=======
       // Fetch data from the database API
       const response = await fetch('http://localhost:3000/dashboard', {
         method: 'GET',
@@ -60,7 +32,6 @@ const SamplePage = () => {
           'Content-Type': 'application/json'
         },
         credentials: 'include',
->>>>>>> 8529f0c (admin basic frontend added)
       });
       const data = await response.json();
       console.log(data);
@@ -76,26 +47,6 @@ const SamplePage = () => {
     fetchCardDataFromDatabase();
   }, []); // Empty dependency array ensures it only runs once on mount
 
-<<<<<<< HEAD
-  // let studentName = '';
-  {
-    cardData.map((card, index) => (
-      // Code inside the map function
-      <React.Fragment key={index}>
-        {/* {card.name} */}
-        {/* {studentName=card.name} */}
-      </React.Fragment>
-    ));
-  }
-
-  let studentName = 'Bijoy Ahmed Saiem';
-
-  return (
-    <MainCard style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh', overflow: 'hidden' }}>
-      <Grid container spacing={3}>
-        {/* Left Column */}
-        <Grid item xs={12} sm={6} style={{ border: '2px solid #ccc', borderRadius: '0px', boxShadow: '0 4px 8px rgba(0,33,243, 2.5)' }}>
-=======
   const studentId = cardData.stu_id || '';
   const studentName = cardData.name || '';
   const studentEmail = cardData.email || '';
@@ -117,7 +68,6 @@ const SamplePage = () => {
       <Grid container spacing={3} style={{color:'green'}}>
         {/* Left Column */}
         <Grid item xs={12} sm={6} style={{ border: '2px solid #ccc', borderRadius: '20px', boxShadow: '0 4px 8px rgba(0,33,243, 2.5)', width: '50%' }}>
->>>>>>> 8529f0c (admin basic frontend added)
           <div className="card h-100">
             <div className="card-body">
               <div className="account-settings">
@@ -134,15 +84,9 @@ const SamplePage = () => {
                         marginTop: '20px'
                       }}
                     />
-<<<<<<< HEAD
-                    <div style={{ marginLeft: '20px' }}>
-                      <h3 className="user-name">Bijoy Ahmed Saiem</h3>
-                      <h4 className="user-email">saiem.bijoy@gmail.com</h4>
-=======
                     <div style={{ marginLeft: '8px' }}>
                       <h3 className="user-name">{studentName} </h3>
                       <h4 className="user-id">{studentId}</h4>
->>>>>>> 8529f0c (admin basic frontend added)
                     </div>
                   </div>
                 </div>
@@ -152,22 +96,6 @@ const SamplePage = () => {
                     <h2 className="mb-4 text-primary">Personal Information</h2>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                    <div className="form-group mt-4">
-                      <label htmlFor="fullName">Student Id: </label>
-                      <input type="text" className="form-control" id="fullName" placeholder="Enter student id" value="1905052" readOnly />
-                    </div>
-                  </div>
-                  <br />
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group mt-4">
-                      <label htmlFor="fullName">Full Name: </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="fullName"
-                        placeholder="Enter full name"
-=======
                     <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',marginRight:'60px' }}>
                       <label htmlFor="student_id" className="input-label">Student ID</label>
                       <input
@@ -188,7 +116,6 @@ const SamplePage = () => {
                         type="text"
                         className="form-control custom-input"
                         id="full_name"
->>>>>>> 8529f0c (admin basic frontend added)
                         value={studentName}
                         readOnly
                       />
@@ -196,16 +123,6 @@ const SamplePage = () => {
                   </div>
                   <br />
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                    <div className="form-group mt-4">
-                      <label htmlFor="eMail">Email: </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="eMail"
-                        placeholder="Enter email ID"
-                        value="saiem.bijoy@gmail.com"
-=======
                     <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                       <label htmlFor="email" className="input-label">Email </label>
                       <input
@@ -213,18 +130,12 @@ const SamplePage = () => {
                         className="form-control custom-input"
                         id="email"
                         value={studentEmail}
->>>>>>> 8529f0c (admin basic frontend added)
                         readOnly
                       />
                     </div>
                   </div>
                   <br />
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                    <div className="form-group mt-4">
-                      <label htmlFor="eMail">Phone: </label>
-                      <input type="email" className="form-control" id="eMail" placeholder="Enter phone no" value="01700123540" readOnly />
-=======
                     <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                       <label htmlFor="phone_no" className="input-label">Phone </label>
                       <input 
@@ -234,19 +145,10 @@ const SamplePage = () => {
                         value={Phone} 
                         readOnly 
                       />
->>>>>>> 8529f0c (admin basic frontend added)
                     </div>
                   </div>
                   <br />
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                    <div className="form-group mt-4">
-                      <label htmlFor="eMail">CGPA: </label>
-                      <input type="email" className="form-control" id="eMail" placeholder="Enter cgpa" value="3.5" readOnly />
-                    </div>
-                  </div>
-                  <br />
-=======
                     <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                       <label htmlFor="cgpa" className="input-label">CGPA: </label>
                       <input 
@@ -285,43 +187,12 @@ const SamplePage = () => {
                       </div>
                     </div>
                   </div>
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
             </div>
           </div>
         </Grid>
         {/* Right Column */}
-<<<<<<< HEAD
-        <Grid item xs={12} sm={6} style={{ border: '2px solid #ccc', borderRadius: '0px', boxShadow: '0 4px 8px rgba(0,33,243, 2.5)' }}>
-          <div className="card h-100" style={{ padding: '20px' }}>
-            {/* Academic Information */}
-            <div className="row gutters">
-              <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 className="mt-4 mb-4 text-primary">Academic Information</h2>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <div className="form-group mt-4">
-                  <label htmlFor="eMail">Deptartment: </label>
-                  <input type="email" className="form-control" id="eMail" placeholder="Enter your dept" value="CSE" readOnly />
-                </div>
-              </div>
-              <br />
-              <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <div className="form-group mt-4">
-                  <label htmlFor="eMail">Level: </label>
-                  <input type="email" className="form-control" id="eMail" placeholder="Enter your dept" value="4" readOnly />
-                </div>
-              </div>
-              <br />
-              <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <div className="form-group mt-4">
-                  <label htmlFor="eMail">Term: </label>
-                  <input type="email" className="form-control" id="eMail" placeholder="Enter your dept" value="1" readOnly />
-                </div>
-              </div>
-            </div>
-=======
         <Grid item xs={12} sm={6} style={{ border: '2px solid #ccc', borderRadius: '20px', boxShadow: '0 4px 8px rgba(0,33,243, 2.5)', width: '50%' }}>
           <div className="card h-100" style={{ padding: '20px' }}>
             <br/>
@@ -331,35 +202,22 @@ const SamplePage = () => {
             <br/>
             <br/> 
             <br/>
->>>>>>> 8529f0c (admin basic frontend added)
             {/* Guardian Information */}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h2 className="mt-4 mb-4 text-primary">Guardian Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="Street">Name: </label>
-                  <input type="text" className="form-control" id="Street" placeholder="Enter name" value="Abidur Rahim" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',marginRight:'60px' }}>
                   <label htmlFor="guardian_name" className="input-label">Name </label>
                   <input type="text" className="form-control custom-input" id="guardian_name" value={guardianName} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
               <br />
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="ciTy">Phone: </label>
-                  <input type="text" className="form-control" id="ciTy" placeholder="Enter phone no" value="01713654321" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="phone_no" className="input-label">Phone </label>
                   <input type="tel" className="form-control custom-input" id="phone_no" value={guardianPhone} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
               {/* ... (similar modifications for other address form fields) ... */}
@@ -370,93 +228,43 @@ const SamplePage = () => {
                 <h2 className="mt-4 mb-4 text-primary">Residential Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="Street">Hall: </label>
-                  <input type="text" className="form-control" id="Street" placeholder="Enter Street" value="Sohrawardy" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="hall" className="input-label">Hall </label>
                   <input type="text" className="form-control custom-input" id="hall" value={Hall} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
               <br />
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="ciTy">Resident: </label>
-                  <input type="text" className="form-control" id="ciTy" placeholder="Enter City" value="Yes" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="resident" className="input-label">Resident </label>
                   <input type="text" className="form-control custom-input" id="resident" value={Resident} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
               <br />
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="ciTy">Room no: </label>
-                  <input type="text" className="form-control" id="ciTy" placeholder="Enter City" value="2001" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="room" className="input-label">Room no: </label>
                   <input type="text" className="form-control custom-input" id="room" value={roomNo} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
               <br />
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="ciTy">Seat no: </label>
-                  <input type="text" className="form-control" id="ciTy" placeholder="Enter City" value="1" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="seat" className="input-label">Seat no: </label>
                   <input type="text" className="form-control custom-input" id="seat" value={seatNo} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
               <br />
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-<<<<<<< HEAD
-                <div className="form-group mt-4">
-                  <label htmlFor="ciTy">Applied for room: </label>
-                  <input type="text" className="form-control" id="ciTy" placeholder="Enter City" value="No" readOnly />
-=======
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="apply" className="input-label">Applied for room: </label>
                   <input type="text" className="form-control custom-input" id="apply" value={Apply} readOnly />
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
             </div>
             {/* Buttons */}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-<<<<<<< HEAD
-                <div className="text-center mr-3">
-                  <button
-                    type="button"
-                    id="cancel"
-                    name="cancel"
-                    className="btn btn-secondary mr-3"
-                    style={{
-                      marginTop: '20px',
-                      fontSize: '1.1rem',
-                      fontFamily: 'Arial, sans-serif',
-                      backgroundColor: '',
-                      boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
-                      width: '100px'
-                    }}
-                    onClick={() => handleDownloadClick()}
-                  >
-                    Edit
-                  </button>
-=======
                 <div className="text-center mr-8">
                   <br/>
                   <Button 
@@ -485,7 +293,6 @@ const SamplePage = () => {
   Update
 </Button>
 
->>>>>>> 8529f0c (admin basic frontend added)
                 </div>
               </div>
             </div>
