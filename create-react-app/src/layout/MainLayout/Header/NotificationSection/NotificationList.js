@@ -1,5 +1,8 @@
 // material-ui
+<<<<<<< HEAD
 import { useTheme, styled } from '@mui/material/styles';
+=======
+>>>>>>> 8529f0c (admin basic frontend added)
 import {
   Avatar,
   Button,
@@ -16,9 +19,16 @@ import {
   Stack,
   Typography
 } from '@mui/material';
+<<<<<<< HEAD
 
 // assets
 import { IconBrandTelegram, IconBuildingStore, IconMailbox, IconPhoto } from '@tabler/icons';
+=======
+import { styled, useTheme } from '@mui/material/styles';
+
+// assets
+import { IconBrandTelegram, IconMailbox, IconPhoto } from '@tabler/icons';
+>>>>>>> 8529f0c (admin basic frontend added)
 import User1 from 'assets/images/users/user-round.svg';
 
 // styles
@@ -86,9 +96,15 @@ const NotificationList = () => {
       <ListItemWrapper>
         <ListItem alignItems="center">
           <ListItemAvatar>
+<<<<<<< HEAD
             <Avatar alt="John Doe" src={User1} />
           </ListItemAvatar>
           <ListItemText primary="John Doe" />
+=======
+            <Avatar alt="Bijoy Ahmed Saiem" src={User1} />
+          </ListItemAvatar>
+          <ListItemText primary="Bijoy Ahmed Saiem" />
+>>>>>>> 8529f0c (admin basic frontend added)
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
@@ -116,7 +132,11 @@ const NotificationList = () => {
         </Grid>
       </ListItemWrapper>
       <Divider />
+<<<<<<< HEAD
       <ListItemWrapper>
+=======
+      {/* <ListItemWrapper>
+>>>>>>> 8529f0c (admin basic frontend added)
         <ListItem alignItems="center">
           <ListItemAvatar>
             <Avatar
@@ -153,7 +173,11 @@ const NotificationList = () => {
             </Grid>
           </Grid>
         </Grid>
+<<<<<<< HEAD
       </ListItemWrapper>
+=======
+      </ListItemWrapper> */}
+>>>>>>> 8529f0c (admin basic frontend added)
       <Divider />
       <ListItemWrapper>
         <ListItem alignItems="center">
@@ -199,9 +223,15 @@ const NotificationList = () => {
       <ListItemWrapper>
         <ListItem alignItems="center">
           <ListItemAvatar>
+<<<<<<< HEAD
             <Avatar alt="John Doe" src={User1} />
           </ListItemAvatar>
           <ListItemText primary={<Typography variant="subtitle1">John Doe</Typography>} />
+=======
+            <Avatar alt="Bijoy Ahmed Saiem" src={User1} />
+          </ListItemAvatar>
+          <ListItemText primary={<Typography variant="subtitle1">Bijoy Ahmed Saiem</Typography>} />
+>>>>>>> 8529f0c (admin basic frontend added)
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
@@ -249,9 +279,15 @@ const NotificationList = () => {
       <ListItemWrapper>
         <ListItem alignItems="center">
           <ListItemAvatar>
+<<<<<<< HEAD
             <Avatar alt="John Doe" src={User1} />
           </ListItemAvatar>
           <ListItemText primary={<Typography variant="subtitle1">John Doe</Typography>} />
+=======
+            <Avatar alt="Bijoy Ahmed Saiem" src={User1} />
+          </ListItemAvatar>
+          <ListItemText primary={<Typography variant="subtitle1">Bijoy Ahmed Saiem</Typography>} />
+>>>>>>> 8529f0c (admin basic frontend added)
           <ListItemSecondaryAction>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>

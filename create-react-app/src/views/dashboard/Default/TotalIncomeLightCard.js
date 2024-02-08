@@ -56,14 +56,27 @@ const TotalIncomeLightCard = ({ isLoading }) => {
                     mt: 0.45,
                     mb: 0.45
                   }}
+<<<<<<< HEAD
                   primary={<Typography variant="h4">Dinner Item List</Typography>}
+=======
+                  primary={
+                    <Typography variant="h4" sx={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px' }}>
+                      Dinner Item List
+                    </Typography>
+                  }
+>>>>>>> 8529f0c (admin basic frontend added)
                   secondary={
                     <Typography
                       variant="subtitle2"
                       sx={{
                         color: theme.palette.grey[500],
                         mt: 1.25,
+<<<<<<< HEAD
                         fontWeight: 600
+=======
+                        fontWeight: 600,
+                        fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px'
+>>>>>>> 8529f0c (admin basic frontend added)
                       }}
                     >
                       Rice, Vegetables, Meat, Eggs, Fish

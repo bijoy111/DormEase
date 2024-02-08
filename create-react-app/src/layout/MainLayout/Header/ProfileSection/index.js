@@ -287,8 +287,13 @@ const ProfileSection = () => {
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 4}
                           // onClick={handleLogout}
+<<<<<<< HEAD
                           onClick={() => window.open('/free/pages/login/login3', '_self')}
                           // onClick={() => window.open('/free/login', '_self')}
+=======
+                          // onClick={() => window.open('/free/pages/login/login3', '_self')}
+                          onClick={() => window.open('/free', '_self')}
+>>>>>>> 8529f0c (admin basic frontend added)
                         >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />
