@@ -20,7 +20,11 @@ app.use(json({
 
 app.use(cookieParser());
 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    withCredentials: true,
+    credentials: true
+}));
 
 app.set("view engine", "ejs");
 
