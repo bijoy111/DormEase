@@ -1,63 +1,297 @@
-import { Button, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import MainCard from 'ui-component/cards/MainCard';
-const SamplePage = () => {
-  const handleDownloadClick = (Title, createdAt, Text) => {
-    // Store data in localStorage
-    localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt, Text }));
+import React, { useState } from 'react';
+import './style.css'; // You can define your CSS styles in App.css
 
-    // Navigate to the noticeboard module
-    window.open('/free/noticeboard', '_self');
-  };
+import Modal from 'react-modal';
 
-  // State for storing card data
-  const [cardData, setCardData] = useState([]);
+function StudentPage() {
+  // Dummy data for dormitory rooms and applicants
+  //const [rooms, setRooms] = useState([
+  const [rooms] = useState([
+    {
+      id: 1,
+      seats: [
+        { name: 'John Doe', id: '101', department: 'CSE', image: 'url_to_image',level_term: '1-1' },
+        { name: '', id: '', department: '', image: '',level_term: '1-2' },
+        { name: '', id: '', department: '', image: '',level_term: '1-2' },
+        { name: 'Jane Smith', id: '102', department: 'EEE', image: 'url_to_image',level_term: '1-1' },
+      ],
+    },
+    {
+      id: 2,
+      seats: [
+        { name: 'Jane Smith', id: '102', department: 'Civil', image: 'url_to_image',level_term: '1-1' },
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: '', id: '', department: '', image: '' ,level_term:''}
+      ],
+    },
+    {
+      id: 3,
+      seats: [
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: 'Jane Smith', id: '102', department: 'CSE', image: 'url_to_image' ,level_term:'4-1' },
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+      ],
+    },
+    {
+      id: 4,
+      seats: [
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: 'Jane Smith', id: '102', department: 'EEE', image: 'url_to_image',level_term: '3-1' },
+        { name: '', id: '', department: '', image: '' ,level_term:''},
+      ],
+    },
+    // Add more rooms as needed
+  ]);
 
-  // Function to fetch card data from the database
-  const fetchCardDataFromDatabase = async () => {
-    console.log('hello');
+//   const handleDrop = (roomId, seatIndex, applicant) => {
+//     const updatedRooms = [...rooms];
+//     updatedRooms[roomId].seats[seatIndex] = applicant;
+//     setRooms(updatedRooms);
+// };
 
-    try {
-      // Fetch data from your database API
-      const response = await fetch('http://localhost:3000/notice');
-      const data = await response.json();
-      console.log(data);
-      // Update the state with the fetched data
-      setCardData(data);
-    } catch (error) {
-      console.error('Error fetching card data:', error);
-    }
-  };
+ // State to manage modal visibility
+ const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+ const [isChangeModalOpen, setIsChangeModalOpen] = useState(false);
+ const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+ const [roomPreference, setRoomPreference] = useState('');
+ const [cgpa, setCGPA] = useState('');
+ const [currentLivingPlace, setCurrentLivingPlace] = useState('');
+ const [reason, setReason] = useState('');
 
-  // useEffect to fetch data when the component mounts
-  useEffect(() => {
-    fetchCardDataFromDatabase();
-  }, []); // Empty dependency array ensures it only runs once on mount
+ // Function to open the modal
+//  const openApplyModal = () => {
+//    setIsApplyModalOpen(true);
+//    setIsChangeModalOpen(false);
+//    setIsCancelModalOpen(false);
+//  };
+
+ // Function to close the modal
+ const closeApplyModal = () => {
+   setIsApplyModalOpen(false);
+ };
+ // Function to open the modal
+ const openChangeModal = () => {
+   setIsChangeModalOpen(true);
+   setIsApplyModalOpen(false);
+   setIsCancelModalOpen(false);
+ };
+
+ // Function to close the modal
+ const closeChangeModal = () => {
+   setIsChangeModalOpen(false);
+ };
+
+ // Function to open the modal
+ const openCancelModal = () => {
+   setIsCancelModalOpen(true);
+   setIsChangeModalOpen(false);
+   setIsApplyModalOpen(false);
+ };
+
+ // Function to close the modal
+ const closeCancelModal = () => {
+   setIsCancelModalOpen(false);
+ };
+
+ // Function to handle form submission
+ const handleApplySeat = (e) => {
+   e.preventDefault();
+   // Perform submission logic here
+   console.log('Room Preference:', roomPreference);
+   console.log('CGPA:', cgpa);
+   console.log('Current Living Place:', currentLivingPlace);
+
+   //reset form fields
+    setRoomPreference('');
+    setCGPA('');
+    setCurrentLivingPlace('');
+   // Close modal
+   closeApplyModal();
+ };
+
+ // Function to handle form submission
+ const handleChangeSeat = (e) => {
+   e.preventDefault();
+   // Perform submission logic here
+   console.log('Room Preference:', roomPreference);
+   console.log('CGPA:', cgpa);
+   console.log('Why do you want to change room? ', currentLivingPlace);
+
+   //reset form fields
+    setRoomPreference('');
+    setCGPA('');
+    setReason('');
+   // Close modal
+   closeChangeModal();
+ };
+ // Function to handle form submission
+ const handleCancelSeat = (e) => {
+   e.preventDefault();
+   // Perform submission logic here
+   console.log('Room Preference:', roomPreference);
+   console.log('CGPA:', cgpa);
+   console.log('Why do you want to cancel room? ', currentLivingPlace);
+
+    //reset form fields
+    setRoomPreference('');
+    setCGPA('');
+    setReason('');
+   // Close modal
+   closeCancelModal();
+ };
+
 
   return (
-    <div>
-      {cardData.map((card, index) => (
-        <React.Fragment key={index}>
-          <MainCard title={card.title}>
-            <Typography variant="body2">{card.text}</Typography>
-            <Typography variant="caption" color="textSecondary" mt={2}>
-              Date: {card.created_at}
-            </Typography>
-            <div style={{ marginBottom: '5px' }} />
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginTop: '10px' }}
-              onClick={() => handleDownloadClick(card.title, card.created_at, card.text)}
-            >
-              View & Download
-            </Button>
-          </MainCard>
-          {index < cardData.length - 1 && <div style={{ margin: '16px' }} />}
-        </React.Fragment>
-      ))}
+    <div className="StudentPage">
+      <div className="room-list">
+        {/* {rooms.map((room, index) => ( */}
+        {rooms.map((room) => (
+          <div key={room.id} className="room-card">
+            <h3>Room {room.id}</h3>
+            <div className="seat-container">
+              {room.seats.map((seat, seatIndex) => (
+                <div key={seatIndex} className="seat">
+                  {seat.name ? (
+                    <div>
+                      <img src={seat.image} alt={seat.name} />
+                      {/* <p>{seat.name}</p> */}
+                      <p>ID: {seat.id}</p>
+                      <p>Department: {seat.department}</p>
+                      <p>Level-Term: {seat.level_term}</p>
+                    </div>
+                  ) : (
+                    <div className="empty-seat">
+                      Empty Seat
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      <div className="student-actions">
+        {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> */}
+        {/* <button1 onClick={openApplyModal}>Apply for a Seat</button1> */}
+        <button1 onClick={openChangeModal}>Apply to Change Room</button1>
+        <button1 onClick={openCancelModal}>Cancel Your Seat</button1>
+      </div>
+      
+
+      <Modal
+        isOpen={isApplyModalOpen}
+        onRequestClose={closeApplyModal}
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <h2>Apply for a Seat</h2>
+        <form onSubmit={handleApplySeat}>
+          <div>
+            <label htmlFor="roomPreference">Enter your preferred rooms:</label>
+            <input
+              type="text"
+              id="roomPreference"
+              value={roomPreference}
+              onChange={(e) => setRoomPreference(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="cgpa">Your CGPA:</label>
+            <input
+              type="text"
+              id="cgpa"
+              value={cgpa}
+              onChange={(e) => setCGPA(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="currentLivingPlace">Your Current Living Place:</label>
+            <input
+              type="text"
+              id="currentLivingPlace"
+              value={currentLivingPlace}
+              onChange={(e) => setCurrentLivingPlace(e.target.value)}
+            />
+          </div>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={closeApplyModal}>Cancel</button>
+        </form>
+      </Modal>
+
+      {/* Change modal */}
+      <Modal
+        isOpen={isChangeModalOpen}
+        onRequestClose={closeChangeModal}
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <h2>Apply for a Seat</h2>
+        <form onSubmit={handleChangeSeat}>
+          <div>
+            <label htmlFor="roomPreference">Enter your preferred rooms:</label>
+            <input
+              type="text"
+              id="roomPreference"
+              value={roomPreference}
+              onChange={(e) => setRoomPreference(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="cgpa">Your CGPA:</label>
+            <input
+              type="text"
+              id="cgpa"
+              value={cgpa}
+              onChange={(e) => setCGPA(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="reason">Why do you want to change room?</label>
+            <textarea
+              rows={3}
+              cols={46}
+              id="reason"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+            />
+          </div>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={closeChangeModal}>Cancel</button>
+        </form>
+      </Modal>
+
+      {/* Cancel modal */}
+      <Modal
+        isOpen={isCancelModalOpen}
+        onRequestClose={closeCancelModal}
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <h2>Seat Cancelation Form</h2>
+        <form onSubmit={handleCancelSeat}>
+
+          <div>
+            <label htmlFor="reason">Why do you want to cancel your seat?</label>
+            <textarea
+              rows={5}
+              cols={46}
+              id="reason"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+            />
+          </div>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={closeCancelModal}>Cancel</button>
+        </form>
+      </Modal>
+
     </div>
   );
-};
+}
 
-export default SamplePage;
+export default StudentPage;
