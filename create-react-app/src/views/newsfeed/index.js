@@ -117,24 +117,34 @@ const SamplePage = () => {
               horizontal: 'left',
             }}
             PaperProps={{
+              className: 'menu-paper', // Assign the menu-paper class directly
               style: {
-                height: '520px', 
+                height: '430px', 
                 width: '420px', 
                 backgroundColor: '#EDE7F6', // Set background color
-                marginLeft: '45px',
-                
+                marginLeft: '0x',
+                marginTop: '20px',
+                transition: 'transform 0.5s ease-in-out', // Add transition for smooth effect
+                transformStyle: 'preserve-3d', // Preserve 3D transformations
+                perspective: '1000px', // Add perspective for 3D effect
               },
+            }}
+            onMouseEnter={() => {
+              document.querySelector('.menu-paper').style.transform = 'rotateY(-10deg) scale(1.20)';
+            }}
+            onMouseLeave={() => {
+              document.querySelector('.menu-paper').style.transform = 'rotateY(0deg) scale(1)';
             }}
           >
           
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',paddingLeft: '15px',paddingTop:'30px',paddingRight:'10px', }}>
+              <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',paddingLeft: '25px',paddingTop:'30px',paddingRight:'25px', }}>
                 <p1 style={{ textAlign: 'center',fontSize:'20px' }}>Create Post</p1>
-                <textarea className="form-control custom-input" id="cause" placeholder="What's on your mind?" style={{ color: '#B2BEB5', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', width: '390px',height:'150px', minHeight: '80px' }}></textarea>
+                <textarea className="form-control custom-input" id="cause" placeholder="What's on your mind?" style={{ color: '#B2BEB5', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', width: '360px',height:'150px', minHeight: '80px',paddingRight:'25px' }}></textarea>
               </div>
             </div>
             
-              <div style={{ border: '2px dashed #ccc', borderRadius: '8px', padding: '20px', textAlign: 'center', color: '#ccc', fontSize: '16px', marginTop: '15px', width: '390px', marginLeft: '15px', cursor: 'pointer' }}>
+              <div style={{ border: '2px dashed #ccc', borderRadius: '8px', padding: '20px', textAlign: 'center', color: '#ccc', fontSize: '16px', marginTop: '15px', width: '360px', marginLeft: '25px', cursor: 'pointer' }}>
                 <div {...getRootProps({ className: 'dropzone' })}>
                   <input {...getInputProps()} />
                   <p>Add photos/videos<br />
@@ -158,7 +168,7 @@ const SamplePage = () => {
               className="btn btn-secondary mr-3"
               style={{
                 marginTop: '20px',
-                marginLeft: '15px',
+                marginLeft: '25px',
                 fontSize: '1.1rem',
                 fontFamily: 'Arial, sans-serif',
                 borderRadius: '15px', // Adjust the border-radius for rounded corners

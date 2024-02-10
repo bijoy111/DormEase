@@ -8,7 +8,9 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Add this line to center items horizontally in each column */
+  /* margin-right: calc(5rem); */
 }
+
 
 .note-card {
   max-width: 400px;
@@ -34,7 +36,7 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(189, 20, 20, 0.4);
+  box-shadow: 0 4px 16px rgba(211, 205, 35, 0.4);
   background-color: #fff;
 }
 
@@ -59,7 +61,7 @@
 }
 
 .react-calendar__tile--now {
-  background-color: #e22810;
+  background-color: #bfe210;
 }
 
 .react-calendar__tile--tile {
@@ -133,3 +135,9 @@ video{
   flex-direction: column;
   
 }
+
+.flex-container {
+  display: flex;
+  justify-content: space-between; /* or any other spacing method you prefer */
+}
+
