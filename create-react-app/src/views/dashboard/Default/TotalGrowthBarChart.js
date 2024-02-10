@@ -84,8 +84,8 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                 <Grid item>
                   <Grid container direction="column" spacing={1}>
                     <Grid item>
-                       <div style={{ bfontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px',lineHeight: '1.5'}}>
-                      <Typography variant="h1">Dinning History</Typography>
+                      <div style={{ bfontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', lineHeight: '1.5' }}>
+                        <Typography variant="h1">Dinning History</Typography>
                       </div>
                     </Grid>
                   </Grid>

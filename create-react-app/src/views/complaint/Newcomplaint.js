@@ -23,8 +23,6 @@ const ComplaintForm = () => {
     setTitle(title);
     setDetails(details);
 
-    // Redirect to home page after submission
-
     window.open('/free/complaint/default', '_self');
   };
 

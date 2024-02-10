@@ -54,7 +54,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const EarningCard = ({ isLoading }) => {
   // State for storing card data
   const [cardData, setCardData] = useState([]);
-   // Function to fetch card data from the database
+  // Function to fetch card data from the database
   const fetchCardDataFromDatabase = async () => {
     console.log('hello');
 
@@ -105,15 +105,11 @@ const EarningCard = ({ isLoading }) => {
                       }}
                     />
                     <div style={{ marginLeft: '20px' }}>
-                      <div style={{fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px',marginLeft:'5px'}}>
-                      {/* <h4 className="user-name">1905052</h4>
-                      <h4 className="user-email">Bijoy Ahmed Saiem</h4> */}
-                      <br/>
-                      <br/>
-                      {studentId}
-                      <br/>
-                      <br/>
-                      {studentName}
+                      <div style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px', marginLeft: '5px' }}>
+                        <br /> <br />
+                        {studentId}
+                        <br /><br />
+                        {studentName}
                       </div>
                     </div>
                   </Grid>

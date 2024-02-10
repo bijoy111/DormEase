@@ -31,10 +31,14 @@
   }
   
   .empty-seat {
-    background-color: #eecbcb;
-    color: #666;
+    background-color: #FFE6CB;
+    color:black;
     text-align: center;
     padding: 60px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom:10px;
+    border-radius: 15px;
   }
   
   .student-actions {
@@ -45,7 +49,6 @@
     margin-bottom: 10px;
   }
   
-  /* ApplySeatModal.css */
 
 .Modal {
     position: fixed;
@@ -57,8 +60,8 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     max-width: 400px;
-    width: 90%; /* Adjust as needed */
-    max-height: 80%; /* Adjust as needed */
+    width: 90%; 
+    max-height: 80%; 
     overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
   }
   
@@ -135,4 +138,28 @@
     background-color: #0056b3;
   }
   
+
+  .card {
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  margin: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin-left: '700px';
+  margin-top: '200px';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #98A89E; /* Initial background color */
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition effect */
+}
+
+.card:hover {
+  background-color: #EEEAE1; /* Background color on hover (white) */
+  box-shadow: 0px 8px 16px rgba(236, 8, 8, 1.2); /* Adjusted box shadow on hover */
+}
+
   

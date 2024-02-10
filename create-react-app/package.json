@@ -26,6 +26,7 @@
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-calendar": "^4.8.0",
+    "react-card-flip": "^1.2.2",
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
@@ -42,6 +43,7 @@
     "redux": "^4.2.0",
     "rive-react": "^4.7.1",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.8",
     "yup": "^0.32.11"
   },
   "scripts": {

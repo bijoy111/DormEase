@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 // material-ui
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-
+import { useEffect, useState } from 'react';
 // project imports
+import axios from 'axios';
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
-
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   overflow: 'hidden',
@@ -39,6 +39,27 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 // ==============================|| DASHBOARD - DINNER ITEM LIST CARD ||============================== //
 
 const TotalIncomeLightCard = ({ isLoading }) => {
+
+  const [dinnerItems, setDinnerItems] = useState([]);
+
+  useEffect(() => {
+    const fetchDinnerItems = async () => {
+      try {
+        const currentDate = new Date().toISOString().split('T')[0]; // make current date in 'YYYY-MM-DD' format
+        console.log(currentDate);
+        const response = await axios.get(`http://localhost:3000/dining/${currentDate}`);
+        setDinnerItems(response.data.dinner);
+      } catch (error) {
+        console.error('Error fetching lunch items:', error);
+      }
+    };
+
+    fetchDinnerItems();
+  }, []);
+
+
+
+
   const theme = useTheme();
 
   return (
@@ -71,7 +92,7 @@ const TotalIncomeLightCard = ({ isLoading }) => {
                         fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px'
                       }}
                     >
-                      Rice, Vegetables, Meat, Eggs, Fish
+                      {dinnerItems.map((item) => item.name).join(', ')}
                     </Typography>
                   }
                 />

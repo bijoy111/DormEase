@@ -4,7 +4,7 @@ import './App.css';
 import { Dashboard } from './Dashboard/dashboard.js';
 import { LoginCard } from './Login/login.js';
 import { SeatAllocation } from './SeatAllocation/seatallocation.js';
-import { Complaint } from './Complaint/complaint.js';
+// import { Complaint } from './Complaint/complaint.js';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={<LoginCard />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/seatallocation" element={<SeatAllocation />} />
-      <Route path="/complaint" element={<Complaint />} />
+      {/* <Route path="/complaint" element={<Complaint />} /> */}
     </Routes>
   );
 }

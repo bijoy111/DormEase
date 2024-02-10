@@ -6,8 +6,6 @@ import { styled } from '@mui/material/styles';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
-// assets
-
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
   color: '#fff',
