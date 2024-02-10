@@ -16,7 +16,6 @@ module.exports = (router) => {
  * @swagger
  * /allocation:
  *    get:
-<<<<<<< HEAD
  *      summary: Show all seat allocations
  *      tags: [Seat Allocation]
  *      responses:
@@ -42,23 +41,12 @@ module.exports = (router) => {
  *                seat_no: [1905025, 1905049, null, 1905021],
  *                room_no: 507
  *                }]
-=======
- *      summary: Show all seat allocations [Admin privilege required]
- *      tags: [Seat Allocation]
- *      requestBody:
- *        content:
- *          application/json: {}
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/SeatAllocation'
->>>>>>> c92ebce3b2901a3cbc915412c5c5ced50cb8ffc4
  */
 
 /**
  * @swagger
  * /auto_allocate:
  *    get:
-<<<<<<< HEAD
  *      summary: Automatically allocate seats
  *      tags: [Seat Allocation]
  *      responses:
@@ -84,27 +72,13 @@ module.exports = (router) => {
  *                seat_no: [1905042, 1905046, 1905047, 1905021],
  *                room_no: 507
  *                }]
-=======
- *      summary: Automatically allocate seats [Admin privilege required]
- *      tags: [Seat Allocation]
- *      requestBody:
- *        content:
- *          application/json: {}
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/SeatAllocation'
->>>>>>> c92ebce3b2901a3cbc915412c5c5ced50cb8ffc4
  */
 
 /**
  * @swagger
  * /allocation/assign:
  *    post:
-<<<<<<< HEAD
- *      summary: Assign a seat to a student
-=======
  *      summary: Assign a seat to a student [Admin privilege required]
->>>>>>> c92ebce3b2901a3cbc915412c5c5ced50cb8ffc4
  *      tags: [Seat Allocation]
  *      requestBody:
  *        required: true
@@ -130,8 +104,6 @@ module.exports = (router) => {
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
-<<<<<<< HEAD
-=======
  */
 
 /**
@@ -169,5 +141,4 @@ module.exports = (router) => {
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
->>>>>>> c92ebce3b2901a3cbc915412c5c5ced50cb8ffc4
  */
