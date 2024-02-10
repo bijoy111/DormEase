@@ -7,7 +7,7 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-export function Dashboard() {
+export function Navbar() {
   return (
     <div>
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
@@ -25,6 +25,9 @@ export function Dashboard() {
             </NavLink>
             <NavLink exact to="/notice" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Notice</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/complaint" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="box">Complaint Box</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/seatallocation" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Seat Allocation</CDBSidebarMenuItem>

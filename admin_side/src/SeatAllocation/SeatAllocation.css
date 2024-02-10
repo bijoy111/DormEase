@@ -1,0 +1,151 @@
+.SeatAllocation {
+    display: flex;
+}
+
+.room-list-container {
+    width: 40%;
+    margin-right: 20px;
+    margin-top: 40px;
+    margin-left: 40px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 40px); /* Adjust the max height as needed */
+}
+
+.applicant-list-container,
+.cancellation-requests-list-container,
+.change-requests-list-container {
+    width: 22%;
+    margin-right: 20px;
+    margin-top : 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 40px); /* Adjust the max height as needed */
+    padding: 10px;
+}
+
+.applicant-list h2,
+.cancellation-requests-list h2,
+.change-requests-list h2{
+    margin-top: 0;
+}
+
+.room-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: #666 0px 0px 10px;
+}
+
+.seat-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.seat {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: #666 0px 0px 10px;
+}
+
+.empty-seat {
+    background-color: #eecbcb;
+    color: #666;
+    text-align: center;
+    padding: 60px;
+}
+
+.applicant,
+.cancellation-request ,
+.change-request{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: #666 0px 0px 10px;
+}
+
+.applicant img,
+.cancellation-request img,
+.change-requests img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+  /* vertically set the buttons */
+  .seat-alloc-buttons {
+    position: fixed;
+    top: 55%; /* Adjust the top position as needed */
+    left: 85%; /* Adjust the left position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    transform: translateY(-50%);
+    z-index: 0; /* Ensure the buttons remain above other content */
+  } 
+
+  .seat-alloc-buttons button{
+    display: block;
+    width: 200px;
+    height: 80px;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 5px; /* Optional: adjust border-radius if you want rounded corners */
+    background-color: #673AB7;
+    color: #fff;
+    font-size: 16px;
+    font-family:sans-serif;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .Modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 100px #666;
+    max-width: 400px;
+    width: 90%; /* Adjust as needed */
+    max-height: 80%; /* Adjust as needed */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+  }
+  
+  .Modal h2 {
+    margin-bottom: 20px;
+  }
+  
+  .Modal {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Modal div {
+    margin-bottom: 10px;
+  }
+  
+  .Modal label {
+    font-weight: bold;
+  }
+  
+  .Modal button {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #673AB7;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 20px;
+
+  }
+  
+  .Modal button:hover {
+    background-color: #0056b3;
+  }
+  
