@@ -69,10 +69,10 @@ async function update_student_edit_info(stu_id, old_pass, new_pass, email, phone
 
     sql = `
         UPDATE student
-        SET email = $2, phone = $3, photo = $4, guardian_name = $5, guardian_phone = $6
+        SET email = $2, phone = $3, guardian_name = $4, guardian_phone = $5
         WHERE stu_id = $1
     `;
-    result = await db_query(sql, [stu_id, email, phone, photo.filename, guardian_name, guardian_phone]);
+    result = await db_query(sql, [stu_id, email, phone, guardian_name, guardian_phone]);
     return result;
 }
 

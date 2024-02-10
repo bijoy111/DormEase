@@ -43,7 +43,7 @@ const get_student_edit_info = async (req, res, next) => {
 
 const update_student_edit_info = async (req, res, next) => {
     if (!req.user || req.user.role !== 'student') {
-        consolelog(req.body);
+        console.log(req.body);
         return res.status(401).json({
             error: 'Unauthorized'
         });

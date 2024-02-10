@@ -17,7 +17,8 @@ module.exports = (router) => {
     router.post('/application/room_change', apply_for_room_change);
     router.delete('/application/room_change', cancel_room_change_application);
     router.get('/dashboard/edit', get_student_edit_info);
-    router.put('/dashboard/edit', upload.single('photo'), update_student_edit_info);
+    // router.put('/dashboard/edit', upload.single('photo'), update_student_edit_info);
+    router.put('/dashboard/edit', update_student_edit_info);
 }
 
 /**

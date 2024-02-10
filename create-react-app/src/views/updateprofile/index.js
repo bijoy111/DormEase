@@ -17,6 +17,9 @@ const SamplePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [Phone, setPhone] = useState('');
   const [studentEmail, setEmail] = useState('');
+  // const [guardianName, setGuardianname] = useState('');
+  // const [guardianPhone, setGuardianphone] = useState('');
+  // const [picture,setPicture] = useState('');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -74,15 +77,23 @@ const SamplePage = () => {
   const roomNo = cardData.room_no || '';
   const seatNo = cardData.seat_no || '';
   const Apply = cardData.applied_for_room || '';
+  const photo = logo;
+
 
   // Function to handle form submission
   const handleSubmit = async () => {
+    const obj= {
+      email: studentEmail,
+      phone: Phone,
+      photo: photo,
+      guardian_name: guardianName,
+      guardian_phone: guardianPhone,
+    }
+
+    console.log(obj);
     try {
       // Send a POST request to your backend server with the updated email and phone
-      const response = await axios.post('http://localhost:3000/dashboard/edit', {
-        studentEmail,
-        Phone
-      });
+      const response = await axios.put('http://localhost:3000/dashboard/edit', obj, {withCredentials: true});
 
       // Handle success response
       console.log('Data updated successfully:', response.data);
@@ -90,6 +101,8 @@ const SamplePage = () => {
       // Handle error
       console.error('Error updating data:', error);
     }
+
+    window.open('/free/viewprofile', '_self');
   };
 
   return (
