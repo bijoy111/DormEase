@@ -1,9 +1,10 @@
-const { get_complaints, post_complaint, update_complaint_stage } = require('../controllers/complaint.controller');
+const { get_complaints, post_complaint, update_complaint_stage, delete_complaint } = require('../controllers/complaint.controller');
 
 module.exports = (router) => {
     router.get('/complaint', get_complaints);
     router.post('/complaint/compose', post_complaint);
     router.post('/complaint/update', update_complaint_stage);
+    router.delete('/complaint/delete/:comp_id', delete_complaint);
 }
 
 /**
@@ -114,3 +115,30 @@ module.exports = (router) => {
  *        "404":
  *          $ref: '#/components/responses/NotFound'
  */
+
+/**
+ * @swagger
+ * /complaint/delete:
+ *    delete:
+ *      summary: Delete a complaint
+ *      tags: [Complaint]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - comp_id
+ *              properties:
+ *                comp_id:
+ *                  type: number
+ *              example:
+ *                comp_id: 2
+ *      responses:
+ *        "200":
+ *          $ref: '#/components/responses/Success'
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
+ */
+

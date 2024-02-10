@@ -1,166 +1,153 @@
-import React, { useState } from 'react';
-import './style.css'; // You can define your CSS styles in App.css
-
+import { Button } from "@material-tailwind/react";
+import CardContent from '@mui/material/CardContent';
+import logo from 'assets/images/common_user10.png';
+import { useState } from 'react';
 import Modal from 'react-modal';
+import './style.css';
 
 function StudentPage() {
   // Dummy data for dormitory rooms and applicants
-  //const [rooms, setRooms] = useState([
   const [rooms] = useState([
     {
-      id: 1,
+      id: 2001,
       seats: [
-        { name: 'John Doe', id: '101', department: 'CSE', image: 'url_to_image',level_term: '1-1' },
-        { name: '', id: '', department: '', image: '',level_term: '1-2' },
-        { name: '', id: '', department: '', image: '',level_term: '1-2' },
-        { name: 'Jane Smith', id: '102', department: 'EEE', image: 'url_to_image',level_term: '1-1' },
+        { name: 'Bijoy Ahmed Saiem', id: '1905052', department: 'CSE', image: logo, level_term: '4-1' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: 'Al-Amin Sany', id: '1905048', department: 'CSE', image: logo, level_term: '4-1' },
       ],
     },
     {
-      id: 2,
+      id: 2002,
       seats: [
-        { name: 'Jane Smith', id: '102', department: 'Civil', image: 'url_to_image',level_term: '1-1' },
-        { name: '', id: '', department: '', image: '' ,level_term:''},
-        { name: '', id: '', department: '', image: '' ,level_term:''},
-        { name: '', id: '', department: '', image: '' ,level_term:''}
+        { name: 'Rakib Ahsan', id: '1905024', department: 'CSE', image: logo, level_term: '4-1' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: '', id: '', department: '', image: '', level_term: '' }
       ],
     },
     {
-      id: 3,
+      id: 2003,
       seats: [
-        { name: '', id: '', department: '', image: '' ,level_term:''},
-        { name: '', id: '', department: '', image: '' ,level_term:''},
-        { name: 'Jane Smith', id: '102', department: 'CSE', image: 'url_to_image' ,level_term:'4-1' },
-        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: 'Tanvir Alam', id: '1904049', department: 'IPE', image: logo, level_term: '4-1' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
       ],
     },
     {
-      id: 4,
+      id: 2004,
       seats: [
-        { name: '', id: '', department: '', image: '' ,level_term:''},
-        { name: '', id: '', department: '', image: '' ,level_term:''},
-        { name: 'Jane Smith', id: '102', department: 'EEE', image: 'url_to_image',level_term: '3-1' },
-        { name: '', id: '', department: '', image: '' ,level_term:''},
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
+        { name: 'Sourov Rahman', id: '1906034', department: 'WRE', image: logo, level_term: '4-1' },
+        { name: '', id: '', department: '', image: '', level_term: '' },
       ],
     },
-    // Add more rooms as needed
+    // we can add more rooms as needed
   ]);
 
-//   const handleDrop = (roomId, seatIndex, applicant) => {
-//     const updatedRooms = [...rooms];
-//     updatedRooms[roomId].seats[seatIndex] = applicant;
-//     setRooms(updatedRooms);
-// };
+  // State to manage modal visibility
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [isChangeModalOpen, setIsChangeModalOpen] = useState(false);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [roomPreference, setRoomPreference] = useState('');
+  const [cgpa, setCGPA] = useState('');
+  const [currentLivingPlace, setCurrentLivingPlace] = useState('');
+  const [reason, setReason] = useState('');
 
- // State to manage modal visibility
- const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
- const [isChangeModalOpen, setIsChangeModalOpen] = useState(false);
- const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
- const [roomPreference, setRoomPreference] = useState('');
- const [cgpa, setCGPA] = useState('');
- const [currentLivingPlace, setCurrentLivingPlace] = useState('');
- const [reason, setReason] = useState('');
+  // Function to close the modal
+  const closeApplyModal = () => {
+    setIsApplyModalOpen(false);
+  };
+  // Function to open the modal
+  const openChangeModal = () => {
+    setIsChangeModalOpen(true);
+    setIsApplyModalOpen(false);
+    setIsCancelModalOpen(false);
+  };
 
- // Function to open the modal
-//  const openApplyModal = () => {
-//    setIsApplyModalOpen(true);
-//    setIsChangeModalOpen(false);
-//    setIsCancelModalOpen(false);
-//  };
+  // Function to close the modal
+  const closeChangeModal = () => {
+    setIsChangeModalOpen(false);
+  };
 
- // Function to close the modal
- const closeApplyModal = () => {
-   setIsApplyModalOpen(false);
- };
- // Function to open the modal
- const openChangeModal = () => {
-   setIsChangeModalOpen(true);
-   setIsApplyModalOpen(false);
-   setIsCancelModalOpen(false);
- };
+  // Function to open the modal
+  const openCancelModal = () => {
+    setIsCancelModalOpen(true);
+    setIsChangeModalOpen(false);
+    setIsApplyModalOpen(false);
+  };
 
- // Function to close the modal
- const closeChangeModal = () => {
-   setIsChangeModalOpen(false);
- };
+  // Function to close the modal
+  const closeCancelModal = () => {
+    setIsCancelModalOpen(false);
+  };
 
- // Function to open the modal
- const openCancelModal = () => {
-   setIsCancelModalOpen(true);
-   setIsChangeModalOpen(false);
-   setIsApplyModalOpen(false);
- };
+  // Function to handle form submission
+  const handleApplySeat = (e) => {
+    e.preventDefault();
+    // Perform submission logic here
+    console.log('Room Preference:', roomPreference);
+    console.log('CGPA:', cgpa);
+    console.log('Current Living Place:', currentLivingPlace);
 
- // Function to close the modal
- const closeCancelModal = () => {
-   setIsCancelModalOpen(false);
- };
-
- // Function to handle form submission
- const handleApplySeat = (e) => {
-   e.preventDefault();
-   // Perform submission logic here
-   console.log('Room Preference:', roomPreference);
-   console.log('CGPA:', cgpa);
-   console.log('Current Living Place:', currentLivingPlace);
-
-   //reset form fields
+    //reset form fields
     setRoomPreference('');
     setCGPA('');
     setCurrentLivingPlace('');
-   // Close modal
-   closeApplyModal();
- };
+    // Close modal
+    closeApplyModal();
+  };
 
- // Function to handle form submission
- const handleChangeSeat = (e) => {
-   e.preventDefault();
-   // Perform submission logic here
-   console.log('Room Preference:', roomPreference);
-   console.log('CGPA:', cgpa);
-   console.log('Why do you want to change room? ', currentLivingPlace);
-
-   //reset form fields
-    setRoomPreference('');
-    setCGPA('');
-    setReason('');
-   // Close modal
-   closeChangeModal();
- };
- // Function to handle form submission
- const handleCancelSeat = (e) => {
-   e.preventDefault();
-   // Perform submission logic here
-   console.log('Room Preference:', roomPreference);
-   console.log('CGPA:', cgpa);
-   console.log('Why do you want to cancel room? ', currentLivingPlace);
+  // Function to handle form submission
+  const handleChangeSeat = (e) => {
+    e.preventDefault();
+    // Perform submission logic here
+    console.log('Room Preference:', roomPreference);
+    console.log('CGPA:', cgpa);
+    console.log('Why do you want to change room? ', currentLivingPlace);
 
     //reset form fields
     setRoomPreference('');
     setCGPA('');
     setReason('');
-   // Close modal
-   closeCancelModal();
- };
+    // Close modal
+    closeChangeModal();
+  };
+  // Function to handle form submission
+  const handleCancelSeat = (e) => {
+    e.preventDefault();
+    // Perform submission logic here
+    console.log('Room Preference:', roomPreference);
+    console.log('CGPA:', cgpa);
+    console.log('Why do you want to cancel room? ', currentLivingPlace);
+
+    //reset form fields
+    setRoomPreference('');
+    setCGPA('');
+    setReason('');
+    // Close modal
+    closeCancelModal();
+  };
 
 
   return (
     <div className="StudentPage">
       <div className="room-list">
-        {/* {rooms.map((room, index) => ( */}
         {rooms.map((room) => (
-          <div key={room.id} className="room-card">
-            <h3>Room {room.id}</h3>
+          <div key={room.id} className="room-card" style={{ textAlign: 'center' }}>
+            <h3 style={{ margin: '0 auto', marginBottom: '15px', fontSize: '20px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold', color: '#673AB7' }}>Room: {room.id}</h3>
             <div className="seat-container">
               {room.seats.map((seat, seatIndex) => (
-                <div key={seatIndex} className="seat">
+                <div key={seatIndex} className="seat" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                   {seat.name ? (
-                    <div>
-                      <img src={seat.image} alt={seat.name} />
-                      {/* <p>{seat.name}</p> */}
-                      <p>ID: {seat.id}</p>
-                      <p>Department: {seat.department}</p>
-                      <p>Level-Term: {seat.level_term}</p>
+                    <div style={{ textAlign: 'center' }}>
+                      <img src={seat.image} alt={seat.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
+                      <p style={{ fontFamily: 'Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', margin: '5px 0' }}>{seat.name}</p>
+                      <p style={{ fontFamily: 'Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', margin: '5px 0' }}>{seat.id}</p>
+                      <p style={{ fontFamily: 'Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', margin: '5px 0' }}> {seat.department}</p>
+                      <p style={{ fontFamily: 'Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', margin: '5px 0' }}>L/T: {seat.level_term}</p>
                     </div>
                   ) : (
                     <div className="empty-seat">
@@ -174,14 +161,63 @@ function StudentPage() {
         ))}
       </div>
 
+      <div className="card" style={{ marginTop: '200px', marginLeft: '700px' }}>
+        <CardContent style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <Button
+            variant="outlined"
+            type="button"
+            id="change-room"
+            name="change-room"
+            className="btn btn-secondary mr-3"
+            style={{
+              marginBottom: '20px',
+              fontSize: '1.1rem',
+              fontFamily: 'Arial, sans-serif',
+              borderRadius: '15px',
+              height: '70px',
+              width: '220px',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease-in-out',
+              color: 'white',
+              backgroundColor: '#673AB7',
+            }}
+            onClick={openChangeModal}
+            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+          >
+            Apply to Change Room
+          </Button>
 
-      <div className="student-actions">
-        {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> */}
-        {/* <button1 onClick={openApplyModal}>Apply for a Seat</button1> */}
-        <button1 onClick={openChangeModal}>Apply to Change Room</button1>
-        <button1 onClick={openCancelModal}>Cancel Your Seat</button1>
+          <Button
+            variant="outlined"
+            type="button"
+            id="cancel-seat"
+            name="cancel-seat"
+            className="btn btn-secondary mr-3"
+            style={{
+              fontSize: '1.1rem',
+              fontFamily: 'Arial, sans-serif',
+              borderRadius: '15px',
+              height: '70px',
+              width: '220px',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease-in-out',
+              color: 'white',
+              backgroundColor: '#673AB7',
+            }}
+            onClick={openCancelModal}
+            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+          >
+            Cancel Your Seat
+          </Button>
+        </CardContent>
       </div>
-      
+
+
+
+
+
 
       <Modal
         isOpen={isApplyModalOpen}

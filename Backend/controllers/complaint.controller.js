@@ -24,8 +24,8 @@ const post_complaint = async (req, res, next) => {
     }
 
     const stu_id = req.user.id;
-    const { title, body } = req.body;
-    const result = await complaint_model.post_complaint(stu_id, title, body);
+    const { title, text } = req.body;
+    const result = await complaint_model.post_complaint(stu_id, title, text);
     return res.status(200).json({
         message: 'OK',
     });
@@ -53,8 +53,32 @@ const update_complaint_stage = async (req, res, next) => {
     });
 }
 
+const delete_complaint = async (req, res, next) => {
+    if (!req.user) {
+        console.log('hello');
+        console.log(req.body);
+        return res.status(401).json({
+
+            error: 'Unauthorized'
+        });
+    }
+
+    const complaint_id = req.params.comp_id;
+    const result = await complaint_model.delete_complaint(complaint_id);
+    if (result.error) {
+        return res.status(404).json({
+            error: result.error
+        });
+    }
+
+    return res.status(200).json({
+        message: 'OK',
+    });
+}
+
 module.exports = {
     get_complaints,
     post_complaint,
-    update_complaint_stage
+    update_complaint_stage,
+    delete_complaint
 }

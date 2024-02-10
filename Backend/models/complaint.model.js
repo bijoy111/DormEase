@@ -50,7 +50,7 @@ async function update_complaint_stage(complaint_id, new_stage) {
 
     if (old_stage == 3)
         return { error: 'Already Resolved' }
-    
+
     const sql = `
         UPDATE complaint
         SET stage = $2

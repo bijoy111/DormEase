@@ -38,13 +38,13 @@ const SamplePage = () => {
     <div>
       {cardData.map((card, index) => (
         <React.Fragment key={index}>
-          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)',fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px' }}>
-            <Typography variant="body2" style={{fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px'}}>{card.text}</Typography>
-            <Typography variant="caption" color="textSecondary" mt={2} style={{fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px'}}>
+          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px' }}>
+            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px' }}>{card.text.length > 35 ? card.text.substring(0, 35) + '...' : card.text}</Typography>
+            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px' }}>
               Date: {card.created_at}
             </Typography>
             <div style={{ marginBottom: '5px' }} />
-            <Button 
+            <Button
               variant="outlined"
               type="button"
               id="cancel"
@@ -52,21 +52,20 @@ const SamplePage = () => {
               className="btn btn-secondary mr-3"
               style={{
                 marginTop: '10px',
-                // marginLeft: '15px',
                 fontSize: '1.1rem',
                 fontFamily: 'Arial, sans-serif',
-                borderRadius: '15px', // Adjust the border-radius for rounded corners
-                height: '50px', // Adjust the height as needed
+                borderRadius: '15px',
+                height: '50px',
                 // width: '150px',
                 boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
                 cursor: 'pointer',
                 transition: 'background-color 0.3s ease-in-out',
-                color:'white',
+                color: 'white',
                 backgroundColor: '#673AB7',
               }}
               onClick={() => handleDownloadClick(card.title, card.created_at, card.text)}
               onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
-              onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white';}} // Change back to default color
+              onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
             >
               View & Download
             </Button>

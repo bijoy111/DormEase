@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
-
 // material-ui
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-// project imports
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
 
@@ -41,6 +40,24 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 // ==============================|| DASHBOARD - LUNCH ITEM LIST CARD ||============================== //
 
 const TotalIncomeDarkCard = ({ isLoading }) => {
+
+  const [lunchItems, setLunchItems] = useState([]);
+
+  useEffect(() => {
+    const fetchLunchItems = async () => {
+      try {
+        const currentDate = new Date().toISOString().split('T')[0]; // make current date in 'YYYY-MM-DD' format
+        console.log(currentDate);
+        const response = await axios.get(`http://localhost:3000/dining/${currentDate}`);
+        setLunchItems(response.data.lunch);
+      } catch (error) {
+        console.error('Error fetching lunch items:', error);
+      }
+    };
+
+    fetchLunchItems();
+  }, []);
+
   return (
     <>
       {isLoading ? (
@@ -57,13 +74,13 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                     mb: 0.45
                   }}
                   primary={
-                    <Typography variant="h4" sx={{ color: '#fff',fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px' }}>
+                    <Typography variant="h4" sx={{ color: '#fff', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px' }}>
                       Lunch Item List
                     </Typography>
                   }
                   secondary={
-                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 1.25, fontWeight: 600,fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px' }}>
-                      Rice, Vegetables, Meat, Eggs, Fish
+                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 1.25, fontWeight: 600, fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px' }}>
+                      {lunchItems.map((item) => item.name).join(', ')}
                     </Typography>
                   }
                 />

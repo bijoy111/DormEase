@@ -20,7 +20,7 @@ body {
 .account-settings .user-profile .user-avatar img {
   width: 90px;
   height: 90px;
-  border-radius: 50%; /* Changed the border-radius property */
+  border-radius: 50%; 
 }
 
 .account-settings .user-profile h5.user-name {
@@ -64,7 +64,7 @@ body {
 }
 
 .custom-spacing {
-  margin-top: 20px; /* Adjust the margin-top value as needed */
+  margin-top: 20px; 
 }
 
 .center {
@@ -74,8 +74,8 @@ body {
 }
 
 #profilePicture {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values based on your preference */
-  padding: 10px; /* Add padding to make the shadow more visible */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  padding: 10px; 
 }
 
 
@@ -92,7 +92,7 @@ body {
 .custom-input {
   font-size: 14px;
   padding: 12px;
-  border: 1px solid #4CAF50; /* Green border */
+  border: 1px solid #4CAF50; 
   border-radius: 8px;
   width: 100%;
   box-sizing: border-box; /* Ensure padding and border don't increase the width */
