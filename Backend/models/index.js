@@ -3,6 +3,7 @@ auth_model = require('./auth.model');
 dashboard_model = require('./dashboard.model');
 complaint_model = require('./complaint.model');
 notice_model = require('./notice.model');
+dining_model = require('./dining.model');
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     auth_model,
     dashboard_model,
     complaint_model,
-    notice_model
+    notice_model,
+    dining_model
 }
