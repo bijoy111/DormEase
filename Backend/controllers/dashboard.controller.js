@@ -43,11 +43,13 @@ const get_student_edit_info = async (req, res, next) => {
 
 const update_student_edit_info = async (req, res, next) => {
     if (!req.user || req.user.role !== 'student') {
+        console.log(req.body);
         return res.status(401).json({
             error: 'Unauthorized'
         });
     }
 
+    
     const stu_id = req.user.id;
     const photo = req.file ? req.file : null;
     const { old_password, new_password, email, phone, guardian_name, guardian_phone } = req.body;

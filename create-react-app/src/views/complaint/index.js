@@ -55,27 +55,39 @@ const SamplePage = () => {
                   horizontal: 'left',
                 }}
                 PaperProps={{
+                  className: 'menu-paper', // Assign the menu-paper class directly
                   style: {
-                    height: '350px', 
-                    width: '320px', // Set width
+                    height: '320px', // Set maximum height
+                    width: '307px', // Set width
                     backgroundColor: '#EDE7F6', // Set background color
-                    marginLeft: '45px',
-                    
+                    // backgroundColor: '#D4A537', // Set background color
+                    marginLeft: '0px',
+                    marginTop: '35px',
+                    transition: 'transform 0.5s ease-in-out', // Add transition for smooth effect
+                    transformStyle: 'preserve-3d', // Preserve 3D transformations
+                    perspective: '1000px', // Add perspective for 3D effect
+                    boxShadow: '0px 4px 8px rgba(88, 68, 22, 1.5)',
                   },
+                }}
+                onMouseEnter={() => {
+                  document.querySelector('.menu-paper').style.transform = 'rotateY(-10deg) scale(1.20)';
+                }}
+                onMouseLeave={() => {
+                  document.querySelector('.menu-paper').style.transform = 'rotateY(0deg) scale(1)';
                 }}
               >
                 
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',paddingLeft: '15px',paddingTop:'30px',paddingRight:'10px',}}>
-                    <label htmlFor="dept" className="input-label" style={{ color: '#1E88E5',fontSize:'20px' }}>Title </label>
-                    <input type="text" className="form-control custom-input" id="dept" value="" style={{ color: '#B2BEB5',paddingTop:'5px',paddingBottom:'5px',paddingLeft:'5px' }} />
+                  <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',paddingLeft: '25px',paddingTop:'30px',paddingRight:'35px',}}>
+                    <label htmlFor="dept" className="input-label" style={{ color: 'black',fontSize:'20px' }}>Title </label>
+                    <input type="text" className="form-control custom-input" id="dept" value="" style={{ color: 'black',paddingTop:'5px',paddingBottom:'5px',paddingLeft:'5px',backgroundColor:'transparent' }} />
                   </div>
                 </div>
                 {/* <br/> */}
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',paddingLeft: '15px',paddingTop:'30px',paddingRight:'10px', }}>
-                    <label htmlFor="cause" className="input-label" style={{ color: '#1E88E5',fontSize:'20px' }}>Details </label>
-                    <textarea className="form-control custom-input" id="cause" style={{ color: '#B2BEB5', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', width: '100%', minHeight: '80px' }}></textarea>
+                  <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block',paddingLeft: '25px',paddingTop:'30px',paddingRight:'35px', }}>
+                    <label htmlFor="cause" className="input-label" style={{ color: 'black',fontSize:'20px' }}>Details </label>
+                    <textarea className="form-control custom-input" id="cause" style={{ color: 'black', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', width: '100%', minHeight: '80px',backgroundColor:'transparent' }}></textarea>
                   </div>
                 </div>
 
@@ -87,7 +99,7 @@ const SamplePage = () => {
                     className="btn btn-secondary mr-3"
                     style={{
                       marginTop: '20px',
-                      marginLeft: '15px',
+                      marginLeft: '25px',
                       fontSize: '1.1rem',
                       fontFamily: 'Arial, sans-serif',
                       borderRadius: '15px', // Adjust the border-radius for rounded corners

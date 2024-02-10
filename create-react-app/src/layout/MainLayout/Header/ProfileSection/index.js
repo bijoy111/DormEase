@@ -267,17 +267,17 @@ const ProfileSection = () => {
                             primary={
                               <Grid container spacing={1} justifyContent="space-between">
                                 <Grid item>
-                                  <Typography variant="body2">Update Profile</Typography>
+                                  <Typography variant="body2">View Profile</Typography>
                                 </Grid>
                                 <Grid item>
-                                  <Chip
-                                    label="02"
+                                  {/* <Chip
+                                   
                                     size="small"
                                     sx={{
                                       bgcolor: theme.palette.warning.dark,
                                       color: theme.palette.background.default
                                     }}
-                                  />
+                                  /> */}
                                 </Grid>
                               </Grid>
                             }

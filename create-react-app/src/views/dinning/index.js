@@ -45,30 +45,63 @@ const MyCalendar = () => {
               </div>
             </div>
             <br/>
-            <div className="column">
-              <div className="note-card" style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)',backgroundColor: '#edeafd',width:'300px'}}>
-                <h1 className="font-effect-outline" style={{color:'#673AB7'}}>Menu List</h1>
-                <br />
-                <div className="note-card" style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}}>
-                  {/* <textarea
-                    className="font-effect-outline"
-                    placeholder="No items list available"
-                    value={note}
-                    onChange={handleNoteChange}
-                    style={{ height: '200px' }}
-                  /> */}
-                  <br/>
-                  <br/>
-                  <div style={{ textAlign: 'center', fontSize: '20px' }}>Chicken</div>
-                  <br/>
-                  <div style={{ textAlign: 'center', fontSize: '20px' }}>Fish</div>
-                  <br/>
-                  <div style={{ textAlign: 'center', fontSize: '20px' }}>Egg</div>
-                  <br/>
-                  <div style={{ textAlign: 'center', fontSize: '20px' }}>Beef</div>
+            <br/>
+            <br/>
+            <br/>
+
+            <div className="flex-container">
+              <div className="column" style={{marginRight:'50px'}}>
+                <div className="note-card" style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', backgroundColor: '#edeafd', width:'300px'}}>
+                  <h1 className="font-effect-outline" style={{color:'#673AB7'}}>Lunch Item</h1>
+                  <br />
+                  <div className="note-card" style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}}>
+                    {/* <textarea
+                      className="font-effect-outline"
+                      placeholder="No items list available"
+                      value={note}
+                      onChange={handleNoteChange}
+                      style={{ height: '200px' }}
+                    /> */}
+                    <br/>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Chicken</div>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Fish</div>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Egg</div>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Beef</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="column">
+                <div className="note-card" style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', backgroundColor: '#edeafd', width:'300px'}}>
+                  <h1 className="font-effect-outline" style={{color:'#673AB7'}}>Dinner Item</h1>
+                  <br />
+                  <div className="note-card" style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}}>
+                    {/* <textarea
+                      className="font-effect-outline"
+                      placeholder="No items list available"
+                      value={note}
+                      onChange={handleNoteChange}
+                      style={{ height: '200px' }}
+                    /> */}
+                    <br/>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Chicken</div>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Fish</div>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Egg</div>
+                    <br/>
+                    <div style={{ textAlign: 'center', fontSize: '20px' }}>Beef</div>
+                  </div>
                 </div>
               </div>
             </div>
+
+
           </div>
           <br />
           <br />

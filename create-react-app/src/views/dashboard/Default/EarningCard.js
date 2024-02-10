@@ -9,8 +9,9 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-
 import logo from 'assets/images/student.png';
+
+import { useEffect, useState } from 'react';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
@@ -51,6 +52,36 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 // ===========================|| DASHBOARD - USER PICTURE,NAME,ID SHOWING CARD ||=========================== //
 
 const EarningCard = ({ isLoading }) => {
+  // State for storing card data
+  const [cardData, setCardData] = useState([]);
+   // Function to fetch card data from the database
+  const fetchCardDataFromDatabase = async () => {
+    console.log('hello');
+
+    try {
+      // Fetch data from the database API
+      const response = await fetch('http://localhost:3000/dashboard', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log(data);
+      // Update the state with the fetched data
+      setCardData(data);
+    } catch (error) {
+      console.error('Error fetching card data:', error);
+    }
+  };
+
+  // useEffect to fetch data when the component mounts
+  useEffect(() => {
+    fetchCardDataFromDatabase();
+  }, []); // Empty dependency array ensures it only runs once on mount
+  const studentId = cardData.stu_id || '';
+  const studentName = cardData.name || '';
   return (
     <>
       {isLoading ? (
@@ -79,10 +110,10 @@ const EarningCard = ({ isLoading }) => {
                       <h4 className="user-email">Bijoy Ahmed Saiem</h4> */}
                       <br/>
                       <br/>
-                      1905052
+                      {studentId}
                       <br/>
                       <br/>
-                      Bijoy Ahmed Saiem
+                      {studentName}
                       </div>
                     </div>
                   </Grid>
