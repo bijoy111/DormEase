@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // project imports
 import LogoSection from '../LogoSection';
-import SearchSection from './SearchSection';
-import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
+import ProfileSection from './ProfileSection';
+import SearchSection from './SearchSection';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';

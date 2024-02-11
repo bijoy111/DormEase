@@ -161,57 +161,70 @@ function StudentPage() {
         ))}
       </div>
 
-      <div className="card" style={{ marginTop: '200px', marginLeft: '700px' }}>
-        <CardContent style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <Button
-            variant="outlined"
-            type="button"
-            id="change-room"
-            name="change-room"
-            className="btn btn-secondary mr-3"
-            style={{
-              marginBottom: '20px',
-              fontSize: '1.1rem',
-              fontFamily: 'Arial, sans-serif',
-              borderRadius: '15px',
-              height: '70px',
-              width: '220px',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease-in-out',
-              color: 'white',
-              backgroundColor: '#673AB7',
-            }}
-            onClick={openChangeModal}
-            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
-            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
-          >
-            Apply to Change Room
-          </Button>
+      <div className="card" style={{ marginTop: '200px', marginLeft: '700px', }}>
+        <CardContent style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'absolute' }}>
 
-          <Button
-            variant="outlined"
-            type="button"
-            id="cancel-seat"
-            name="cancel-seat"
-            className="btn btn-secondary mr-3"
-            style={{
-              fontSize: '1.1rem',
-              fontFamily: 'Arial, sans-serif',
-              borderRadius: '15px',
-              height: '70px',
-              width: '220px',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease-in-out',
-              color: 'white',
-              backgroundColor: '#673AB7',
-            }}
-            onClick={openCancelModal}
-            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
-            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
-          >
-            Cancel Your Seat
-          </Button>
         </CardContent>
+      </div>
+
+
+      <div style={{ position: 'fixed' }}>
+        <Button
+          variant="outlined"
+          type="button"
+          id="change-room"
+          name="change-room"
+          className="btn btn-secondary mr-3"
+          style={{
+            marginTop: '370px',
+            marginLeft: '740px',
+            marginBottom: '40px',
+            fontSize: '1.1rem',
+            fontFamily: 'Arial, sans-serif',
+            borderRadius: '15px',
+            height: '70px',
+            width: '220px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease-in-out',
+            color: 'white',
+            backgroundColor: '#673AB7',
+          }}
+          onClick={openChangeModal}
+          onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+          onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+        >
+          Apply to Change Room
+        </Button>
+      </div>
+
+      <div style={{
+        position: 'fixed',
+      }}>
+        <Button
+          variant="outlined"
+          type="button"
+          id="cancel-seat"
+          name="cancel-seat"
+          className="btn btn-secondary mr-3"
+          style={{
+            marginTop: '270px',
+            marginLeft: '740px',
+            fontSize: '1.1rem',
+            fontFamily: 'Arial, sans-serif',
+            borderRadius: '15px',
+            height: '70px',
+            width: '220px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease-in-out',
+            color: 'white',
+            backgroundColor: '#673AB7',
+          }}
+          onClick={openCancelModal}
+          onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+          onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+        >
+          Cancel Your Seat
+        </Button>
       </div>
 
 

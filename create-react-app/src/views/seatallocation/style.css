@@ -144,22 +144,36 @@
   height: 300px;
   position: fixed;
   margin: auto;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+  /* box-shadow: 0px 8px 16px rgb(246, 246, 11,2.2);  */
+ 
+  box-shadow: 0px 8px 16px rgba(236, 8, 8, 1.2); /* Adjusted box shadow on hover */
+  border-radius: 50%;
   margin-left: '700px';
   margin-top: '200px';
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #98A89E; /* Initial background color */
+  background-color: #EEEAE1; /* Background color on hover (white) */
   font-family: Arial, sans-serif;
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition effect */
+  animation: rotate 5s linear infinite;
 }
 
 .card:hover {
-  background-color: #EEEAE1; /* Background color on hover (white) */
-  box-shadow: 0px 8px 16px rgba(236, 8, 8, 1.2); /* Adjusted box shadow on hover */
+ 
+  background-color: #e6b8b8; /* Initial background color */
+  box-shadow: 0px 8px 16px green;
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
   
