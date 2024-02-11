@@ -32,6 +32,9 @@ export function Navbar() {
             <NavLink exact to="/seatallocation" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Seat Allocation</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/dining" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="utensils">Dining</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="exclamation-circle">Log Out</CDBSidebarMenuItem>
             </NavLink>
