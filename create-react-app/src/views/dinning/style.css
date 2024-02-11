@@ -12,13 +12,13 @@
 
 
 .note-card {
-  max-width: 400px;
+  max-width: 300px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
   text-align: center;
-  height: 265px;
+  height: 205px;
 }
 
 /* Add this CSS rule to ensure images in the Carousel don't affect the layout below */
@@ -30,7 +30,7 @@
 
 
 .calendar-container {
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
