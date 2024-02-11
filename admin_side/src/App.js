@@ -5,6 +5,7 @@ import { Dashboard } from './Dashboard/dashboard.js';
 import { LoginCard } from './Login/login.js';
 import { SeatAllocation } from './SeatAllocation/seatallocation.js';
 // import { Complaint } from './Complaint/complaint.js';
+import { Notice } from './views/Notice/notice.js';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/seatallocation" element={<SeatAllocation />} />
       {/* <Route path="/complaint" element={<Complaint />} /> */}
+      <Route path="/notice" element={<Notice />} />
     </Routes>
   );
 }
