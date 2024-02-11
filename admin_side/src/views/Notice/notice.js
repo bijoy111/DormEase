@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dashboard } from "../../dashboard";
+import { Navbar } from "../../Navbar/Navbar.js";
 
 export function Notice() {
     const notices = [
@@ -62,7 +62,7 @@ export function Notice() {
             <div class={`transition-all duration-100 ease-in-out ${isModalOpen ? 'filter blur-sm pointer-events-none' : ''}`}>
                 <div class={`grid grid-cols-5`}>
                     <div class="col-span-1 ">
-                        <Dashboard />
+                        <Navbar />
                     </div>
                     <div class="col-span-4 px-2 mr-20">
                         <div class="flex pt-2 pb-3 px-2 border-b-2">
