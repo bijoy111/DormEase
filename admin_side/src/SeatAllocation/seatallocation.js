@@ -92,6 +92,7 @@ export function SeatAllocation() {
     setSelectedRequest(null);
   };
   const handleChangeAccept = () => {
+
     // Handle accept logic here
     // For example, remove the request from the list
     setChangeRequests(changeRequests.filter(request => request.id !== selectedRequest.id));
@@ -245,6 +246,10 @@ export function SeatAllocation() {
         <p>ID: {selectedRequest.id}</p>
         <p>Department: {selectedRequest.department}</p>
         <p>Reason: {selectedRequest.reason}</p>
+
+        {/* this input field will take a room no which is in the preffered list given by the applicant &
+        the applicant will be alloted into that room */}
+        <input type="text" placeholder="Enter Allotted Room No" />
         <div className="modal-buttons">
           <button onClick={handleChangeAccept}>Accept</button>
           <button onClick={handleChangeReject}>Reject</button>

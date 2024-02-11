@@ -1,0 +1,159 @@
+.ComplaintBox {
+    font-family: Arial, sans-serif;
+    display: flex;
+  }
+
+  .complaints-list {
+    margin-top: 20px;
+    margin-left: 60px;
+    width: 60%;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+    padding: 10px;
+    /* box-shadow: #ccc 0px 0px 10px; */
+  }
+  
+  .complaint {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: #666 0px 0px 10px;
+  }
+  
+  .complaint h3 {
+    margin-top: 0;
+  }
+  
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 60px;
+  }
+  
+  .circle-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 12px;
+  }
+  .circle p{
+    margin-top: 25px;
+  }
+  
+  .circle:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .circle.active {
+    background-color: #007bff;
+    color:black;
+  }
+  
+  .line {
+    width: 100px;
+    height: 2px;
+    background-color: #000;
+  }
+  
+  .line-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Adjusted margin to align lines properly */
+  }
+  
+  .state-name {
+    font-size: 12px;
+    margin-top: 5px; /* Adjusted margin to separate from circles */
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 50px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .complaint-stats {
+    grid-column: 2 / 3;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .complaint-stats h2 {
+    margin-bottom: 10px;
+  }
+  
+  .complaint-stats div {
+    margin-bottom: 10px;
+  }
+  
+  .sorting-buttons {
+    display: flex;
+    margin-top: 40px;
+    box-shadow: 0 0 10px #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    justify-content: center;
+  }
+  
+  .sorting-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  
+  .sorting-buttons button:hover {
+    background-color: #0056b3;
+  }
+
+  .div-stat {
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .div-stat div {
+    margin-bottom: 10px;
+    background-color: #f9e3e3;
+    text-align: center;
+    text-wrap: wrap;
+    font-size: 24px;
+    font-family: 'Slabo 27px';
+  }
+  
+  .nb p{
+    font-size: 14px;
+    font-family: 'Slabo 27px';
+    margin-left: 10px;
+  }
