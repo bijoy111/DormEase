@@ -9,12 +9,16 @@ const SamplePage = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
+
+  const [menuOpen, setMenuOpen] = useState(false);
   const handleApplyButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setMenuOpen(true);
   };
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
+    setMenuOpen(false);
   };
 
   const handleSubmit = async () => {
@@ -36,7 +40,7 @@ const SamplePage = () => {
   };
 
   return (
-    <div>
+    <div className={`${menuOpen ? 'blur-background' : ''}`}>
       <div>
         <Button
           variant="outlined"

@@ -3,8 +3,24 @@ import CardContent from '@mui/material/CardContent';
 import logo from 'assets/images/common_user10.png';
 import { useState } from 'react';
 import Modal from 'react-modal';
+import Select from 'react-select';
 import './style.css';
+const options = [
+  { value: 1, label: 'hazar block' },
+  { value: 2, label: 'hundred block' },
+  { value: 3, label: 'first floor' },
+  { value: 4, label: 'second floor' },
+  { value: 5, label: 'third floor' },
+  { value: 6, label: 'fourth floor' },
+  { value: 7, label: 'fifth floor' },
 
+];
+const options2 = [
+  { value: 1, label: '2001' },
+  { value: 2, label: '2002' },
+  { value: 3, label: '2003' },
+  { value: 4, label: '2004' },
+];
 function StudentPage() {
   // Dummy data for dormitory rooms and applicants
   const [rooms] = useState([
@@ -73,11 +89,11 @@ function StudentPage() {
   };
 
   // Function to open the modal
-  const openCancelModal = () => {
-    setIsCancelModalOpen(true);
-    setIsChangeModalOpen(false);
-    setIsApplyModalOpen(false);
-  };
+  // const openCancelModal = () => {
+  //   setIsCancelModalOpen(true);
+  //   setIsChangeModalOpen(false);
+  //   setIsApplyModalOpen(false);
+  // };
 
   // Function to close the modal
   const closeCancelModal = () => {
@@ -131,10 +147,54 @@ function StudentPage() {
     closeCancelModal();
   };
 
-
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions2, setSelectedOptions2] = useState([]);
+  const handleChange = (selectedOption) => {
+    setSelectedOptions(selectedOption);
+  };
+  const handleChange2 = (selectedOption) => {
+    setSelectedOptions2(selectedOption);
+  };
   return (
     <div className="StudentPage">
       <div className="room-list">
+        <div className="select-container">
+          <Select
+            options={options}
+            value={selectedOptions}
+            onChange={handleChange}
+            isMulti={true}
+          />
+          <Button
+            variant="outlined"
+            type="button"
+            id="filter"
+            name="filter"
+            className="btn btn-secondary mr-3"
+            style={{
+              marginTop: '10px',
+              marginBottom: '15px',
+              marginLeft: '0px',
+              fontSize: '1rem',
+              fontFamily: 'Arial, sans-serif',
+              borderRadius: '10px',
+              height: '35px',
+              width: '70px',
+              boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease-in-out',
+              color: 'white',
+              backgroundColor: '#673AB7',
+            }}
+            onClick={() => handleSubmit()}
+            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+          >
+            Filter
+          </Button>
+        </div>
+
+        <br />
         {rooms.map((room) => (
           <div key={room.id} className="room-card" style={{ textAlign: 'center' }}>
             <h3 style={{ margin: '0 auto', marginBottom: '15px', fontSize: '20px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold', color: '#673AB7' }}>Room: {room.id}</h3>
@@ -161,7 +221,7 @@ function StudentPage() {
         ))}
       </div>
 
-      <div className="card" style={{ marginTop: '200px', marginLeft: '700px', }}>
+      <div className="cardd" style={{ marginTop: '200px', marginLeft: '700px', }}>
         <CardContent style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'absolute' }}>
 
         </CardContent>
@@ -176,7 +236,7 @@ function StudentPage() {
           name="change-room"
           className="btn btn-secondary mr-3"
           style={{
-            marginTop: '370px',
+            marginTop: '310px',
             marginLeft: '740px',
             marginBottom: '40px',
             fontSize: '1.1rem',
@@ -193,11 +253,11 @@ function StudentPage() {
           onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
           onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
         >
-          Apply to Change Room
+          Apply for seat
         </Button>
       </div>
 
-      <div style={{
+      {/* <div style={{
         position: 'fixed',
       }}>
         <Button
@@ -225,7 +285,7 @@ function StudentPage() {
         >
           Cancel Your Seat
         </Button>
-      </div>
+      </div> */}
 
 
 
@@ -279,29 +339,45 @@ function StudentPage() {
         className="Modal"
         overlayClassName="Overlay"
       >
-        <h2>Apply for a Seat</h2>
+        {/* <h1>Apply for a Seat</h1> */}
+        <br />
         <form onSubmit={handleChangeSeat}>
           <div>
-            <label htmlFor="roomPreference">Enter your preferred rooms:</label>
-            <input
-              type="text"
-              id="roomPreference"
-              value={roomPreference}
-              onChange={(e) => setRoomPreference(e.target.value)}
-            />
+            <label htmlFor="roomPreference" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Enter your preferred rooms:</label>
+            <div className="select-container">
+              <Select
+                options={options2}
+                value={selectedOptions2}
+                onChange={handleChange2}
+                isMulti={true}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    backgroundColor: 'transparent',
+                    border: '1px solid #4CAF50',
+                    // Add more styles as needed
+                  }),
+                  // Add more styles for other elements if necessary
+                }}
+              />
+            </div>
           </div>
           <div>
-            <label htmlFor="cgpa">Your CGPA:</label>
+            <label htmlFor="cgpa" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Your CGPA:</label>
             <input
               type="text"
+              className="form-control custom-input"
+              style={{ color: 'black', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', backgroundColor: 'transparent', border: '1px solid #4CAF50', borderRadius: '8px' }}
               id="cgpa"
               value={cgpa}
               onChange={(e) => setCGPA(e.target.value)}
             />
           </div>
           <div>
-            <label htmlFor="reason">Why do you want to change room?</label>
+            <label htmlFor="reason" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Why do you want room?</label>
             <textarea
+              className="form-control custom-input"
+              style={{ color: 'black', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', width: '100%', minHeight: '80px', backgroundColor: 'transparent' }}
               rows={3}
               cols={46}
               id="reason"
@@ -309,8 +385,67 @@ function StudentPage() {
               onChange={(e) => setReason(e.target.value)}
             />
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={closeChangeModal}>Cancel</button>
+          {/* <button type="submit">Submit</button>
+          <button type="button" onClick={closeChangeModal}>Cancel</button> */}
+          <div className="row gutters">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div className="text-center mr-8">
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="cancel"
+                  name="cancel"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '20px',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '50px',
+                    width: '100px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={() => closeChangeModal()}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="cancel"
+                  name="cancel"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '20px',
+                    marginLeft: '15px',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '50px',
+                    width: '100px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={() => handleSubmit()}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Save
+                </Button>
+              </div>
+            </div>
+          </div>
+
         </form>
       </Modal>
 

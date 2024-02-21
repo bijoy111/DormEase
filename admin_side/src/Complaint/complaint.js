@@ -1,5 +1,5 @@
-import { Navbar } from "../Navbar/Navbar";
 import React, { useState } from 'react';
+import { Navbar } from "../Navbar/Navbar";
 import './complaint.css';
 
 export function Complaint() {
@@ -8,6 +8,8 @@ export function Complaint() {
     { id: 1, title: 'Internet Connection Issue', submissionDate: '2024-02-07', details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', status: 'pending' },
     { id: 2, title: 'Library Book Unavailability', submissionDate: '2024-02-06', details: 'Nulla facilisi. Sed non felis eget velit aliquet.', status: 'seen' },
     { id: 3, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
+    { id: 4, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
+    { id: 5, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
     // Add more complaints as needed
   ]);
 
@@ -56,7 +58,7 @@ export function Complaint() {
     }
     setComplaints(sortedComplaints);
   };
-  
+
 
   const complaintStats = {
     total: complaints.length,
@@ -124,7 +126,7 @@ export function Complaint() {
           <button onClick={() => sortComplaints('completed')}>Sort by Completed</button>
         </div>
         <div className="nb">
-            <p>N.B: Complaints with same status are sorted by submission date</p>
+          <p>N.B: Complaints with same status are sorted by submission date</p>
         </div>
       </div>
 

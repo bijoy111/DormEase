@@ -16,6 +16,12 @@ const UpdateProfile = Loadable(lazy(() => import('views/updateprofile')));
 const ViewProfile = Loadable(lazy(() => import('views/viewprofile')));
 const Rootpage = Loadable(lazy(() => import('views/pages/authentication/authentication3/Login3')));
 
+const Resident_Seatallocation = Loadable(lazy(() => import('views/resident_seatallocation')));
+const Generel_Dinning = Loadable(lazy(() => import('views/generel_dinning')));
+
+const isResident = false;
+const isMessmanager = true;
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -72,7 +78,8 @@ const MainRoutes = {
       children: [
         {
           path: 'default',
-          element: <Dinning />
+          //element: <Dinning />
+          element: isMessmanager ? <Dinning /> : <Generel_Dinning />
         }
       ]
     },
@@ -82,7 +89,8 @@ const MainRoutes = {
       children: [
         {
           path: 'default',
-          element: <Seatallocation />
+          //element: <Seatallocation />
+          element: isResident ? <Resident_Seatallocation /> : <Seatallocation />
         }
       ]
     },
