@@ -139,7 +139,6 @@ video{
   justify-content: space-between; 
 }
 
-
 .blur-background {
     filter: blur(5px); /* Adjust the blur amount as needed */
 }

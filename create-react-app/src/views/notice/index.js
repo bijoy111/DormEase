@@ -1,6 +1,11 @@
 import { Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
 import MainCard from 'ui-component/cards/MainCard';
+const options = [
+  { value: 1, label: 'Personal Notice' },
+  { value: 2, label: 'Generel Notice' },
+];
 const SamplePage = () => {
   const handleDownloadClick = (Title, createdAt, Text) => {
     // Store data in localStorage
@@ -34,8 +39,49 @@ const SamplePage = () => {
     fetchCardDataFromDatabase();
   }, []); // Empty dependency array ensures it only runs once on mount
 
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const handleChange = (selectedOption) => {
+    setSelectedOptions(selectedOption);
+  };
+
   return (
     <div>
+      <div className="select-container">
+        <Select
+          options={options}
+          value={selectedOptions}
+          onChange={handleChange}
+          isMulti={true}
+        />
+      </div>
+      <Button
+        variant="outlined"
+        type="button"
+        id="filter"
+        name="filter"
+        className="btn btn-secondary mr-3"
+        style={{
+          marginTop: '10px',
+          marginBottom: '15px',
+          fontSize: '1rem',
+          fontFamily: 'Arial, sans-serif',
+          borderRadius: '10px',
+          height: '35px',
+          width: '70px',
+          boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+          cursor: 'pointer',
+          transition: 'background-color 0.3s ease-in-out',
+          color: 'white',
+          backgroundColor: '#673AB7',
+        }}
+        onClick={() => handleSubmit()}
+        onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+        onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+      >
+        Filter
+      </Button>
+      <br />
       {cardData.map((card, index) => (
         <React.Fragment key={index}>
           <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px' }}>

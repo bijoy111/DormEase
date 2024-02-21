@@ -22,13 +22,16 @@ const SamplePage = () => {
     files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files])
 
+  const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleBoxClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setMenuOpen(true);
   };
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
+    setMenuOpen(false);
   };
 
   const [votes, setVotes] = useState(0);
@@ -42,7 +45,7 @@ const SamplePage = () => {
 
   return (
 
-    <div>
+    <div className={`${menuOpen ? 'blur-background' : ''}`}>
       <section style={{ display: 'flex', justifyContent: 'center' }}>
         <div className="d-flex mb-3" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '8px', width: '1000px' }}>
           {/* user image */}
@@ -112,8 +115,7 @@ const SamplePage = () => {
             <div style={{ border: '2px dashed #ccc', borderRadius: '8px', padding: '20px', textAlign: 'center', color: '#ccc', fontSize: '16px', marginTop: '15px', width: '360px', marginLeft: '25px', cursor: 'pointer' }}>
               <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
-                <p>Add photos/videos<br />
-                  or drag & drops</p>
+                <p>Add photos</p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 {files.map(file => (
