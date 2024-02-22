@@ -1,13 +1,23 @@
-const { func } = require('../controllers/feed.controller');
+const { create_post,
+    delete_post,
+    comment,
+    upvote,
+    cancel_upvote,
+    downvote,
+    cancel_downvote,
+    get_feed } = require('../controllers/feed.controller');
 
 module.exports = (router) => {
-    router.get('/feed', func);
-    router.get('/feed/post/:post_id', func);
-    router.post('/feed/post/compose', func);
-    router.post('/feed/post/:post_id/delete', func);
-    router.post('/feed/comment/:post_id', func);
-    router.post('/feed/upvote/:post_id', func);
-    router.post('/feed/downvote/:post_id', func);
+    router.get('/feed', get_feed);
+    // router.get('/feed/post/:post_id', func);
+    router.post('/feed/post/compose', create_post);
+    router.post('/feed/post/:post_id/delete', delete_post);
+    router.post('/feed/comment/:post_id', comment);
+    router.post('/feed/comment/:post_id/delete', delete_post);
+    router.post('/feed/upvote/:post_id', upvote);
+    router.post('/feed/upvote/:post_id/cancel', cancel_upvote);
+    router.post('/feed/downvote/:post_id', downvote);
+    router.post('/feed/downvote/:post_id/cancel', cancel_downvote);
 }
 
 /**
@@ -66,30 +76,7 @@ module.exports = (router) => {
 
 /**
  * @swagger
- * /feed/post/{post_id}:
- *    get:
- *      summary: Show a post
- *      tags: [Feed]
- *      parameters:
- *        - in: path
- *          name: post_id
- *          schema:
- *            type: string
- *          required: true
- *          description: Post ID
- *      requestBody:
- *        content:
- *          application/json: {}
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/Post'
- *        "404":
- *          $ref: '#/components/responses/NotFound'
- */
-
-/**
- * @swagger
- * /post/compose:
+ * /feed/post/compose:
  *    post:
  *      summary: Create post
  *      tags: [Feed]
@@ -100,26 +87,18 @@ module.exports = (router) => {
  *            schema:
  *              type: object
  *              required:
- *                - stu_id
  *                - text
  *                - media
- *                - type
  *              properties:
- *                stu_id:
- *                  type: number
  *                text:
  *                  type: string
  *                media:
  *                  type: array
  *                  items:
  *                    type: string
- *                "type":
- *                  type: string
  *              example:
- *                  stu_id: 1905024
  *                  text: This is a post
  *                  media: ["https://www.google.com", "https://www.amazon.com"]
- *                  "type": status
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
@@ -138,10 +117,6 @@ module.exports = (router) => {
  *              type: string
  *          required: true
  *          description: Post ID
- *      requestBody:
- *        required: true
- *        content:
- *          application/json: {}
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
@@ -169,15 +144,9 @@ module.exports = (router) => {
  *            schema:
  *              type: object
  *              required:
- *                - stu_id
- *                - parent_id
  *                - text
  *                - media
  *              properties:
- *                stu_id:
- *                  type: number
- *                parent_id:
- *                  type: number
  *                text:
  *                  type: string
  *                media:
@@ -185,8 +154,6 @@ module.exports = (router) => {
  *                  items:
  *                    type: string
  *              example:
- *                  stu_id: 1905024
- *                  parent_id: 1
  *                  text: This is a post
  *                  media: ["https://www.google.com", "https://www.amazon.com"]
  *      responses:
@@ -196,11 +163,12 @@ module.exports = (router) => {
  *          $ref: '#/components/responses/NotFound'
  */
 
+
 /**
  * @swagger
  * /feed/upvote/{post_id}:
  *    post:
- *      summary: Give or remove upvote in post or comment
+ *      summary: Give upvote in post or comment
  *      tags: [Feed]
  *      parameters:
  *        - in: path
@@ -209,23 +177,26 @@ module.exports = (router) => {
  *              type: string
  *          required: true
  *          description: Post ID
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              required:
- *                - stu_id
- *                - post_id
- *              properties:
- *                stu_id:
- *                  type: number
- *                post_id:
- *                  type: number
- *              example:
- *                  stu_id: 1905024
- *                  post_id: 1
+ *      responses:
+ *        "200":
+ *          $ref: '#/components/responses/Success'
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /feed/upvote/{post_id}/cancel:
+ *    post:
+ *      summary: remove upvote in post or comment
+ *      tags: [Feed]
+ *      parameters:
+ *        - in: path
+ *          name: post_id
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: Post ID
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
@@ -237,7 +208,7 @@ module.exports = (router) => {
  * @swagger
  * /feed/downvote/{post_id}:
  *    post:
- *      summary: Give or remove downvote in post or comment
+ *      summary: Give downvote in post or comment
  *      tags: [Feed]
  *      parameters:
  *        - in: path
@@ -246,23 +217,26 @@ module.exports = (router) => {
  *              type: string
  *          required: true
  *          description: Post ID
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              required:
- *                - stu_id
- *                - post_id
- *              properties:
- *                stu_id:
- *                  type: number
- *                post_id:
- *                  type: number
- *              example:
- *                  stu_id: 1905024
- *                  post_id: 1
+ *      responses:
+ *        "200":
+ *          $ref: '#/components/responses/Success'
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /feed/downvote/{post_id}/cancel:
+ *    post:
+ *      summary: Remove downvote in post or comment
+ *      tags: [Feed]
+ *      parameters:
+ *        - in: path
+ *          name: post_id
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: Post ID
  *      responses:
  *        "200":
  *          $ref: '#/components/responses/Success'
