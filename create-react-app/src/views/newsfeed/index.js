@@ -43,6 +43,36 @@ const SamplePage = () => {
     setVotes(votes - 1);
   };
 
+
+  // State for storing card data
+  const [cardData, setCardData] = useState([]);
+  // Function to fetch card data from the database
+  const fetchCardDataFromDatabase = async () => {
+    console.log('hello');
+    try {
+      // Fetch data from the database API
+      const response = await fetch('http://localhost:3000/feed', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log(data);
+      // Update the state with the fetched data
+      setCardData(data);
+    } catch (error) {
+      console.error('Error fetching card data:', error);
+    }
+  };
+  // useEffect to fetch data when the component mounts
+  useEffect(() => {
+    fetchCardDataFromDatabase();
+  }, []); // Empty dependency array ensures it only runs once on mount
+
+
+
   return (
 
     <div className={`${menuOpen ? 'blur-background' : ''}`}>
@@ -58,9 +88,9 @@ const SamplePage = () => {
               marginTop: '0px',
               borderRadius: '20px',
               border: '12px',
-              backgroundColor: '#e3f2fd',
+              backgroundColor: '#673AB7',
               paddingLeft: '20px',
-              color: 'black',
+              color: 'white',
               cursor: 'pointer',
               width: '1000px',
               fontSize: '20px',
@@ -174,7 +204,7 @@ const SamplePage = () => {
               </a>
               {/* user name */}
               <div style={{ paddingLeft: '12px', marginTop: '9px', fontSize: '20px' }}>
-                <strong>Bijoy Ahmed Saiem</strong>
+                <strong>{cardData.name}</strong>
                 <br />
                 {/* post time */}
                 <small style={{ marginTop: '-6px' }}>10h</small>
