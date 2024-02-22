@@ -523,9 +523,21 @@ const FirebaseLogin = ({ ...others }) => {
                   fullWidth
                   size="large"
                   type="submit"
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
-                  borderRadius="15px"
+                  borderRadius="150px"
+                  style={{
+                    fontSize: '1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                 >
                   Sign in
                 </Button>

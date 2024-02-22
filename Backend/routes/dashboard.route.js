@@ -6,7 +6,7 @@ const { get_student_info,
     get_vacant_rooms,
     apply_for_room_change,
     cancel_room_change_application } = require('../controllers/dashboard.controller');
-    
+
 const { upload } = require('../middlewares/multerjs');
 
 module.exports = (router) => {
@@ -73,6 +73,8 @@ module.exports = (router) => {
  *                    type: number
  *                  applied_for_room:
  *                    type: boolean
+ *                  mess_manager:
+ *                   type: boolean 
  *              example:
  *                  stu_id: 1905024
  *                  name: John Doe
@@ -89,6 +91,7 @@ module.exports = (router) => {
  *                  room_no: 101
  *                  seat_no: 4
  *                  applied_for_room: false
+ *                  mess_manager: true
  */
 
 /**

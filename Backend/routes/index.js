@@ -4,6 +4,7 @@ const dashboard_router = require('./dashboard.route');
 const complaint_router = require('./complaint.route');
 const notice_router = require('./notice.route');
 const dining_router = require('./dining.route');
+// const seatallocation_router = require('./seat_alloc.route');
 
 const initiateRoutes = (router) => {
     // add routes
@@ -12,6 +13,7 @@ const initiateRoutes = (router) => {
     complaint_router(router);
     notice_router(router);
     dining_router(router);
+    // seatallocation_router(router);
 }
 
 module.exports = initiateRoutes;
