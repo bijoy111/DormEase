@@ -14,6 +14,19 @@ import MainCard from 'ui-component/cards/MainCard';
 import './style.css';
 
 const MyCalendar = () => {
+
+  const [slideIndex, setSlideIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Move to the next slide
+      setSlideIndex((prevIndex) => (prevIndex + 1) % 4);
+    }, 5000); // Change the interval time as needed (in milliseconds)
+    return () => {
+      clearInterval(interval);
+    };
+  }, []); // Run only once on component mount
+
+
   const [date, setDate] = useState(new Date());
   const [lunchItems, setLunchItems] = useState([]);
   const [dinnerItems, setDinnerItems] = useState([]);
@@ -239,7 +252,7 @@ const MyCalendar = () => {
               </>
             )}
             <div className="column" style={{ color: '#673AB7', marginRight: '370px' }}>
-              <div className="calendar-container">
+              <div className="calendar-container" style={{ backgroundColor: '#edeafd' }}>
                 <div className="calendar-header" style={{ color: '#673AB7' }}>
                   <h2>Dining <br /> Calendar</h2>
                 </div>
@@ -255,7 +268,7 @@ const MyCalendar = () => {
                     <div className="items-container" style={{
                       marginLeft: '10px',
                       paddingLeft: '30px', paddingRight: '30px', border: '1px solid',
-                      borderRadius: '5px'
+                      borderRadius: '5px', backgroundColor: '#edeafd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'
                     }}>
                       <div className="item-section" style={{ height: '90px' }}>
                         <h3>Add Lunch Item:</h3>
@@ -389,62 +402,62 @@ const MyCalendar = () => {
           <br />
           <br />
 
-          <div className="row">
-            <div className="column" >
-              <br />
-              <br />
-              <div style={{ backgroundColor: '#EDE7F6', padding: '15px', borderRadius: '10px' }}>
-                <h1 className="font-effect-outline" style={{ color: '#673AB7', margin: '0' }}>Menu Image</h1>
-              </div>
-              <br />
-              <Carousel interval={1000} showArrows={true} className="rounded-xl">
-                <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
-                  <div className="bg-image hover-overlay ripple rounded-0"
-                    data-mdb-ripple-color="light"
-                    style={{ padding: '10px', borderRadius: '2px', height: '100%' }}
-                  >
-                    <img src={beef_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
-                    <a href="#!">
-                      <div className="mask" > </div>
-                    </a>
-                  </div>
-                </div>
-                <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
-                  <div className="bg-image hover-overlay ripple rounded-0"
-                    data-mdb-ripple-color="light"
-                    style={{ padding: '10px', borderRadius: '2px', height: '100%' }}
-                  >
-                    <img src={egg_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
-                    <a href="#!">
-                      <div className="mask" ></div>
-                    </a>
-                  </div>
-                </div>
-                <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
-                  <div className="bg-image hover-overlay ripple rounded-0"
-                    data-mdb-ripple-color="light"
-                    style={{ padding: '10px', borderRadius: '2px', height: '100%' }}
-                  >
-                    <img src={chicken_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
-                    <a href="#!">
-                      <div className="mask" ></div>
-                    </a>
-                  </div>
-                </div>
-                <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
-                  <div className="bg-image hover-overlay ripple rounded-0"
-                    data-mdb-ripple-color="light"
-                    style={{ padding: '10px', borderRadius: '2px', height: '100%' }}
-                  >
-                    <img src={fish_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
-                    <a href="#!">
-                      <div className="mask" ></div>
-                    </a>
-                  </div>
-                </div>
-              </Carousel>
+          {/* <div className="row"> */}
+          <div className="column" style={{ backgroundColor: 'grey' }} >
+            <br />
+            <br />
+            <div style={{ backgroundColor: '#edeafd', padding: '15px', borderRadius: '20px' }}>
+              <h1 className="font-effect-outline" style={{ color: '#673AB7', margin: '0', width: '180px', textAlign: 'center', cursor: 'pointer' }}>Menu Image</h1>
             </div>
+            <br />
+            <Carousel interval={0} selectedItem={slideIndex} transitionDuration={5000} showArrows={true} className="rounded-xl">
+              <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
+                <div className="bg-image hover-overlay ripple rounded-0"
+                  data-mdb-ripple-color="light"
+                  style={{ padding: '0px', borderRadius: '2px', height: '100%', boxShadow: '0 0 20px red' }}
+                >
+                  <img src={beef_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
+                  <a href="#!">
+                    <div className="mask" > </div>
+                  </a>
+                </div>
+              </div>
+              <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
+                <div className="bg-image hover-overlay ripple rounded-0"
+                  data-mdb-ripple-color="light"
+                  style={{ padding: '0px', borderRadius: '2px', height: '100%', boxShadow: '0 0 20px red' }}
+                >
+                  <img src={egg_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
+                  <a href="#!">
+                    <div className="mask" ></div>
+                  </a>
+                </div>
+              </div>
+              <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
+                <div className="bg-image hover-overlay ripple rounded-0"
+                  data-mdb-ripple-color="light"
+                  style={{ padding: '0px', borderRadius: '2px', height: '100%', boxShadow: '0 0 20px red' }}
+                >
+                  <img src={chicken_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
+                  <a href="#!">
+                    <div className="mask" ></div>
+                  </a>
+                </div>
+              </div>
+              <div className="carousel-item" style={{ width: '50%', height: '300px', margin: '0 auto' }}>
+                <div className="bg-image hover-overlay ripple rounded-0"
+                  data-mdb-ripple-color="light"
+                  style={{ padding: '0px', borderRadius: '2px', height: '100%', boxShadow: '0 0 20px red' }}
+                >
+                  <img src={fish_pic} className="w-100 h-100" alt="Media" style={{ objectFit: 'cover', }} />
+                  <a href="#!">
+                    <div className="mask" ></div>
+                  </a>
+                </div>
+              </div>
+            </Carousel>
           </div>
+          {/* </div> */}
         </div>
       </div>
     </div>

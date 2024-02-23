@@ -127,7 +127,7 @@ const FirebaseLogin = ({ ...others }) => {
   const handleSignInClick = async (values) => {
     const response = await axios.post('http://localhost:3000/login', values, { withCredentials: true });
     if (response.status === 200) {
-      window.open('/free/dashboard/default', '_self');
+      window.open('/free/notice/default', '_self');
     }
   };
 
