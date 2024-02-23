@@ -7,6 +7,7 @@ const options = [
   { value: 2, label: 'Generel Notice' },
 ];
 const SamplePage = () => {
+  const [cardHovered, setCardHovered] = useState(null);
   const handleDownloadClick = (Title, createdAt, Text) => {
     // Store data in localStorage
     localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt, Text }));
@@ -47,7 +48,7 @@ const SamplePage = () => {
 
   return (
     <div>
-      <div className="select-container">
+      <div className="select-container" style={{ marginLeft: '115px', marginRight: '115px' }}>
         <Select
           options={options}
           value={selectedOptions}
@@ -63,6 +64,7 @@ const SamplePage = () => {
         className="btn btn-secondary mr-3"
         style={{
           marginTop: '10px',
+          marginLeft: '115px',
           marginBottom: '15px',
           fontSize: '1rem',
           fontFamily: 'Arial, sans-serif',
@@ -84,9 +86,12 @@ const SamplePage = () => {
       <br />
       {cardData.map((card, index) => (
         <React.Fragment key={index}>
-          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px' }}>
-            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px' }}>{card.text.length > 35 ? card.text.substring(0, 35) + '...' : card.text}</Typography>
-            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px' }}>
+          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px', backgroundColor: cardHovered === index ? '#349cff' : '#b2d7e9', cursor: 'pointer', color: cardHovered === index ? 'white' : 'black', width: '80%', margin: 'auto' }}
+            onMouseEnter={() => setCardHovered(index)} // Set index when mouse enters
+            onMouseLeave={() => setCardHovered(null)} // Reset when mouse leaves
+          >
+            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', color: cardHovered === index ? 'white' : 'black', }}>{card.text.length > 35 ? card.text.substring(0, 35) + '...' : card.text}</Typography>
+            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px', color: cardHovered === index ? 'white' : 'black', }}>
               Date: {card.created_at}
             </Typography>
             <div style={{ marginBottom: '5px' }} />

@@ -50,6 +50,7 @@ const SamplePage = () => {
           className="btn btn-secondary mr-3"
           style={{
             marginTop: '20px',
+            marginLeft: '115px',
             fontSize: '1.1rem',
             fontFamily: 'Arial, sans-serif',
             borderRadius: '15px',

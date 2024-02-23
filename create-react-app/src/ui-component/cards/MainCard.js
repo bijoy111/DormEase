@@ -2,12 +2,18 @@ import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // constant
 const headerSX = {
-  '& .MuiCardHeader-action': { mr: 0 }
+  '& .MuiCardHeader-action': {
+    mr: 0,
+    '& > button': {
+      fontSize: '24px',
+      color: 'red',
+    }
+  }
 };
 
 // ==============================|| CUSTOM MAIN CARD ||============================== //
@@ -46,7 +52,7 @@ const MainCard = forwardRef(
         }}
       >
         {/* card header and action */}
-        {title && <CardHeader sx={headerSX} title={darkTitle ? <Typography variant="h3">{title}</Typography> : title} action={secondary} />}
+        {title && <CardHeader sx={headerSX} title={darkTitle ? <Typography variant="h2">{title}</Typography> : title} action={secondary} />}
 
         {/* content & header divider */}
         {title && <Divider />}

@@ -204,17 +204,25 @@ const SamplePage = () => {
               </a>
               {/* user name */}
               <div style={{ paddingLeft: '12px', marginTop: '9px', fontSize: '20px' }}>
-                <strong>{cardData.name}</strong>
-                <br />
-                {/* post time */}
-                <small style={{ marginTop: '-6px' }}>10h</small>
+                {/* Check if cardData exists and has at least one element */}
+                {cardData && cardData.length > 0 && (
+                  <>
+                    <strong>{cardData[0].name}</strong>
+                    <br />
+                    {/* Check if created_at property exists in the first element */}
+                    {cardData[0].created_at && (
+                      <small style={{ marginTop: '-6px' }}>{cardData[0].created_at}</small>
+                    )}
+                  </>
+                )}
               </div>
             </div>
             {/* post related Description */}
             <div style={{ backgroundColor: '#e3f2fd', padding: '10px', borderRadius: '8px', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', lineHeight: '1.5' }}>
               <p>
-                The Bangladesh University of Engineering and Technology (BUET) is one of the most prestigious institutions for higher
-                education in Bangladesh, and also it particularly in the field of engineering and architecture.
+                {/* The Bangladesh University of Engineering and Technology (BUET) is one of the most prestigious institutions for higher
+                education in Bangladesh, and also it particularly in the field of engineering and architecture. */}
+                {cardData && cardData.length > 0 && cardData[0].text}
               </p>
             </div>
             <br />
