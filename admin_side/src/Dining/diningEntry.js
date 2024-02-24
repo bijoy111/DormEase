@@ -56,7 +56,7 @@ function DailyDiningEntryPage() {
     .sort((a, b) => a.id.localeCompare(b.id)); // Sort IDs alphabetically
 
   const totalStudents = filteredStudents.length;
-  const presentInLunch = Object.values(lunchEntries).filter((status) => status).length ;
+  const presentInLunch = Object.values(lunchEntries).filter((status) => status).length;
   const presentInDinner = Object.values(dinnerEntries).filter((status) => status).length;
   const absentInLunch = totalStudents - presentInLunch;
   const absentInDinner = totalStudents - presentInDinner;
@@ -84,52 +84,59 @@ function DailyDiningEntryPage() {
   return (
     <div className="container mx-auto p-4 flex">
       <div className="w-2/3">
-        <h1 className="text-center text-2xl font-bold mb-4">Current Date:{curr_date}</h1>
-        {/* Toggle buttons for Lunch and Dinner */}
-        <div className="flex justify-center space-x-4 mb-4">
-          <button
-            className={`px-4 py-2 rounded-md ${mealType === 'lunch' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}
-            onClick={() => setMealType('lunch')}
-          >
-            Lunch
-          </button>
-          <button
-            className={`px-4 py-2 rounded-md ${mealType === 'dinner' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}
-            onClick={() => setMealType('dinner')}
-          >
-            Dinner
-          </button>
+        <div style={{ backgroundColor: '#bbd6f0', width: '400px', height: '140px', borderRadius: '15px', marginLeft: '400px' }}>
+          <br />
+          <h1 className="text-center text-2xl font-bold mb-4">Current Date:{curr_date}</h1>
+          {/* Toggle buttons for Lunch and Dinner */}
+          <div className="flex justify-center space-x-4 mb-4">
+            <button
+              className={`px-4 py-2 rounded-md ${mealType === 'lunch' ? 'bg-blue-500 text-white' : 'bg-grey-300 text-gray-700'}`}
+              onClick={() => setMealType('lunch')}
+            >
+              Lunch
+            </button>
+            <button
+              className={`px-4 py-2 rounded-md ${mealType === 'dinner' ? 'bg-blue-500 text-white' : 'bg-grey-300 text-gray-700'}`}
+              onClick={() => setMealType('dinner')}
+            >
+              Dinner
+            </button>
+          </div>
         </div>
 
         {/* Render student IDs by level and term */}
         {Array.from(new Set(filteredStudents.map((student) => student.level))).map(renderStudentIds)}
       </div>
 
-      <div className="meal-stats">
-      <div className="meal-stats bg-gray-100 p-4 rounded-md">
-        <h2 className="text-lg font-semibold mb-2">Meal Statistics</h2>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="info-box">
-            <p>Total Students: {totalStudents}</p>
-          </div>
-          <div className='info-box'>
-            <div className="info-box">
-              <p>Present in Lunch: {presentInLunch}</p>
+      <div className="meal-stats" style={{ width: '330px', marginTop: '120px' }}>
+        <div className="meal-stats bg-gray-100 p-4 rounded-md">
+          <h2 className="text-lg font-semibold mb-2" style={{ marginLeft: '50px' }}>Meal Statistics</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="info-box1" style={{ width: '220px' }}>
+              <div className="info-box1">
+                <p>Total Students: {totalStudents}</p>
+              </div>
             </div>
-            <div className="info-box">
-              <p>Absent in Lunch: {absentInLunch}</p>
+            <br />
+            <div className='info-box1' style={{ width: '220px' }}>
+              <div className="info-box1">
+                <p>Present in Lunch: {presentInLunch}</p>
+              </div>
+              <div className="info-box1">
+                <p>Absent in Lunch: {absentInLunch}</p>
+              </div>
             </div>
-          </div>
+            <br />
 
-          <div className='info-box'>
-            <div className="info-box">
-              <p>Present in Dinner: {presentInDinner}</p>
-            </div>
-            <div className="info-box">
-              <p>Absent in Dinner: {absentInDinner}</p>
+            <div className='info-box1' style={{ width: '220px' }}>
+              <div className="info-box1">
+                <p>Present in Dinner: {presentInDinner}</p>
+              </div>
+              <div className="info-box1">
+                <p>Absent in Dinner: {absentInDinner}</p>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
 
