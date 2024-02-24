@@ -17,8 +17,8 @@ function App() {
       <Route path="/seatallocation" element={<SeatAllocation />} />
       <Route path="/notice" element={<Notice />} />
       <Route path="/complaint" element={<Complaint />} />
-      {/* <Route path="/dining" element={<Dining />} />
-      <Route path="/dining/daily-dining-entries" element={<DailyDiningEntryPage />} /> */}
+      <Route path="/dining" element={<Dining />} />
+      <Route path="/dining/daily-dining-entries" element={<DailyDiningEntryPage />} />
     </Routes>
   );
 }
