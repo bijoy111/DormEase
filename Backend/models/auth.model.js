@@ -69,6 +69,8 @@ async function login_admin(admin_id, password) {
         error: 'Incorrect password'
     }
 
+    console.log(admin);
+
     return {
         admin,
         error: null

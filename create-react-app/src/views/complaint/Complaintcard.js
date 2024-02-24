@@ -64,7 +64,7 @@ const Complaintcard = () => {
       {cardData.map((card, index) => (
 
         <React.Fragment key={index}>
-          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '22px', backgroundColor: cardHovered === index ? '#349cff' : '#b2d7e9', cursor: 'pointer', color: cardHovered === index ? 'white' : 'black', width: '80%', margin: 'auto' }}
+          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '22px', backgroundColor: cardHovered === index ? '#349cff' : '#EDE7F6', cursor: 'pointer', color: cardHovered === index ? 'white' : 'black', width: '80%', margin: 'auto' }}
             onMouseEnter={() => setCardHovered(index)} // Set index when mouse enters
             onMouseLeave={() => setCardHovered(null)} // Reset when mouse leaves
           >
