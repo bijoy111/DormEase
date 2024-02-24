@@ -1,23 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../../Navbar/Navbar.js";
 
 export function Notice() {
-    const notices = [
-        {
-            id: 1,
-            title: 'Notice Title 1',
-            date: '2024-02-10',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec dui in nunc lacinia tincidunt',
-        },
-        {
-            id: 2,
-            title: 'Notice Title 2',
-            date: '2024-02-11',
-            content: 'Another notice content here',
-        },
-        // Add more notices as needed
-    ];
-
+    const [notices, setNotices] = useState([]); // State to store fetched notices
     const [isModalOpen, setModalOpen] = useState(false);
 
     const openModal = () => {
@@ -27,6 +12,24 @@ export function Notice() {
     const closeModal = () => {
         setModalOpen(false);
     };
+
+    // Function to fetch notices from backend
+    const fetchNotices = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/notice');
+            const data = await response.json();
+            console.log(data);
+            // Update the state with the fetched data
+            setNotices(data);
+        } catch (error) {
+            console.error('Error fetching notices:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchNotices(); // Fetch notices when component mounts
+    }, []);
+
 
     return (
         <div>
@@ -90,7 +93,7 @@ export function Notice() {
                                 <div className="flex border-b-2 w-full items-center justify-between p-3">
                                     <div>
                                         <p className="text-2xl font-bold">{notice.title}</p>
-                                        <p className="text-sm">{notice.date}</p>
+                                        <p className="text-sm">{notice.created_at}</p>
                                     </div>
                                     <div>
                                         <button className="bg-red-600 text-white py-1 px-3 hover:bg-red-700 rounded-sm">Remove</button>
@@ -98,7 +101,7 @@ export function Notice() {
                                 </div>
                                 <div class="p-3">
                                     <p>
-                                        {notice.content}
+                                        {notice.text}
                                     </p>
                                 </div>
                             </div>

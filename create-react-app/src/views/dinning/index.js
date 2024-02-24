@@ -267,7 +267,7 @@ const MyCalendar = () => {
                   <>
                     <div className="items-container" style={{
                       marginLeft: '10px',
-                      paddingLeft: '30px', paddingRight: '30px', border: '1px solid',
+                      paddingLeft: '30px', paddingRight: '30px',
                       borderRadius: '5px', backgroundColor: '#edeafd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'
                     }}>
                       <div className="item-section" style={{ height: '90px' }}>

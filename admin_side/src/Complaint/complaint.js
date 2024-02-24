@@ -73,11 +73,11 @@ export function Complaint() {
     <div className="ComplaintBox">
       <Navbar />
       <div className="complaints-list">
-        <h2>Complaints</h2>
+        <h1 style={{ marginLeft: '250px', marginBottom: '20px' }}>COMPLAINTS</h1>
         {complaints.map(complaint => (
           <div key={complaint.id} className="complaint">
-            <h3>{complaint.title}</h3>
-            <p>Submission Date: {complaint.submissionDate}</p>
+            <h2 style={{ marginLeft: '200px', fontWeight: 'bold', marginBottom: '10px' }}>{complaint.title}</h2>
+            <h6 style={{ fontWeight: 100 }}>Submission Date: {complaint.submissionDate}</h6>
             <p>{complaint.details}</p>
             <div className="progress-bar">
               <div className="circle-container">
@@ -104,13 +104,13 @@ export function Complaint() {
                 </div>
               </div>
             </div>
-            <button onClick={() => handleDelete(complaint.id)}>Delete</button>
+            <button style={{ backgroundColor: 'red', padding: '5px', borderRadius: '10px', marginTop: '20px', marginBottom: '10px' }} onClick={() => handleDelete(complaint.id)}>Delete</button>
           </div>
         ))}
       </div>
 
       <div className="complaint-stats">
-        <h2>Complaint Stats</h2>
+        <h1 style={{ marginLeft: '180px', marginBottom: '20px', marginTop: '10px' }}>COMPLAINT STATS</h1>
         <div className="div-stat">
           <div>Total Complaints: {complaintStats.total}</div>
           <div>Pending Complaints: {complaintStats.pending}</div>

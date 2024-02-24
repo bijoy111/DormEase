@@ -1,0 +1,9 @@
+ .students-list {
+    margin-top: 20px;
+    margin-left: 60px;
+    width: 60%;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+    padding: 10px;
+    /* box-shadow: #ccc 0px 0px 10px; */
+  }
