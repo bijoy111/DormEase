@@ -1,7 +1,7 @@
-import { Navbar } from "../Navbar/Navbar";
-import './dining.css';
 import { useNavigate } from 'react-router-dom';
-
+import { Navbar } from "../Navbar/Navbar";
+import img from '../images/common_user10.png';
+import './dining.css';
 export function Dining() {
 
     // Get current date and format it
@@ -14,8 +14,8 @@ export function Dining() {
 
     // Dummy data for dining managers
     const diningManagers = [
-        { id: 1, name: 'Rakib', department: 'CSE', level_term: '4-2', image: 'url_to_image' },
-        { id: 2, name: 'Bijoy', department: 'CSE', level_term: '4-2', image: 'url_to_image' },
+        { id: 1905024, name: 'Rakib Ahsan', department: 'CSE', level_term: '4-2', image: img },
+        { id: 1905052, name: 'Bijoy Ahmed', department: 'CSE', level_term: '4-2', image: img },
         // Add more dining managers as needed
     ];
 
@@ -38,7 +38,7 @@ export function Dining() {
             <div className="dining-home-page">
                 {/* Header */}
                 <header className="header">
-                    <div className="header-info">
+                    <div className="header-info" style={{ backgroundColor: '#bbd6f0', width: '350px', marginLeft: '400px', paddingTop: '10px', paddingBottom: '10px', borderRadius: '15px' }}>
                         <h2>Current Dining Month: {currentDiningMonth}</h2>
                         <p>Day: {currentDayOfMonth}</p>
                         <p>Date: {formattedDate}</p>
@@ -50,10 +50,12 @@ export function Dining() {
                 {/* Body */}
                 <div className="body">
                     <div className="manager-info">
-                        <h5><b>Dining Managers</b></h5>
+                        <h5 style={{ marginLeft: '60px' }}><b>Dining Managers</b></h5>
                         {diningManagers.map(manager => (
                             <div key={manager.id} className="manager">
-                                <img src={manager.image} alt={manager.name} />
+                                <img src={manager.image} alt={manager.name} style={{ width: '70px', height: '70px', borderRadius: '50%', marginLeft: '70px' }} />
+                                <p style={{ marginLeft: '60px' }}> {manager.name}</p>
+                                <br />
                                 <p>ID: {manager.id}</p>
                                 <p>Department: {manager.department}</p>
                                 <p>Level/Term: {manager.level_term}</p>
@@ -61,7 +63,7 @@ export function Dining() {
                         ))}
                     </div>
 
-                    <div className="button-container">
+                    <div className="button-container" style={{ marginTop: '25px' }}>
                         <button onClick={handleDailyDiningEntriesClick}>Daily Dining Entries</button>
                         <button onClick={() => {/* Handle navigation to Disbursement Info page */ }}>Disbursement Info</button>
                         <button onClick={() => {/* Handle navigation to Dining Stats page */ }}>Dining Stats</button>
