@@ -20,7 +20,27 @@ async function post_menu(date, item_name, meal_time) {
     return result;
 }
 
+async function apply_mess_manager(stu_id_1, stu_id_2) {
+    const sql = `
+            INSERT INTO mess_manager_application (stu_id_1, stu_id_2)
+            VALUES ($1, $2)
+        `;
+    const result = await db_query(sql, [stu_id_1, stu_id_2]);
+    return result;
+}
+
+async function cancel_mess_manager(stu_id_1, stu_id_2) {
+    const sql = `
+            DELETE FROM mess_manager_application
+            WHERE stu_id_1 = $1 AND stu_id_2 = $2
+        `;
+    const result = await db_query(sql, [stu_id_1, stu_id_2]);
+    return result;
+}
+
 module.exports = {
     get_menu_from_date,
-    post_menu
+    post_menu,
+    apply_mess_manager,
+    cancel_mess_manager
 }
