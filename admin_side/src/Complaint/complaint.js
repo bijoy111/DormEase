@@ -104,7 +104,7 @@ export function Complaint() {
                 </div>
               </div>
             </div>
-            <button style={{ backgroundColor: 'red', padding: '5px', borderRadius: '10px', marginTop: '20px', marginBottom: '10px' }} onClick={() => handleDelete(complaint.id)}>Delete</button>
+            <button style={{ backgroundColor: '#673AB7', color: 'white', padding: '8px', borderRadius: '10px', marginTop: '20px', marginBottom: '10px' }} onClick={() => handleDelete(complaint.id)}>Delete</button>
           </div>
         ))}
       </div>

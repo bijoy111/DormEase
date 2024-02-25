@@ -55,7 +55,7 @@ const MainCard = forwardRef(
         {title && <CardHeader sx={headerSX} title={darkTitle ? <Typography variant="h2">{title}</Typography> : title} action={secondary} />}
 
         {/* content & header divider */}
-        {title && <Divider />}
+        {title && <Divider sx={{ color: 'black' }} />}
 
         {/* card content */}
         {content && (

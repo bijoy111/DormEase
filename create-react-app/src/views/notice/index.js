@@ -86,12 +86,12 @@ const SamplePage = () => {
       <br />
       {cardData.map((card, index) => (
         <React.Fragment key={index}>
-          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px', backgroundColor: cardHovered === index ? '#349cff' : '#EDE7F6', cursor: 'pointer', color: cardHovered === index ? 'white' : 'black', width: '80%', margin: 'auto' }}
+          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px', backgroundColor: cardHovered === index ? 'transparent' : '#EDE7F6', cursor: 'pointer', color: cardHovered === index ? 'black' : 'black', width: '80%', margin: 'auto' }}
             onMouseEnter={() => setCardHovered(index)} // Set index when mouse enters
             onMouseLeave={() => setCardHovered(null)} // Reset when mouse leaves
           >
-            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', color: cardHovered === index ? 'white' : 'black', }}>{card.text.length > 35 ? card.text.substring(0, 35) + '...' : card.text}</Typography>
-            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px', color: cardHovered === index ? 'white' : 'black', }}>
+            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', color: cardHovered === index ? 'black' : 'black', }}>{card.text.length > 35 ? card.text.substring(0, 35) + '...' : card.text}</Typography>
+            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px', color: cardHovered === index ? 'black' : 'black', }}>
               Date: {card.created_at}
             </Typography>
             <div style={{ marginBottom: '5px' }} />

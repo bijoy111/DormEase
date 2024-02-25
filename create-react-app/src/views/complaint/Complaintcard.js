@@ -64,17 +64,17 @@ const Complaintcard = () => {
       {cardData.map((card, index) => (
 
         <React.Fragment key={index}>
-          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '22px', backgroundColor: cardHovered === index ? '#349cff' : '#EDE7F6', cursor: 'pointer', color: cardHovered === index ? 'white' : 'black', width: '80%', margin: 'auto' }}
+          <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '22px', backgroundColor: cardHovered === index ? 'transparent' : '#EDE7F6', cursor: 'pointer', color: cardHovered === index ? '#336aea' : 'black', width: '80%', margin: 'auto' }}
             onMouseEnter={() => setCardHovered(index)} // Set index when mouse enters
             onMouseLeave={() => setCardHovered(null)} // Reset when mouse leaves
           >
-            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', color: cardHovered === index ? 'white' : 'black', }}>
+            <Typography variant="body2" style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '18px', color: cardHovered === index ? 'black' : 'black', }}>
               <b>Details :</b> {card.body}
             </Typography>
-            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px', color: cardHovered === index ? 'white' : 'black', }}>
+            <Typography variant="caption" color="textSecondary" mt={2} style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '14px', color: cardHovered === index ? 'black' : 'black', }}>
               <b>Complaint Submitted On :</b> {card.created_at}
             </Typography>
-            <div style={{ color: cardHovered === index ? 'white' : 'black', }}>
+            <div style={{ color: cardHovered === index ? 'black' : 'black', }}>
               <h4>Status : </h4>
               {/* <ProgressBar />  */}
               <ProgressBar initialProgress={card.stage} />
