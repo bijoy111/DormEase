@@ -142,18 +142,19 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.info-box {
+.info-box1 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
+  width: 200px;
 }
 
 
-.info-box p:first-child {
+.info-box1 p:first-child {
   font-weight: bold;
 }
 
-.info-box p:last-child {
+.info-box1 p:last-child {
   font-size: 1.1rem;
   color: #333;
 }
