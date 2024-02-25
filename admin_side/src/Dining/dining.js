@@ -30,6 +30,10 @@ export function Dining() {
         navigate('/dining/daily-dining-entries');
     };
 
+    const handleDisbursementInfoClick = () => {
+        navigate('/dining/disbursement-info');
+    };
+
 
     return (
         <div className="dining">
@@ -63,7 +67,7 @@ export function Dining() {
 
                     <div className="button-container">
                         <button onClick={handleDailyDiningEntriesClick}>Daily Dining Entries</button>
-                        <button onClick={() => {/* Handle navigation to Disbursement Info page */ }}>Disbursement Info</button>
+                        <button onClick={handleDisbursementInfoClick}>Disbursement Info</button>
                         <button onClick={() => {/* Handle navigation to Dining Stats page */ }}>Dining Stats</button>
                         <button onClick={() => {/* Handle navigation to Dining History page */ }}>Dining History</button>
                     </div>
