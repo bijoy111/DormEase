@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .disbursement-list {
+    flex: 1;
+    margin-right: 20px;
+    margin-top: 30px;
+    box-shadow:#ccc 0px 0px 10px;;
+  }
+
+  .list-item {
+    display: flex;
+    box-shadow: #ccc 0px 0px 10px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 20px;
+  }
+  
+  .disbursement-form {
+    flex: 1;
+  }
+  
+  .disbursement-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .disbursement-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .disbursement-form .form-group input {
+    width: calc(100% - 20px); /* Adjusted for padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .disbursement-form .form-group button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
