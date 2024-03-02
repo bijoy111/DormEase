@@ -8,7 +8,7 @@ import DailyDiningEntryPage from "./Dining/diningEntry.js";
 import DisbursementInfoPage from "./Dining/disbursement.js";
 import { LoginCard } from './Login/login.js';
 import { SeatAllocation } from './SeatAllocation/seatallocation.js';
-import { Notice } from './views/Notice/notice.js';
+import { Notice } from './Notice/notice.js';
 
 function App() {
   return (

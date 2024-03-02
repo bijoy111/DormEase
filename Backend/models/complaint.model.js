@@ -48,7 +48,7 @@ async function update_complaint_stage(complaint_id, new_stage) {
     if (!old_stage)
         return { error: 'Not Found' }
 
-    if (old_stage == 3)
+    if (old_stage == 4)
         return { error: 'Already Resolved' }
 
     const sql = `

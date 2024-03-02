@@ -55,10 +55,7 @@ const update_complaint_stage = async (req, res, next) => {
 
 const delete_complaint = async (req, res, next) => {
     if (!req.user) {
-        console.log('hello');
-        console.log(req.body);
         return res.status(401).json({
-
             error: 'Unauthorized'
         });
     }

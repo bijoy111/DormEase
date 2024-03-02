@@ -9,7 +9,7 @@ module.exports = (router) => {
     router.get('/notice', get_notices);
     router.get('/notice/:post_id', get_notice);
     router.delete('/notice/:post_id', delete_notice);
-    router.post('/notice/compose', upload.array('media'), create_notice);
+    router.post('/notice/compose', create_notice);
 }
 
 /**
