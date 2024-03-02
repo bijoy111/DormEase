@@ -77,11 +77,13 @@ export function Notice() {
             title: title,
             text: content,
             is_private: is_private,
-            student_list: list
+            student_list: is_private ? list : []
         }
 
         const response = await axios.post('http://localhost:3000/notice/compose', obj, { withCredentials: true });
         fetchNotices();
+        is_private = false;
+        students = '';
         closeModal();
     }
 
@@ -166,7 +168,7 @@ export function Notice() {
                                         <p className="text-2xl font-bold">{notice.title}</p>
                                         <p className="text-sm">{notice.created_at}</p>
                                         {/*loop through student_list */}
-                                        <p className="text-sm mt-2 mt-0" style={{ color: 'red' }}>
+                                        <p className="text-sm mt-2" style={{ color: 'red' }}>
                                             <b>{notice.student_list && notice.student_list.length > 0 ?
                                                 notice.student_list.map(student => student.stu_id).join(', ') : ''}</b>
                                         </p>
