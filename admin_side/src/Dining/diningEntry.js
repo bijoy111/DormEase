@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './diningentry.css'; // Import custom CSS file
+import { Navbar } from '../Navbar/Navbar';
 
 function DailyDiningEntryPage() {
   // Define student data with IDs and their corresponding Level-Term
@@ -24,6 +25,103 @@ function DailyDiningEntryPage() {
     { id: '2205032', level: 1, term: 1 },
     { id: '2105043', level: 2, term: 1 },
     { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
+    { id: '2205048', level: 1, term: 1 },
+    { id: '2105055', level: 2, term: 1 },
+    { id: '2005062', level: 3, term: 1 },
+    { id: '1905079', level: 4, term: 1 },
+    { id: '2205042', level: 1, term: 1 },
+    { id: '2105053', level: 2, term: 1 },
+    { id: '2005063', level: 3, term: 1 },
+    { id: '1905073', level: 4, term: 1 },
+    { id: '2205023', level: 1, term: 1 },
+    { id: '2105021', level: 2, term: 1 },
+    { id: '2005012', level: 3, term: 1 },
+    { id: '1905029', level: 4, term: 1 },
+    { id: '2205032', level: 1, term: 1 },
+    { id: '2105043', level: 2, term: 1 },
+    { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
+    { id: '2205048', level: 1, term: 1 },
+    { id: '2105055', level: 2, term: 1 },
+    { id: '2005062', level: 3, term: 1 },
+    { id: '1905079', level: 4, term: 1 },
+    { id: '2205042', level: 1, term: 1 },
+    { id: '2105053', level: 2, term: 1 },
+    { id: '2005063', level: 3, term: 1 },
+    { id: '1905073', level: 4, term: 1 },
+    { id: '2205023', level: 1, term: 1 },
+    { id: '2105021', level: 2, term: 1 },
+    { id: '2005012', level: 3, term: 1 },
+    { id: '1905029', level: 4, term: 1 },
+    { id: '2205032', level: 1, term: 1 },
+    { id: '2105043', level: 2, term: 1 },
+    { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
+    { id: '2205048', level: 1, term: 1 },
+    { id: '2105055', level: 2, term: 1 },
+    { id: '2005062', level: 3, term: 1 },
+    { id: '1905079', level: 4, term: 1 },
+    { id: '2205042', level: 1, term: 1 },
+    { id: '2105053', level: 2, term: 1 },
+    { id: '2005063', level: 3, term: 1 },
+    { id: '1905073', level: 4, term: 1 },
+    { id: '2205023', level: 1, term: 1 },
+    { id: '2105021', level: 2, term: 1 },
+    { id: '2005012', level: 3, term: 1 },
+    { id: '1905029', level: 4, term: 1 },
+    { id: '2205032', level: 1, term: 1 },
+    { id: '2105043', level: 2, term: 1 },
+    { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
+    { id: '2205048', level: 1, term: 1 },
+    { id: '2105055', level: 2, term: 1 },
+    { id: '2005062', level: 3, term: 1 },
+    { id: '1905079', level: 4, term: 1 },
+    { id: '2205042', level: 1, term: 1 },
+    { id: '2105053', level: 2, term: 1 },
+    { id: '2005063', level: 3, term: 1 },
+    { id: '1905073', level: 4, term: 1 },
+    { id: '2205023', level: 1, term: 1 },
+    { id: '2105021', level: 2, term: 1 },
+    { id: '2005012', level: 3, term: 1 },
+    { id: '1905029', level: 4, term: 1 },
+    { id: '2205032', level: 1, term: 1 },
+    { id: '2105043', level: 2, term: 1 },
+    { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
+    { id: '2205048', level: 1, term: 1 },
+    { id: '2105055', level: 2, term: 1 },
+    { id: '2005062', level: 3, term: 1 },
+    { id: '1905079', level: 4, term: 1 },
+    { id: '2205042', level: 1, term: 1 },
+    { id: '2105053', level: 2, term: 1 },
+    { id: '2005063', level: 3, term: 1 },
+    { id: '1905073', level: 4, term: 1 },
+    { id: '2205023', level: 1, term: 1 },
+    { id: '2105021', level: 2, term: 1 },
+    { id: '2005012', level: 3, term: 1 },
+    { id: '1905029', level: 4, term: 1 },
+    { id: '2205032', level: 1, term: 1 },
+    { id: '2105043', level: 2, term: 1 },
+    { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
+    { id: '2205048', level: 1, term: 1 },
+    { id: '2105055', level: 2, term: 1 },
+    { id: '2005062', level: 3, term: 1 },
+    { id: '1905079', level: 4, term: 1 },
+    { id: '2205042', level: 1, term: 1 },
+    { id: '2105053', level: 2, term: 1 },
+    { id: '2005063', level: 3, term: 1 },
+    { id: '1905073', level: 4, term: 1 },
+    { id: '2205023', level: 1, term: 1 },
+    { id: '2105021', level: 2, term: 1 },
+    { id: '2005012', level: 3, term: 1 },
+    { id: '1905029', level: 4, term: 1 },
+    { id: '2205032', level: 1, term: 1 },
+    { id: '2105043', level: 2, term: 1 },
+    { id: '2005033', level: 3, term: 1 },
+    { id: '1905063', level: 4, term: 1 },
     { id: '1905063', level: 4, term: 1 },
     // Add more student data as needed
   ];
@@ -82,11 +180,13 @@ function DailyDiningEntryPage() {
   );
 
   return (
-    <div className="container mx-auto p-4 flex">
-      <div className="w-2/3">
-        <div style={{ backgroundColor: '#bbd6f0', width: '400px', height: '140px', borderRadius: '15px', marginLeft: '400px' }}>
-          <br />
-          <h1 className="text-center text-2xl font-bold mb-4">Current Date:{curr_date}</h1>
+    <div className="container">
+
+      <Navbar />
+
+      <div>
+        <div className='top-box'>
+          <h1 className="text-center">Today's Date : {curr_date}</h1>
           {/* Toggle buttons for Lunch and Dinner */}
           <div className="flex justify-center space-x-4 mb-4">
             <button
@@ -102,23 +202,29 @@ function DailyDiningEntryPage() {
               Dinner
             </button>
           </div>
+
+          <div className='back-button'>
+            {/* back icon */}
+            <button onClick={() => window.history.back()}><img height="5px" width="30px" src="https://img.icons8.com/ios/50/000000/back.png"/></button>
+          </div>
         </div>
 
         {/* Render student IDs by level and term */}
-        {Array.from(new Set(filteredStudents.map((student) => student.level))).map(renderStudentIds)}
+        <div className='student-list'>
+          {Array.from(new Set(filteredStudents.map((student) => student.level))).map(renderStudentIds)}
+        </div>
       </div>
 
-      <div className="meal-stats" style={{ width: '330px', marginTop: '120px' }}>
-        <div className="meal-stats bg-gray-100 p-4 rounded-md">
-          <h2 className="text-lg font-semibold mb-2" style={{ marginLeft: '50px' }}>Meal Statistics</h2>
+        <div className="meal-stats">
+          <h2 className="text-lg font-semibold mb-2" >Meal Statistics</h2>
           <div className="grid grid-cols-2 gap-4">
-            <div className="info-box1" style={{ width: '220px' }}>
+            <div className="info-box1" style={{ width: '225px' }}>
               <div className="info-box1">
                 <p>Total Students: {totalStudents}</p>
               </div>
             </div>
             <br />
-            <div className='info-box1' style={{ width: '220px' }}>
+            <div className='info-box1' style={{ width: '225px' }}>
               <div className="info-box1">
                 <p>Present in Lunch: {presentInLunch}</p>
               </div>
@@ -128,7 +234,7 @@ function DailyDiningEntryPage() {
             </div>
             <br />
 
-            <div className='info-box1' style={{ width: '220px' }}>
+            <div className='info-box1' style={{ width: '225px' }}>
               <div className="info-box1">
                 <p>Present in Dinner: {presentInDinner}</p>
               </div>
@@ -138,7 +244,6 @@ function DailyDiningEntryPage() {
             </div>
           </div>
         </div>
-      </div>
 
     </div>
   );
