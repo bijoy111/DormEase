@@ -34,6 +34,12 @@ export function Dining() {
         navigate('/dining/disbursement-info');
     };
 
+    const handleReqForMessManagerClick = () => {
+        // do whatever you want to do; don't trouble me
+    };
+
+    const handleStatsClick = () => {
+    };
 
     return (
         <div className="dining">
@@ -43,7 +49,7 @@ export function Dining() {
                 {/* Header */}
                 <header className="header">
                     <div className="header-info" style={{ backgroundColor: '#bbd6f0', width: '350px', marginLeft: '400px', paddingTop: '10px', paddingBottom: '10px', borderRadius: '15px' }}>
-                        <h2>Current Dining Month: {currentDiningMonth}</h2>
+                        <h2 className="text-lg font-semibold mb-2">Current Dining Month: {currentDiningMonth}</h2>
                         <p>Day: {currentDayOfMonth}</p>
                         <p>Date: {formattedDate}</p>
                     </div>
@@ -58,7 +64,7 @@ export function Dining() {
                         {diningManagers.map(manager => (
                             <div key={manager.id} className="manager">
                                 <img src={manager.image} alt={manager.name} style={{ width: '70px', height: '70px', borderRadius: '50%', marginLeft: '70px' }} />
-                                <p style={{ marginLeft: '60px' }}> {manager.name}</p>
+                                <p className="text-lg font-semibold mb-1" style={{ marginLeft: '60px' }}> {manager.name}</p>
                                 <br />
                                 <p>ID: {manager.id}</p>
                                 <p>Department: {manager.department}</p>
@@ -70,13 +76,11 @@ export function Dining() {
                     <div className="button-container" style={{ marginTop: '25px' }}>
                         <button onClick={handleDailyDiningEntriesClick}>Daily Dining Entries</button>
                         <button onClick={handleDisbursementInfoClick}>Disbursement Info</button>
-                        <button onClick={() => {/* Handle navigation to Dining Stats page */ }}>Dining Stats</button>
-                        <button onClick={() => {/* Handle navigation to Dining History page */ }}>Dining History</button>
+                        <button onClick={handleStatsClick}>Dining Sats</button>
                     </div>
-                </div>
 
-                {/* Footer */}
-                <footer className="footer">
+                    {/* Footer */}
+        
                     <div className="footer-menu">
                         {/* Left Part (Lunch Menu) */}
                         <div className="lunch-menu">
@@ -89,7 +93,7 @@ export function Dining() {
                             <div className="menu-description">{dinnerMenu}</div>
                         </div>
                     </div>
-                </footer>
+                </div>
             </div>
         </div>
     );
