@@ -25,13 +25,14 @@ const get_notice = async (req, res, next) => {
 }
 
 const get_notices = async (req, res, next) => {
-    // if (!req.user) {
-    //     return res.status(401).json({
-    //         error: 'Unauthorized'
-    //     });
-    // }
+    if (!req.user) {
+        return res.status(401).json({
+            error: 'Unauthorized'
+        });
+    }
 
-    const notices = await notice_model.get_notices();
+    const id = req.user.id;
+    const notices = await notice_model.get_notices(id);
     return res.status(200).json([
         ...notices
     ]);

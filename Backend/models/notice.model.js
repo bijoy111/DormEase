@@ -1,6 +1,6 @@
 const { db_query } = require('../db');
 
-async function get_notices() {
+async function get_notices(stu_id) {
     let notices = [];
     const sql = `
         SELECT post_id FROM notice
@@ -10,6 +10,17 @@ async function get_notices() {
     for (let i = 0; i < noticeIDs.rows.length; i++) {
         let notice = await get_notice(noticeIDs.rows[i].post_id);
         notices.push(notice);
+    }
+
+    for (let i = 0; i < notices.length; i++) {
+        if (notices[i].is_private && stu_id > 10) {
+            let sql = `SELECT * FROM private_notice WHERE post_id = $1 AND stu_id = $2`;
+            let result = await db_query(sql, [notices[i].post_id, stu_id]);
+            if (result.rows.length === 0) {
+                notices.splice(i, 1);
+                i--;
+            }
+        }
     }
 
     return notices;
