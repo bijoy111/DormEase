@@ -103,12 +103,30 @@ async function comment(parent_id, stu_id, text, media) {
 }
 
 async function upvote(post_id, stu_id) {
-    const sql = `
-        INSERT INTO upvote (post_id, stu_id, upvoted)
-        VALUES ($1, $2, true)
-    `;
-    const result = await db_query(sql, [post_id, stu_id]);
-    return result;
+    const updateSql = `
+            UPDATE upvote
+            SET upvoted = true
+            WHERE post_id = $1 AND stu_id = $2 AND upvoted = false
+        `;
+    let updateResult = await db_query(updateSql, [post_id, stu_id]);
+    if (updateResult.rowCount === 0) {
+        const insertSql = `
+                INSERT INTO upvote (post_id, stu_id, upvoted)
+                VALUES ($1, $2, true)
+            `;
+        updateResult = await db_query(insertSql, [post_id, stu_id]);
+    }
+
+    return updateResult;
+    // console.log(post_id, stu_id);
+    // const sql = `
+    //     INSERT INTO upvote (post_id, stu_id, upvoted)
+    //     VALUES ($1, $2, true)
+    // `;
+    // const result = await db_query(sql, [post_id, stu_id]);
+    // console.log('bijoy');
+    // console.log(result);
+    // return result;
 }
 
 async function cancel_upvote(post_id, stu_id) {
@@ -121,12 +139,29 @@ async function cancel_upvote(post_id, stu_id) {
 }
 
 async function downvote(post_id, stu_id) {
-    const sql = `
-        INSERT INTO upvote (post_id, stu_id, upvoted)
-        VALUES ($1, $2, false)
-    `;
-    const result = await db_query(sql, [post_id, stu_id]);
-    return result;
+    const updateSql = `
+            UPDATE upvote
+            SET upvoted = false
+            WHERE post_id = $1 AND stu_id = $2 AND upvoted = true
+        `;
+    let updateResult = await db_query(updateSql, [post_id, stu_id]);
+    if (updateResult.rowCount === 0) {
+        const insertSql = `
+                INSERT INTO upvote (post_id, stu_id, upvoted)
+                VALUES ($1, $2, false)
+            `;
+        updateResult = await db_query(insertSql, [post_id, stu_id]);
+    }
+
+    return updateResult;
+
+    // console.log(post_id, stu_id);
+    // const sql = `
+    //     INSERT INTO upvote (post_id, stu_id, upvoted)
+    //     VALUES ($1, $2, false)
+    // `;
+    // const result = await db_query(sql, [post_id, stu_id]);
+    // return result;
 }
 
 async function cancel_downvote(post_id, stu_id) {

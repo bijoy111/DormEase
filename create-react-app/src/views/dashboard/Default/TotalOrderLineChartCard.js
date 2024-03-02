@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // material-ui
-import { Box, Button, Grid, Menu, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
 // project imports
@@ -63,18 +63,18 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  //const [anchorEl, setAnchorEl] = useState(null);
   const handleChangeTime = (event, newValue) => {
     setTimeValue(newValue);
   };
 
-  const handleApplyButtonClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleApplyButtonClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+  // const handleCloseMenu = () => {
+  //   setAnchorEl(null);
+  // };
 
 
   // State for storing card data
@@ -151,7 +151,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                         {timeValue ? (
                           <Typography sx={{ fontSize: '2.5rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{roomNo}</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.5rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{seatNo}</Typography>
+                          <Typography sx={{ fontSize: '2.5rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{'0' + seatNo}</Typography>
                         )}
                       </Grid>
 
@@ -183,7 +183,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
 
             {/* <br /> */}
 
-            <Grid item>
+            {/* <Grid item>
               <Button
                 disableElevation
                 variant={timeValue ? 'contained' : 'text'}
@@ -266,7 +266,9 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                   Submit
                 </Button>
               </Menu>
-            </Grid>
+            </Grid> */}
+            <br /><br />
+            <div style={{ marginBottom: '12px' }}></div>
           </Box>
         </CardWrapper>
       )}

@@ -1,3 +1,4 @@
+//ignore this file
 //bijoy 111
 import beef_pic from 'assets/images/beef.png';
 import chicken_pic from 'assets/images/chicken.png';

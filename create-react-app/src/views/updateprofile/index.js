@@ -1,6 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import { Grid } from '@mui/material';
-import logo from 'assets/images/student.png';
+// import logo from 'assets/images/student.png';
+import logo from 'assets/images/common_user10.png';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
@@ -17,8 +18,8 @@ const SamplePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [Phone, setPhone] = useState('');
   const [studentEmail, setEmail] = useState('');
-  // const [guardianName, setGuardianname] = useState('');
-  // const [guardianPhone, setGuardianphone] = useState('');
+  const [guardianName, setGuardianname] = useState('');
+  const [guardianPhone, setGuardianphone] = useState('');
   // const [picture,setPicture] = useState('');
 
   const handleFileChange = (event) => {
@@ -72,8 +73,8 @@ const SamplePage = () => {
   const Cgpa = cardData.cgpa || '';
   const Hall = cardData.hall || '';
   const Resident = cardData.resident || '';
-  const guardianName = cardData.guardian_name || '';
-  const guardianPhone = cardData.guardian_phone || '';
+  // const guardianName = cardData.guardian_name || '';
+  // const guardianPhone = cardData.guardian_phone || '';
   const roomNo = cardData.room_no || '';
   const seatNo = cardData.seat_no || '';
   const Apply = cardData.applied_for_room || '';
@@ -81,7 +82,7 @@ const SamplePage = () => {
 
 
   // Function to handle form submission
-  const handleSubmit = async () => {
+  const handleSave = async () => {
     const obj = {
       email: studentEmail,
       phone: Phone,
@@ -105,6 +106,10 @@ const SamplePage = () => {
     window.open('/free/viewprofile', '_self');
   };
 
+  const handleCancel = () => {
+    window.open('/free/viewprofile', '_self');
+  }
+
   return (
     <MainCard style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', paddingTop: '20px' }}>
       <Grid container spacing={3} style={{ color: 'green' }}>
@@ -126,16 +131,16 @@ const SamplePage = () => {
                         marginTop: '20px'
                       }}
                     />
-                    <div style={{ marginLeft: '8px' }}>
-                      <h3 className="user-name">{studentName}</h3>
-                      <h4 className="user-id">{studentId}</h4>
+                    <div style={{ marginLeft: '2px' }}>
+                      <h2 className="user-name" style={{ color: '#349cff', }}>{studentName}</h2>
+                      <h2 className="user-id" style={{ color: '#349cff', }}>{studentId}</h2>
                     </div>
                   </div>
                 </div>
                 {/* Personal Details */}
                 <div className="row gutters mx-auto left-spacing style={{ marginLeft: '100px' }}">
                   <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h2 className="mb-4 text-primary">Personal Information</h2>
+                    <h2 className="mb-4 text-primary" style={{ color: '#349cff', }}>Personal Information</h2>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
@@ -223,7 +228,7 @@ const SamplePage = () => {
                   <br />
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style={{ marginRight: '60px' }}>
                     <div className="form-group mt-4">
-                      <label htmlFor="profilePicture" className="form-label">Change Profile Picture:</label><br />
+                      <label htmlFor="profilePicture" className="form-label" style={{ color: '#349cff', }}>Change Profile Picture:</label><br />
                       <input type="file" className="form-control-file cursor-pointer" id="profilePicture" accept="image/*" aria-describedby="profilePictureHelp" onChange={handleFileChange} />
                       <small id="profilePictureHelp" className="form-text text-muted"></small>
                     </div>
@@ -252,7 +257,7 @@ const SamplePage = () => {
             {/* Academic Information */}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style={{ marginRight: '60px' }}>
-                <h2 className="mt-4 mb-4 text-primary">Academic Information</h2>
+                <h2 className="mt-4 mb-4 text-primary" style={{ color: '#349cff', }}>Academic Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
@@ -278,26 +283,26 @@ const SamplePage = () => {
             {/* Guardian Information */}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 className="mt-4 mb-4 text-primary">Guardian Information</h2>
+                <h2 className="mt-4 mb-4 text-primary" style={{ color: '#349cff', }}>Guardian Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="guardian_name" className="input-label">Name </label>
-                  <input type="text" className="form-control custom-input" id="guardian_name" value={guardianName} />
+                  <input type="text" className="form-control custom-input" id="guardian_name" value={guardianName} placeholder="Enter your Guardian Name" onChange={(e) => setGuardianname(e.target.value)} />
                 </div>
               </div>
               <br />
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
                   <label htmlFor="phone_no" className="input-label">Phone </label>
-                  <input type="tel" className="form-control custom-input" id="phone_no" value={guardianPhone} />
+                  <input type="tel" className="form-control custom-input" id="phone_no" value={guardianPhone} placeholder="Enter your Guardian Phone" onChange={(e) => setGuardianphone(e.target.value)} />
                 </div>
               </div>
             </div>
             {/* Residential Information*/}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 className="mt-4 mb-4 text-primary">Residential Information</h2>
+                <h2 className="mt-4 mb-4 text-primary" style={{ color: '#349cff', }}>Residential Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
@@ -358,6 +363,7 @@ const SamplePage = () => {
                       color: 'white',
                       backgroundColor: '#673AB7',
                     }}
+                    onClick={() => handleCancel()}
                     onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
                     onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                   >
@@ -384,7 +390,7 @@ const SamplePage = () => {
                       color: 'white',
                       backgroundColor: '#673AB7',
                     }}
-                    onClick={() => handleSubmit()}
+                    onClick={() => handleSave()}
                     onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
                     onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                   >

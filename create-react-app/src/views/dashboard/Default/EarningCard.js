@@ -9,7 +9,8 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-import logo from 'assets/images/student.png';
+// import logo from 'assets/images/student.png';
+import logo from 'assets/images/common_user10.png';
 
 import { useEffect, useState } from 'react';
 
@@ -100,7 +101,7 @@ const EarningCard = ({ isLoading }) => {
                         borderRadius: '50%',
                         border: '2px solid grey',
                         width: '150px',
-                        height: '148px',
+                        height: '146px',
                         marginTop: '20px'
                       }}
                     />

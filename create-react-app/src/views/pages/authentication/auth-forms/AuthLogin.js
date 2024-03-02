@@ -39,6 +39,7 @@ import "./style.css";
 const FirebaseLogin = ({ ...others }) => {
 
   // ===========================|| <NewCode> ||=========================== //
+  const [error, setError] = useState(null);
   const [loginImage, setloginImage] = useState(
     "https://res.cloudinary.com/dfqs9as0v/image/upload/v1683480418/defaultYeti_atdp3z.svg"
   );
@@ -125,9 +126,13 @@ const FirebaseLogin = ({ ...others }) => {
 
 
   const handleSignInClick = async (values) => {
-    const response = await axios.post('http://localhost:3000/login', values, { withCredentials: true });
-    if (response.status === 200) {
-      window.open('/free/notice/default', '_self');
+    try {
+      const response = await axios.post('http://localhost:3000/login', values, { withCredentials: true });
+      if (response.status === 200) {
+        window.open('/free/notice/default', '_self');
+      }
+    } catch (error) {
+      setError('Invalid Student Id or Password. Please try again.');
     }
   };
 
@@ -405,7 +410,7 @@ const FirebaseLogin = ({ ...others }) => {
       <Formik
         initialValues={{
           id: '',
-          password: 'password3',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -546,6 +551,27 @@ const FirebaseLogin = ({ ...others }) => {
           </form>
         )}
       </Formik>
+
+      {error && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: '60%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: 'white',
+            padding: '20px',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+            borderRadius: '8px',
+            zIndex: 9999,
+          }}
+        >
+          <Typography variant="body1">{error}</Typography>
+          <Button variant="outlined" style={{ marginTop: '20px' }} onClick={() => setError(null)}>
+            Close
+          </Button>
+        </Box>
+      )}
     </>
   );
 };

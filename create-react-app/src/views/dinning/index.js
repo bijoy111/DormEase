@@ -43,7 +43,9 @@ const MyCalendar = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const currentDate = date.toISOString().split('T')[0];
+        const nextDate = new Date(date);
+        nextDate.setDate(date.getDate() + 1); // Set to the next day
+        const currentDate = nextDate.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
 
         console.log(currentDate);
         const response = await axios.get(`http://localhost:3000/dining/${currentDate}`);
@@ -65,7 +67,9 @@ const MyCalendar = () => {
     // setNewLunchItem('');
 
     try {
-      const currentDate = date.toISOString().split('T')[0];
+      const nextDate = new Date(date);
+      nextDate.setDate(date.getDate() + 1); // Set to the next day
+      const currentDate = nextDate.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
       console.log(currentDate);
       const response = await axios.post(`http://localhost:3000/dining/${currentDate}/entry/meal`, {
         date: currentDate,
@@ -78,6 +82,7 @@ const MyCalendar = () => {
     }
 
     // window.open('/free/dinning/default', '_self');
+    fetchCardDataFromDatabase();
   };
 
   const addDinnerItem = async () => {
@@ -85,7 +90,9 @@ const MyCalendar = () => {
     // setNewDinnerItem('');
 
     try {
-      const currentDate = date.toISOString().split('T')[0];
+      const nextDate = new Date(date); // Assuming date is already a Date object
+      nextDate.setDate(date.getDate() + 1); // Set to the next day
+      const currentDate = nextDate.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
       console.log(currentDate);
       const response = await axios.post(`http://localhost:3000/dining/${currentDate}/entry/meal`, {
         date: currentDate,
@@ -97,6 +104,7 @@ const MyCalendar = () => {
       console.error('Error submitting complaint:', error);
     }
     // window.open('/free/dinning/default', '_self');
+    fetchCardDataFromDatabase();
   };
 
   const handleNewLunchItemChange = (e) => {
