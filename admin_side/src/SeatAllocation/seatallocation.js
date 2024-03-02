@@ -1,77 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { Navbar } from '../Navbar/Navbar';
 import img from '../images/common_user10.png';
 import './SeatAllocation.css'; // You can define your CSS styles in SeatAllocation.css
+import axios from 'axios';
 
 export function SeatAllocation() {
   // Dummy data for dormitory rooms and applicants
   const [rooms, setRooms] = useState([
     {
-      id: 1, seats: [{ id: 101, name: 'John Doe', department: 'Computer Science', image: img },
+      id: 1, seats: [{ img: img },
       {},
-      { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-      { id: 102, name: 'Jane Smith', department: 'Engineering', image: img }]
+      { img: img },
+      { img: img }]
     }, // Example room with 4 empty seats
     {
-      id: 2, seats: [{ id: 101, name: 'John Doe', department: 'Computer Science', image: img },
+      id: 2, seats: [{ img: img },
       {},
-      { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
+      { img: img },
       {}]
     }, // Example room with 4 empty seats
     {
       id: 3, seats: [{},
-      { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
+      { img: img },
       {}, {}]
     }, // Example room with 4 empty seats
     {
-      id: 4, seats: [{ id: 101, name: 'John Doe', department: 'Computer Science', image: img },
+      id: 4, seats: [{ img: img },
       {},
-      { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-      { id: 102, name: 'Jane Smith', department: 'Engineering', image: img }]
+      { img: img },
+      { img: img }]
     }, // Example room with 4 empty seats
     // Add more rooms as needed
   ]);
 
-  const [applicants] = useState([
-    { id: 101, name: 'John Doe', department: 'Computer Science', image: img },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img },
+  const [applicants, setApplicants] = useState([
+    { img: img },
+    { img: img },
+    { img: img },
+    { img: img },
+    { img: img },
+    { img: img },
+    { img: img },
     // Add more applicants as needed
   ]);
 
-  const [cancellationRequests] = useState([
-    { id: 101, name: 'John Doe', department: 'Computer Science', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
+  const [cancellationRequests, setCancellationRequests] = useState([
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
     // Add more applicants as needed
   ]);
 
-  const [changeRequests] = useState([
-    { id: 101, name: 'John Doe', department: 'Computer Science', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
-    { id: 102, name: 'Jane Smith', department: 'Engineering', image: img, reason: 'I want to cancel my application' },
+  const [changeRequests, setChangeRequests] = useState([
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
+    { img: img, reason: 'I want to cancel my application' },
     // Add more applicants as needed
   ]);
+
+  const fetchRooms = async () => {
+    const response = await axios.get('http://localhost:3000/seat_allocation');
+    setRooms(response.data);
+  };
+
+  const fetchApplicants = async () => {
+    const response = await axios.get('http://localhost:3000/seat_allocation/applicants');
+    setApplicants(response.data);
+  };
+
+  const fetchRoomChangeApplicants = async () => {
+    const response = await axios.get('http://localhost:3000/seat_allocation/room_change_applicants');
+    console.log(response.data);
+    setChangeRequests(response.data);
+  };
+
+  const fetchRoomCancelApplicants = async () => {
+    const response = await axios.get('http://localhost:3000/seat_allocation/room_cancel_applicants');
+    console.log(response.data);
+    setCancellationRequests(response.data);
+  };
+
+  useEffect(() => {
+    fetchRooms();
+    fetchApplicants();
+    fetchRoomChangeApplicants();
+    fetchRoomCancelApplicants();
+  }, []);
 
   const [draggedApplicant, setDraggedApplicant] = useState(null);
 
   const handleDrop = (roomId, seatIndex) => {
-    const updatedRooms = [...rooms];
-    updatedRooms[roomId].seats[seatIndex] = draggedApplicant;
-    setRooms(updatedRooms);
+
+    let room = rooms.find(room => room.room_no === roomId);
+    room.seats[seatIndex].stu_id = draggedApplicant.stu_id;
+    room.seats[seatIndex].name = draggedApplicant.name;
+    room.seats[seatIndex].dept = draggedApplicant.dept;
+    room.seats[seatIndex].level_term = draggedApplicant.level_term;
+
+    const response = axios.post('http://localhost:3000/seat_allocation/allocate_room', {
+      stu_id: draggedApplicant.stu_id,
+      room_no: roomId,
+      seat_no: seatIndex
+    });
+    console.log(response.data);
+
+    setRooms([...rooms]);
   };
 
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -88,44 +130,36 @@ export function SeatAllocation() {
     setSelectedRequest(request);
     setCancelModalVisible(true);
   };
+
   const handleChangeRequest = (request) => {
     setSelectedRequest(request);
     setChangeModalVisible(true);
   };
 
-  const handleCancellationAccept = () => {
-    // Handle accept logic here
-    // For example, remove the request from the list
-    setCancellationRequests(cancellationRequests.filter(request => request.id !== selectedRequest.id));
-    setModalVisible(false);
+  const handleRoomCancel = () => {
+    const response = axios.post('http://localhost:3000/seat_allocation/allocate_room_cancel', {
+      stu_id: selectedRequest.stu_id,
+      decision: 'accept'
+    });
+    console.log(response.data);
+    fetchRooms();
+    fetchRoomCancelApplicants();
+    setCancelModalVisible(false);
     setSelectedRequest(null);
   };
-  const handleChangeAccept = () => {
 
-    // Handle accept logic here
-    // For example, remove the request from the list
-    setChangeRequests(changeRequests.filter(request => request.id !== selectedRequest.id));
+  const handleRoomChange = (stu_id, new_room_no, new_seat_no, decision) => {
+    const response = axios.post('http://localhost:3000/seat_allocation/allocate_room_change', {
+      stu_id: stu_id,
+      room_no: new_room_no,
+      seat_no: new_seat_no,
+      decision: decision
+    });
+    console.log(response.data);
+    // setChangeRequests(changeRequests.filter(request => request.stu_id !== selectedRequest.stu_id));
+    fetchRooms();
+    fetchRoomChangeApplicants();
     setChangeModalVisible(false);
-    setSelectedRequest(null);
-  };
-
-  const setCancellationRequests = (filter) => {
-    throw new Error('Function not implemented.');
-  };
-  const setChangeRequests = (filter) => {
-    throw new Error('Function not implemented.');
-  };
-
-  const handleCancellationReject = () => {
-    // Handle reject logic here
-    // For example, keep the request in the list
-    setCancelModalVisible(false);
-    setSelectedRequest(null);
-  };
-  const handleChangeReject = () => {
-    // Handle reject logic here
-    // For example, keep the request in the list
-    setCancelModalVisible(false);
     setSelectedRequest(null);
   };
 
@@ -137,23 +171,26 @@ export function SeatAllocation() {
       <div className="room-list-container">
         <div className="room-list">
           {rooms.map((room, index) => (
-            <div key={room.id} className="room-card">
-              <h3 style={{ marginLeft: '250px', marginBottom: '20px' }}>Room {room.id}</h3>
+            <div key={index} className="room-card">
+              <div class="flex items-center justify-center mb-4">
+                <h3 class="text-2xl font-bold">Room {room.room_no}</h3>
+              </div>
               <div className="seat-container">
                 {room.seats.map((seat, seatIndex) => (
                   <div
                     key={seatIndex}
                     className="seat"
                     onDragOver={(e) => e.preventDefault()} // Allow dropping onto the seat
-                    onDrop={() => handleDrop(index, seatIndex)} // Handle drop event
+                    onDrop={() => handleDrop(room.room_no, seatIndex)} // Handle drop event
                     style={{ textAlign: 'center', alignItems: 'center' }}
                   >
                     {seat.name ? (
-                      <div>
-                        <img src={seat.image} alt={seat.name} style={{ width: '70px', height: '70px', borderRadius: '50%', marginLeft: '90px' }} />
+                      <div class="text-sm">
+                        <img src={img} alt={seat.name} style={{ width: '70px', height: '70px', borderRadius: '50%', marginLeft: '90px' }} />
                         <p>{seat.name}</p>
-                        <p>ID: {seat.id}</p>
-                        <p>Department: {seat.department}</p>
+                        <p>ID: {seat.stu_id}</p>
+                        <p>Department: {seat.dept}</p>
+                        <p>Level: {seat.level_term}</p>
                       </div>
                     ) : (
                       <div className="empty-seat">
@@ -172,21 +209,32 @@ export function SeatAllocation() {
         { changeListVisible: false, cancelListVisible: false },
 
         <div className="applicant-list-container">
+          <div class="flex items-center justify-center">
+            <h2 class="text-3xl font-bold" style={{ marginLeft: '110px', marginTop: '20px', marginBottom: '20px' }}>Applicants</h2>
+          </div>
           <div className="applicant-list">
-            <h2 style={{ marginLeft: '110px', marginTop: '20px', marginBottom: '20px' }}>Applicants</h2>
             {applicants.map((applicant) => (
-              <div
-                key={applicant.id}
-                draggable
-                className="applicant"
-                onDragStart={() => setDraggedApplicant(applicant)}
-                onDragEnd={() => setDraggedApplicant(null)}
-                style={{ display: 'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}
-              >
-                <img src={applicant.image} alt={applicant.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
-                <p>{applicant.name}</p>
-                <p>ID: {applicant.id}</p>
-                <p>Department: {applicant.department}</p>
+              <div class="flex applicant">
+                <div
+                  key={applicant.stu_id}
+                  draggable
+                  className="flex-grow justify-start"
+                  onDragStart={() => setDraggedApplicant(applicant)}
+                  onDragEnd={() => setDraggedApplicant(null)}
+                // style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', alignItems: 'left', flex: '1'}}
+                >
+                  <p class="text-lg">{applicant.name}</p>
+                  <div class="text-xs">
+                    <span>ID: {applicant.stu_id}</span><br />
+                    <span>Department: {applicant.dept}</span><br />
+                    <span>Home District: {applicant.home_district}</span><br />
+                    <span>School: {applicant.school}</span><br />
+                    <span>College: {applicant.college}</span>
+                  </div>
+                </div>
+                <div class="flex-1 align-middle justify-end">
+                  <img src={img} alt={applicant.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
+                </div>
               </div>
             ))}
           </div>
@@ -198,18 +246,18 @@ export function SeatAllocation() {
         { applicantListVisible: false, changeListVisible: false },
         <div className="cancellation-requests-list-container">
           <div className="cancellation-requests-list">
-            <h2 style={{ marginLeft: '80px', marginTop: '20px', marginBottom: '20px' }}>Cancellation Requests</h2>
+            <h2 class="text-3xl font-bold" style={{ marginLeft: '80px', marginTop: '20px', marginBottom: '20px' }}>Applicants</h2>
             {cancellationRequests.map((request) => (
               <div
-                key={request.id}
+                key={request.stu_id}
                 className="cancellation-request"
                 onClick={() => handleRequestClick(request)}
                 style={{ display: 'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}
               >
-                <img src={request.image} alt={request.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
+                <img src={img} alt={request.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
                 <p>{request.name}</p>
-                <p>ID: {request.id}</p>
-                <p>Department: {request.department}</p>
+                <p>ID: {request.stu_id}</p>
+                <p>Department: {request.dept}</p>
               </div>
             ))}
           </div>
@@ -221,18 +269,18 @@ export function SeatAllocation() {
         { applicantListVisible: false, cancelListVisible: false },
         <div className="change-requests-list-container">
           <div className="change-requests-list">
-            <h2 style={{ marginLeft: '90px', marginTop: '20px', marginBottom: '20px' }}>Change Requests</h2>
+            <h2 class="text-3xl font-bold" style={{ marginLeft: '90px', marginTop: '20px', marginBottom: '20px' }}>Applicants</h2>
             {changeRequests.map((request) => (
               <div
-                key={request.id}
+                key={request.stu_id}
                 className="change-request"
                 onClick={() => handleChangeRequest(request)}
                 style={{ display: 'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}
               >
-                <img src={request.image} alt={request.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
+                <img src={img} alt={request.name} style={{ width: '70px', height: '70px', borderRadius: '50%' }} />
                 <p>{request.name}</p>
-                <p>ID: {request.id}</p>
-                <p>Department: {request.department}</p>
+                <p>ID: {request.stu_id}</p>
+                <p>Department: {request.dept}</p>
               </div>
             ))}
           </div>
@@ -253,19 +301,22 @@ export function SeatAllocation() {
           className="Modal"
           overlayClassName="Overlay"
         >
-          <h2>Change Request Details</h2>
-          <img src={selectedRequest.image} alt={selectedRequest.name} />
+          <img src={img} alt={selectedRequest.name} />
           <p>{selectedRequest.name}</p>
-          <p>ID: {selectedRequest.id}</p>
-          <p>Department: {selectedRequest.department}</p>
+          <p>ID: {selectedRequest.stu_id}</p>
+          <p>Department: {selectedRequest.dept}</p>
           <p>Reason: {selectedRequest.reason}</p>
+          <p>New room: {selectedRequest.new_room_no}, New seat: {selectedRequest.new_seat_no}</p>
 
           {/* this input field will take a room no which is in the preffered list given by the applicant &
         the applicant will be alloted into that room */}
           <input type="text" placeholder="Enter Allotted Room No" />
           <div className="modal-buttons">
-            <button onClick={handleChangeAccept}>Accept</button>
-            <button onClick={handleChangeReject}>Reject</button>
+            <button onClick={() => handleRoomChange(selectedRequest.stu_id, selectedRequest.new_room_no, selectedRequest.new_seat_no, 'accept')} style={{ backgroundColor: "green" }}>Accept</button>
+            <button onClick={() => handleRoomChange(selectedRequest.stu_id, selectedRequest.new_room_no, selectedRequest.new_seat_no, 'reject')} style={{ backgroundColor: "red" }}>Reject</button>
+            <button onClick={() => {
+              setCancelModalVisible(false); setSelectedRequest(null);
+            }}>Back</button>
           </div>
         </Modal>
       )}
@@ -277,15 +328,17 @@ export function SeatAllocation() {
           className="Modal"
           overlayClassName="Overlay"
         >
-          <h2>Cancellation Request Details</h2>
-          <img src={selectedRequest.image} alt={selectedRequest.name} />
+          <img src={img} alt={selectedRequest.name} />
           <p>{selectedRequest.name}</p>
-          <p>ID: {selectedRequest.id}</p>
-          <p>Department: {selectedRequest.department}</p>
+          <p>ID: {selectedRequest.stu_id}</p>
+          <p>Department: {selectedRequest.dept}</p>
           <p>Reason: {selectedRequest.reason}</p>
           <div className="modal-buttons">
-            <button onClick={handleCancellationAccept}>Accept</button>
-            <button onClick={handleCancellationReject}>Reject</button>
+            <button onClick={() => handleRoomCancel(selectedRequest.stu_id, 'accept')} style={{ backgroundColor: "green" }}>Accept</button>
+            <button onClick={() => handleRoomCancel(selectedRequest.stu_id, 'reject')} style={{ backgroundColor: "red" }}>Reject</button>
+            <button onClick={() => {
+              setCancelModalVisible(false); setSelectedRequest(null);
+            }}>Back</button>
           </div>
         </Modal>
       )}
