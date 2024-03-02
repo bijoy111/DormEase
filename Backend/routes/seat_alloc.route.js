@@ -1,9 +1,13 @@
-const { get_rooms } = require('../controllers/seat_alloc.controller');
+const { get_rooms,
+    apply_room_allotment,
+    apply_room_change,
+    apply_room_cancel
+} = require('../controllers/seat_alloc.controller');
 
 module.exports = (router) => {
-    router.get('/allocation', get_rooms);
-    // router.get('/auto_allocate', func);
-    // router.post('/allocation/assign', func);
+    router.post('/seat_allocation/apply_room_allotment', apply_room_allotment);
+    router.post('/seat_allocation/apply_room_change', apply_room_change);
+    router.post('/seat_allocation/apply_room_cancel', apply_room_cancel);
 }
 
 /**
