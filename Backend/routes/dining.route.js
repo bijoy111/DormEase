@@ -2,8 +2,6 @@ const { get_menu, post_menu, apply_mess_manager, cancel_mess_manager } = require
 
 module.exports = (router) => {
   router.get('/dining/:date', get_menu);
-  router.get('/dining/:date/entry/student', get_menu);
-  router.post('/dining/:date/entry/student', get_menu);
   router.post('/dining/:date/entry/meal', post_menu);
   router.post('/dining/apply_mess_manager', apply_mess_manager);
   router.post('/dining/cancel_mess_manager', cancel_mess_manager);

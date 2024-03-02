@@ -42,9 +42,6 @@ const get_menu = async (req, res, next) => {
 }
 
 const post_menu = async (req, res, next) => {
-
-    console.log(req.body);
-    console.log('hjello');
     if (!req.user || req.user.role !== 'student') {
         return res.status(401).json({
             error: 'Unauthorized'
