@@ -1,12 +1,18 @@
 const { db_query } = require('../db');
 
 async function get_notices() {
+    let notices = [];
     const sql = `
-        SELECT * FROM notice JOIN post USING (post_id)
-        ORDER BY created_at DESC
+        SELECT post_id FROM notice
     `;
-    const result = await db_query(sql);
-    return result.rows;
+    const noticeIDs = await db_query(sql);
+
+    for (let i = 0; i < noticeIDs.rows.length; i++) {
+        let notice = await get_notice(noticeIDs.rows[i].post_id);
+        notices.push(notice);
+    }
+
+    return notices;
 }
 
 async function get_notice(post_id) {
@@ -21,13 +27,23 @@ async function get_notice(post_id) {
         WHERE post_id = $1
     `;
     const media = await db_query(sql, [post_id]);
+
+    if (data.rows[0].is_private) {
+        sql = `
+            SELECT stu_id FROM private_notice
+            WHERE post_id = $1
+        `;
+        const students = await db_query(sql, [post_id]);
+        data.rows[0].student_list = students.rows;
+    }
+
     return {
         ...data.rows[0],
         media: media.rows
     }
 }
 
-async function create_notice(title, text, media, form) {
+async function create_notice(title, text, media, is_private, student_list) {
     let sql = `
         INSERT INTO post(post_id, created_at)
         VALUES (DEFAULT, DEFAULT)
@@ -37,10 +53,10 @@ async function create_notice(title, text, media, form) {
     const post_id = result.rows[0].post_id;
 
     sql = `
-        INSERT INTO notice (post_id, title, text)
-        VALUES ($1, $2, $3)
+        INSERT INTO notice (post_id, title, text, is_private)
+        VALUES ($1, $2, $3, $4)
     `;
-    await db_query(sql, [post_id, title, text]);
+    await db_query(sql, [post_id, title, text, is_private]);
 
     if (media) {
         for (let i = 0; i < media.length; i++) {
@@ -62,6 +78,15 @@ async function create_notice(title, text, media, form) {
         }
     }
 
+    if (is_private) {
+        sql = `
+            INSERT INTO private_notice (post_id, stu_id)
+            VALUES ($1, $2)
+        `;
+        for (let i = 0; i < student_list.length; i++) {
+            await db_query(sql, [post_id, student_list[i]]);
+        }
+    }
     return result;
 }
 

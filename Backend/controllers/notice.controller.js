@@ -38,26 +38,26 @@ const get_notices = async (req, res, next) => {
 }
 
 const create_notice = async (req, res, next) => {
-    if (!req.user || req.user.role !== 'admin') {
-        return res.status(401).json({
-            error: 'Unauthorized'
-        });
-    }
+    // if (!req.user || req.user.role !== 'admin') {
+    //     return res.status(401).json({
+    //         error: 'Unauthorized'
+    //     });
+    // }
 
-    const { title, text } = req.body;
+    const { title, text, is_private, student_list } = req.body;
     const media = req.files ? req.files.map(file => file.filename) : null;
-    const result = await notice_model.create_notice(title, text, media);
+    const result = await notice_model.create_notice(title, text, media, is_private, student_list);
     return res.status(200).json({
         message: 'OK'
     });
 }
 
 const delete_notice = async (req, res, next) => {
-    if (!req.user || req.user.role !== 'admin') {
-        return res.status(401).json({
-            error: 'Unauthorized'
-        });
-    }
+    // if (!req.user || req.user.role !== 'admin') {
+    //     return res.status(401).json({
+    //         error: 'Unauthorized'
+    //     });
+    // }
 
     const post_id = req.params.post_id;
 
@@ -67,7 +67,7 @@ const delete_notice = async (req, res, next) => {
             error: 'Not Found'
         });
     }
-    
+
     const media_path = path.join(__dirname, '../public/');
     const media = await notice_model.get_media(post_id);
     console.log(media);

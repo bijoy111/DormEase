@@ -1,34 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from "../Navbar/Navbar";
 import './complaint.css';
+import axios from 'axios';
 
 export function Complaint() {
 
   const [complaints, setComplaints] = useState([
-    { id: 1, title: 'Internet Connection Issue', submissionDate: '2024-02-07', details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', status: 'pending' },
-    { id: 2, title: 'Library Book Unavailability', submissionDate: '2024-02-06', details: 'Nulla facilisi. Sed non felis eget velit aliquet.', status: 'seen' },
-    { id: 3, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
-    { id: 4, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
-    { id: 5, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
+    // { id: 1, title: 'Internet Connection Issue', submissionDate: '2024-02-07', details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', status: 'pending' },
+    // { id: 2, title: 'Library Book Unavailability', submissionDate: '2024-02-06', details: 'Nulla facilisi. Sed non felis eget velit aliquet.', status: 'seen' },
+    // { id: 3, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
+    // { id: 4, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
+    // { id: 5, title: 'Broken Chair in Reading room', submissionDate: '2024-02-05', details: 'Morbi rutrum elit quis ligula varius, eu hendrerit orci consectetur.', status: 'processing' },
     // Add more complaints as needed
   ]);
 
+  const fetchComplaints = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/complaint', { withCredentials: true });
+      const data = response.data;
+      setComplaints(data);
+    } catch (error) {
+      console.error('Error fetching complaints:', error);
+    }
+  };
+
   const handleStatusChange = (complaintId, newStatus) => {
-    const updatedComplaints = complaints.map(complaint => {
-      if (complaint.id === complaintId) {
-        return { ...complaint, status: newStatus };
-      }
-      return complaint;
-    });
-    setComplaints(updatedComplaints);
+    const response = axios.post('http://localhost:3000/complaint/update', {
+      comp_id: complaintId,
+      stage: newStatus
+    }, { withCredentials: true });
+
+    fetchComplaints();
   };
 
-  const handleDelete = (complaintId) => {
-    const updatedComplaints = complaints.filter(complaint => complaint.id !== complaintId);
-    setComplaints(updatedComplaints);
+  const handleDelete = async (comp_id) => {
+    const response = await axios.delete(`http://localhost:3000/complaint/delete/${comp_id}`, { withCredentials: true });
   };
 
-
+  useEffect(() => {
+    fetchComplaints();
+  });
 
   // const [sortBy, setSortBy] = useState(null);
 
@@ -40,13 +51,13 @@ export function Complaint() {
       case 'processing':
       case 'completed':
         sortedComplaints.sort((a, b) => {
-          if (a.status === sortBy && b.status === sortBy) {
+          if (a.stage === sortBy && b.stage === sortBy) {
             // If both complaints have the same status, sort by submission date
-            return new Date(a.submissionDate) - new Date(b.submissionDate);
-          } else if (a.status === sortBy) {
+            return new Date(a.created_at) - new Date(b.created_at);
+          } else if (a.stage === sortBy) {
             // Older complaints (earlier submission date) should display first
             return -1;
-          } else if (b.status === sortBy) {
+          } else if (b.stage === sortBy) {
             return 1;
           } else {
             return 0;
@@ -54,7 +65,7 @@ export function Complaint() {
         });
         break;
       default:
-        sortedComplaints.sort((a, b) => a.id - b.id);
+        sortedComplaints.sort((a, b) => a.complaint_id - b.complaint_id);
     }
     setComplaints(sortedComplaints);
   };
@@ -62,10 +73,10 @@ export function Complaint() {
 
   const complaintStats = {
     total: complaints.length,
-    pending: complaints.filter(complaint => complaint.status === 'pending').length,
-    seen: complaints.filter(complaint => complaint.status === 'seen').length,
-    processing: complaints.filter(complaint => complaint.status === 'processing').length,
-    completed: complaints.filter(complaint => complaint.status === 'completed').length,
+    pending: complaints.filter(complaint => complaint.stage === 1).length,
+    seen: complaints.filter(complaint => complaint.stage === 2).length,
+    processing: complaints.filter(complaint => complaint.stage === 3).length,
+    completed: complaints.filter(complaint => complaint.stage === 4).length,
   };
 
 
@@ -75,36 +86,36 @@ export function Complaint() {
       <div className="complaints-list">
         <h1 style={{ marginLeft: '250px', marginBottom: '20px' }}>COMPLAINTS</h1>
         {complaints.map(complaint => (
-          <div key={complaint.id} className="complaint">
+          <div key={complaint.complaint_id} className="complaint">
             <h2 style={{ marginLeft: '200px', fontWeight: 'bold', marginBottom: '10px' }}>{complaint.title}</h2>
-            <h6 style={{ fontWeight: 100 }}>Submission Date: {complaint.submissionDate}</h6>
-            <p>{complaint.details}</p>
+            <h6 style={{ fontWeight: 100 }}>Submission Date: {complaint.created_at}</h6>
+            <p>{complaint.body}</p>
             <div className="progress-bar">
               <div className="circle-container">
-                <div className={`circle ${complaint.status === 'pending' ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.id, 'pending')}>
+                <div className={`circle ${complaint.stage === 1 ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.complaint_id, 1)}>
                   <p>Pending</p>
                 </div>
                 <div className="line-container">
                   <div className="line" />
                 </div>
-                <div className={`circle ${complaint.status === 'seen' ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.id, 'seen')}>
+                <div className={`circle ${complaint.stage === 2 ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.complaint_id, 2)}>
                   <p>Seen</p>
                 </div>
                 <div className="line-container">
                   <div className="line" />
                 </div>
-                <div className={`circle ${complaint.status === 'processing' ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.id, 'processing')}>
+                <div className={`circle ${complaint.stage === 3 ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.complaint_id, 3)}>
                   <p>Processing</p>
                 </div>
                 <div className="line-container">
                   <div className="line" />
                 </div>
-                <div className={`circle ${complaint.status === 'completed' ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.id, 'completed')}>
+                <div className={`circle ${complaint.stage === 4 ? 'active' : ''}`} onClick={() => handleStatusChange(complaint.complaint_id, 4)}>
                   <p>Completed</p>
                 </div>
               </div>
             </div>
-            <button style={{ backgroundColor: '#673AB7', color: 'white', padding: '8px', borderRadius: '10px', marginTop: '20px', marginBottom: '10px' }} onClick={() => handleDelete(complaint.id)}>Delete</button>
+            <button style={{ backgroundColor: '#673AB7', color: 'white', padding: '8px', borderRadius: '10px', marginTop: '20px', marginBottom: '10px' }} onClick={() => handleDelete(complaint.complaint_id)}>Delete</button>
           </div>
         ))}
       </div>
