@@ -1,6 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import { Grid } from '@mui/material';
-import logo from 'assets/images/student.png';
+// import logo from 'assets/images/student.png';
+import logo from 'assets/images/common_user10.png';
 import { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import './style.css';
@@ -84,16 +85,16 @@ const SamplePage = () => {
                         marginTop: '20px'
                       }}
                     />
-                    <div style={{ marginLeft: '8px' }}>
-                      <h3 className="user-name">{studentName} </h3>
-                      <h4 className="user-id">{studentId}</h4>
+                    <div style={{ marginLeft: '2px' }}>
+                      <h2 className="user-name" style={{ color: '#349cff', fontWeight: '44px' }}>{studentName} </h2>
+                      <h2 className="user-id" style={{ color: '#349cff' }}>{studentId}</h2>
                     </div>
                   </div>
                 </div>
                 {/* Personal Details */}
                 <div className="row gutters mx-auto left-spacing style={{ marginLeft: '100px' }}">
                   <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h2 className="mb-4 text-primary">Personal Information</h2>
+                    <h2 className="mb-4 text-primary" style={{ color: '#349cff' }}>Personal Information</h2>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block', marginRight: '60px' }}>
@@ -164,7 +165,7 @@ const SamplePage = () => {
                   {/* Academic Information */}
                   <div className="row gutters">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h2 className="mt-4 mb-4 text-primary">Academic Information</h2>
+                      <h2 className="mt-4 mb-4 text-primary" style={{ color: '#349cff' }}>Academic Information</h2>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>
@@ -205,7 +206,7 @@ const SamplePage = () => {
             {/* Guardian Information */}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 className="mt-4 mb-4 text-primary">Guardian Information</h2>
+                <h2 className="mt-4 mb-4 text-primary" style={{ color: '#349cff' }}>Guardian Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block', marginRight: '60px' }}>
@@ -224,7 +225,7 @@ const SamplePage = () => {
             {/* Residential Information*/}
             <div className="row gutters">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 className="mt-4 mb-4 text-primary">Residential Information</h2>
+                <h2 className="mt-4 mb-4 text-primary" style={{ color: '#349cff' }}>Residential Information</h2>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div className="form-group mt-4" style={{ width: 'auto', display: 'inline-block' }}>

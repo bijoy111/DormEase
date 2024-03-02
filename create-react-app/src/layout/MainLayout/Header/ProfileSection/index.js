@@ -31,7 +31,8 @@ import { useTheme } from '@mui/material/styles';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 // project imports
-import User1 from 'assets/images/users/user-round.svg';
+// import User1 from 'assets/images/users/user-round.svg';
+import User1 from 'assets/images/common_user10.png';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 
@@ -85,6 +86,37 @@ const ProfileSection = () => {
 
     prevOpen.current = open;
   }, [open]);
+
+  // State for storing card data
+  const [cardData, setCardData] = useState([]);
+  // Function to fetch card data from the database
+  const fetchCardDataFromDatabase = async () => {
+    console.log('hello');
+
+    try {
+      // Fetch data from the database API
+      const response = await fetch('http://localhost:3000/dashboard', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log(data);
+      // Update the state with the fetched data
+      setCardData(data);
+    } catch (error) {
+      console.error('Error fetching card data:', error);
+    }
+  };
+
+  // useEffect to fetch data when the component mounts
+  useEffect(() => {
+    fetchCardDataFromDatabase();
+  }, []); // Empty dependency array ensures it only runs once on mount
+  const studentId = cardData.stu_id || '';
+  const studentName = cardData.name || '';
 
   return (
     <>
@@ -156,12 +188,12 @@ const ProfileSection = () => {
                   <Box sx={{ p: 2 }}>
                     <Stack>
                       <Stack direction="row" spacing={0.5} alignItems="center">
-                        <Typography variant="h4">Good Morning,</Typography>
+                        <Typography variant="h4">Hello,</Typography>
                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                          Bijoy Ahmed Saiem
+                          {studentName}
                         </Typography>
                       </Stack>
-                      <Typography variant="subtitle2">1905052</Typography>
+                      <Typography variant="subtitle2">{studentId}</Typography>
                     </Stack>
                     <OutlinedInput
                       sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}

@@ -6,21 +6,81 @@ import Modal from 'react-modal';
 import Select from 'react-select';
 import './style.css';
 
-const options = [
-  { value: 1, label: 'hazar block' },
-  { value: 2, label: 'hundred block' },
-  { value: 3, label: 'first floor' },
-  { value: 4, label: 'second floor' },
-  { value: 5, label: 'third floor' },
-  { value: 6, label: 'fourth floor' },
-  { value: 7, label: 'fifth floor' },
-];
+const options = [];
 
 const options2 = [
-  { value: 1, label: '2001' },
-  { value: 2, label: '2002' },
-  { value: 3, label: '2003' },
-  { value: 4, label: '2004' },
+  { value: 1, label: '01' },
+  { value: 2, label: '02' },
+  { value: 3, label: '03' },
+  { value: 4, label: '04' },
+];
+
+const options3 = [
+  { value: 'Bagerhat', label: 'Bagerhat' },
+  { value: 'Bandarban', label: 'Bandarban' },
+  { value: 'Barguna', label: 'Barguna' },
+  { value: 'Barishal', label: 'Barishal' },
+  { value: 'Bhola', label: 'Bhola' },
+  { value: 'Bogra', label: 'Bogra' },
+  { value: 'Brahmanbaria', label: 'Brahmanbaria' },
+  { value: 'Chandpur', label: 'Chandpur' },
+  { value: 'Chapai Nawabganj', label: 'Chapai Nawabganj' },
+  { value: 'Chattogram', label: 'Chattogram' },
+  { value: 'Chuadanga', label: 'Chuadanga' },
+  { value: 'Cox\'s Bazar', label: 'Cox\'s Bazar' },
+  { value: 'Cumilla', label: 'Cumilla' },
+  { value: 'Dhaka', label: 'Dhaka' },
+  { value: 'Dinajpur', label: 'Dinajpur' },
+  { value: 'Faridpur', label: 'Faridpur' },
+  { value: 'Feni', label: 'Feni' },
+  { value: 'Gaibandha', label: 'Gaibandha' },
+  { value: 'Gazipur', label: 'Gazipur' },
+  { value: 'Gopalganj', label: 'Gopalganj' },
+  { value: 'Habiganj', label: 'Habiganj' },
+  { value: 'Jamalpur', label: 'Jamalpur' },
+  { value: 'Jashore', label: 'Jashore' },
+  { value: 'Jhalokati', label: 'Jhalokati' },
+  { value: 'Jhenaidah', label: 'Jhenaidah' },
+  { value: 'Joypurhat', label: 'Joypurhat' },
+  { value: 'Khagrachhari', label: 'Khagrachhari' },
+  { value: 'Khulna', label: 'Khulna' },
+  { value: 'Kishoreganj', label: 'Kishoreganj' },
+  { value: 'Kurigram', label: 'Kurigram' },
+  { value: 'Kushtia', label: 'Kushtia' },
+  { value: 'Lakshmipur', label: 'Lakshmipur' },
+  { value: 'Lalmonirhat', label: 'Lalmonirhat' },
+  { value: 'Madaripur', label: 'Madaripur' },
+  { value: 'Magura', label: 'Magura' },
+  { value: 'Manikganj', label: 'Manikganj' },
+  { value: 'Meherpur', label: 'Meherpur' },
+  { value: 'Moulvibazar', label: 'Moulvibazar' },
+  { value: 'Munshiganj', label: 'Munshiganj' },
+  { value: 'Mymensingh', label: 'Mymensingh' },
+  { value: 'Naogaon', label: 'Naogaon' },
+  { value: 'Narail', label: 'Narail' },
+  { value: 'Narayanganj', label: 'Narayanganj' },
+  { value: 'Narsingdi', label: 'Narsingdi' },
+  { value: 'Natore', label: 'Natore' },
+  { value: 'Nawabganj', label: 'Nawabganj' },
+  { value: 'Netrokona', label: 'Netrokona' },
+  { value: 'Nilphamari', label: 'Nilphamari' },
+  { value: 'Noakhali', label: 'Noakhali' },
+  { value: 'Pabna', label: 'Pabna' },
+  { value: 'Panchagarh', label: 'Panchagarh' },
+  { value: 'Patuakhali', label: 'Patuakhali' },
+  { value: 'Pirojpur', label: 'Pirojpur' },
+  { value: 'Rajbari', label: 'Rajbari' },
+  { value: 'Rajshahi', label: 'Rajshahi' },
+  { value: 'Rangamati', label: 'Rangamati' },
+  { value: 'Rangpur', label: 'Rangpur' },
+  { value: 'Satkhira', label: 'Satkhira' },
+  { value: 'Shariatpur', label: 'Shariatpur' },
+  { value: 'Sherpur', label: 'Sherpur' },
+  { value: 'Sirajganj', label: 'Sirajganj' },
+  { value: 'Sunamganj', label: 'Sunamganj' },
+  { value: 'Sylhet', label: 'Sylhet' },
+  { value: 'Tangail', label: 'Tangail' },
+  { value: 'Thakurgaon', label: 'Thakurgaon' }
 ];
 
 function StudentPage() {
@@ -29,9 +89,8 @@ function StudentPage() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [isChangeModalOpen, setIsChangeModalOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
-  const [roomPreference, setRoomPreference] = useState('');
-  const [cgpa, setCGPA] = useState('');
-  const [currentLivingPlace, setCurrentLivingPlace] = useState('');
+  const [school, setSchool] = useState('');
+  const [college, setCollege] = useState('');
   const [reason, setReason] = useState('');
 
   // Function to open the apply modal
@@ -72,14 +131,12 @@ function StudentPage() {
   // Function to handle apply form submission
   const handleApplySeat = (e) => {
     e.preventDefault();
-    // Perform submission logic here
-    console.log('Room Preference:', roomPreference);
-    console.log('CGPA:', cgpa);
-    console.log('Current Living Place:', currentLivingPlace);
     //reset form fields
     setRoomPreference('');
-    setCGPA('');
-    setReason('');
+    setSeatPreference('');
+    setDistrict('');
+    setSchool('');
+    setCollege('');
     // Close modal
     closeApplyModal();
   };
@@ -87,13 +144,9 @@ function StudentPage() {
   // Function to handle change form submission
   const handleChangeSeat = (e) => {
     e.preventDefault();
-    // Perform submission logic here
-    console.log('Room Preference:', roomPreference);
-    console.log('CGPA:', cgpa);
-    console.log('Why do you want to change room? ', currentLivingPlace);
     //reset form fields
     setRoomPreference('');
-    setCGPA('');
+    setSeatPreference('');
     setReason('');
     // Close modal
     closeChangeModal();
@@ -102,13 +155,7 @@ function StudentPage() {
   // Function to handle cancel form submission
   const handleCancelSeat = (e) => {
     e.preventDefault();
-    // Perform submission logic here
-    console.log('Room Preference:', roomPreference);
-    console.log('CGPA:', cgpa);
-    console.log('Why do you want to cancel room? ', currentLivingPlace);
     //reset form fields
-    setRoomPreference('');
-    setCGPA('');
     setReason('');
     // Close modal
     closeCancelModal();
@@ -116,18 +163,22 @@ function StudentPage() {
 
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedOptions2, setSelectedOptions2] = useState([]);
+  const [selectedOptions3, setSelectedOptions3] = useState([]);
   const handleChange = (selectedOption) => {
     setSelectedOptions(selectedOption);
   };
   const handleChange2 = (selectedOption) => {
     setSelectedOptions2(selectedOption);
   };
+  const handleChange3 = (selectedOption) => {
+    setSelectedOptions3(selectedOption);
+  };
 
+  const [cardData0, setCardData0] = useState([]);
   // State for storing card data
   const [cardData, setCardData] = useState([]);
   // Function to fetch card data from the database
   const fetchCardDataFromDatabase = async () => {
-    console.log('hello');
     try {
       // Fetch data from the database API
       const response = await fetch('http://localhost:3000/allocation', {
@@ -141,8 +192,7 @@ function StudentPage() {
       console.log(data);
       // Update the state with the fetched data
       setCardData(data);
-      // console.log(cardData)
-      // console.log(cardData[0].room_no);
+      setCardData0(data);
     } catch (error) {
       console.error('Error fetching card data:', error);
     }
@@ -151,6 +201,37 @@ function StudentPage() {
   useEffect(() => {
     fetchCardDataFromDatabase();
   }, []); // Empty dependency array ensures it only runs once on mount
+
+
+  // State for storing card data
+  const [cardData1, setCardData1] = useState([]);
+  // Function to fetch card data from the database
+  const fetchCardDataFromDatabase1 = async () => {
+    try {
+      // Fetch data from the database API
+      const response = await fetch('http://localhost:3000/dashboard', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      // Update the state with the fetched data
+      setCardData1(data);
+      // console.log(cardData)
+      // console.log(cardData[0].room_no);
+    } catch (error) {
+      console.error('Error fetching card data:', error);
+    }
+  };
+  // useEffect to fetch data when the component mounts
+  useEffect(() => {
+    fetchCardDataFromDatabase1();
+  }, []); // Empty dependency array ensures it only runs once on mount
+
+  const resident = cardData1.resident;
+  const attached = !resident;
 
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
@@ -165,6 +246,11 @@ function StudentPage() {
       // Check if the room_no exists in tmp, if not, initialize it as an empty array
       if (!tmp[room_no]) {
         tmp[room_no] = [];
+        const existingOption = options.find(option => option.value === room_no);
+        // If it doesn't exist, push it into the options array
+        if (!existingOption) {
+          options.push({ value: room_no, label: `${room_no}` });
+        }
       }
       // Store student information in tmp
       tmp[room_no][seat_no] = { name, id, dept, lt };
@@ -212,8 +298,25 @@ function StudentPage() {
   }, [cardData]);
 
 
-  const resident = false;
-  const attached = !resident;
+  const handleFilterClick = () => {
+    // Filter cardData based on selected options
+    const filteredData = cardData0.filter((card) => {
+      if (selectedOptions.length === 0) {
+        // If no options selected, show all notices
+        return true;
+      } else {
+        // Otherwise, check if the notice matches any selected option
+        return selectedOptions.some((option) => {
+          if (option.value === card.room_no) {
+            return card.room_no;
+          }
+          return false;
+        });
+      }
+    });
+    // Update cardData state with filtered data
+    setCardData(filteredData);
+  };
 
   return (
     <div className="StudentPage">
@@ -246,7 +349,7 @@ function StudentPage() {
               color: 'white',
               backgroundColor: '#673AB7',
             }}
-            onClick={() => handleSubmit()}
+            onClick={() => handleFilterClick()}
             onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
             onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
           >
@@ -327,17 +430,16 @@ function StudentPage() {
         className="Modal"
         overlayClassName="Overlay"
       >
-        {/* <h1>Apply for a Seat</h1> */}
-        <br />
+        {/* <h2>Seat Application Form</h2> */}
         <form onSubmit={handleApplySeat}>
           <div>
-            <label htmlFor="roomPreference" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Enter your preferred rooms:</label>
+            <label htmlFor="roomPreference" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Room Number</label>
             <div className="select-container">
               <Select
-                options={options2}
-                value={selectedOptions2}
-                onChange={handleChange2}
-                isMulti={true}
+                options={options}
+                value={selectedOptions}
+                onChange={handleChange}
+                isMulti={false}
                 styles={{
                   control: (provided) => ({
                     ...provided,
@@ -349,17 +451,64 @@ function StudentPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="cgpa" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Your CGPA:</label>
+            <label htmlFor="seatPreference" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Seat Number</label>
+            <div className="select-container">
+              <Select
+                options={options2}
+                value={selectedOptions2}
+                onChange={handleChange2}
+                isMulti={false}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    backgroundColor: 'transparent',
+                    border: '1px solid #4CAF50',
+                  }),
+                }}
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="district" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Home District</label>
+            <div className="select-container">
+              <Select
+                options={options3}
+                value={selectedOptions3}
+                onChange={handleChange3}
+                isMulti={false}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    backgroundColor: 'transparent',
+                    border: '1px solid #4CAF50',
+                  }),
+                }}
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="school" className="input-label" style={{ color: 'black', fontSize: '20px' }}>School</label>
+            <input
+              type="text"
+              className="form-control custom-input"
+              style={{ color: 'black', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', backgroundColor: 'transparent', border: '1px solid #4CAF50', borderRadius: '8px' }}
+              id="school"
+              value={school}
+              onChange={(e) => setSchool(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="college" className="input-label" style={{ color: 'black', fontSize: '20px' }}>College</label>
             <input
               type="text"
               className="form-control custom-input"
               style={{ color: 'black', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', backgroundColor: 'transparent', border: '1px solid #4CAF50', borderRadius: '8px' }}
               id="cgpa"
-              value={cgpa}
-              onChange={(e) => setCGPA(e.target.value)}
+              value={college}
+              onChange={(e) => setCollege(e.target.value)}
             />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="reason" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Why do you want room?</label>
             <textarea
               className="form-control custom-input"
@@ -370,7 +519,7 @@ function StudentPage() {
               value={reason}
               onChange={(e) => setReason(e.target.value)}
             />
-          </div>
+          </div> */}
           <div className="row gutters">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div className="text-center mr-8">
@@ -424,7 +573,7 @@ function StudentPage() {
                   onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
                   onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                 >
-                  Save
+                  Submit
                 </Button>
               </div>
             </div>
@@ -448,7 +597,7 @@ function StudentPage() {
                 marginBottom: '40px',
                 fontSize: '1.1rem',
                 fontFamily: 'Arial, sans-serif',
-                borderRadius: '35px',
+                borderRadius: '25px',
                 height: '70px',
                 width: '180px',
                 cursor: 'pointer',
@@ -482,7 +631,7 @@ function StudentPage() {
                 marginLeft: '760px',
                 fontSize: '1.1rem',
                 fontFamily: 'Arial, sans-serif',
-                borderRadius: '35px',
+                borderRadius: '25px',
                 height: '70px',
                 width: '180px',
                 cursor: 'pointer',
@@ -508,37 +657,112 @@ function StudentPage() {
         className="Modal"
         overlayClassName="Overlay"
       >
-        <h2>Apply for a Seat</h2>
+        <h2>Seat Application Form</h2>
         <form onSubmit={handleChangeSeat}>
           <div>
-            <label htmlFor="roomPreference">Enter your preferred rooms:</label>
-            <input
-              type="text"
-              id="roomPreference"
-              value={roomPreference}
-              onChange={(e) => setRoomPreference(e.target.value)}
-            />
+            <label htmlFor="roomPreference" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Room Number</label>
+            <div className="select-container">
+              <Select
+                options={options}
+                value={selectedOptions}
+                onChange={handleChange}
+                isMulti={false}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    backgroundColor: 'transparent',
+                    border: '1px solid #4CAF50',
+                  }),
+                }}
+              />
+            </div>
           </div>
           <div>
-            <label htmlFor="cgpa">Your CGPA:</label>
-            <input
-              type="text"
-              id="cgpa"
-              value={cgpa}
-              onChange={(e) => setCGPA(e.target.value)}
-            />
+            <label htmlFor="seatPreference" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Seat Number</label>
+            <div className="select-container">
+              <Select
+                options={options2}
+                value={selectedOptions2}
+                onChange={handleChange2}
+                isMulti={false}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    backgroundColor: 'transparent',
+                    border: '1px solid #4CAF50',
+                  }),
+                }}
+              />
+            </div>
           </div>
           <div>
-            <label htmlFor="currentLivingPlace">Your Current Living Place:</label>
-            <input
-              type="text"
-              id="currentLivingPlace"
-              value={currentLivingPlace}
-              onChange={(e) => setCurrentLivingPlace(e.target.value)}
+            <label htmlFor="reason">Why do you want to cancel your seat?</label>
+            <textarea
+              rows={5}
+              cols={36}
+              id="reason"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
             />
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={closeChangeModal}>Cancel</button>
+          <div className="row gutters">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div className="text-center mr-8">
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="cancel"
+                  name="cancel"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '20px',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '50px',
+                    width: '100px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={() => closeChangeModal()}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="cancel"
+                  name="cancel"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '20px',
+                    marginLeft: '15px',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '50px',
+                    width: '100px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={() => handleSubmit()}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </div>
         </form>
       </Modal>
 
@@ -556,14 +780,70 @@ function StudentPage() {
             <label htmlFor="reason">Why do you want to cancel your seat?</label>
             <textarea
               rows={5}
-              cols={46}
+              cols={36}
               id="reason"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
             />
           </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={closeCancelModal}>Cancel</button>
+          <div className="row gutters">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div className="text-center mr-8">
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="cancel"
+                  name="cancel"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '20px',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '50px',
+                    width: '100px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={() => closeCancelModal()}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="cancel"
+                  name="cancel"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '20px',
+                    marginLeft: '15px',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '50px',
+                    width: '100px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={() => handleSubmit()}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </div>
         </form>
       </Modal>
 

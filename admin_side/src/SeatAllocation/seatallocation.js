@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { Navbar } from '../Navbar/Navbar';
 import img from '../images/common_user10.png';
 import './SeatAllocation.css'; // You can define your CSS styles in SeatAllocation.css
-import axios from 'axios';
 
 export function SeatAllocation() {
   // Dummy data for dormitory rooms and applicants
@@ -112,7 +112,7 @@ export function SeatAllocation() {
       seat_no: seatIndex
     });
     console.log(response.data);
-
+    fetchApplicants();
     setRooms([...rooms]);
   };
 

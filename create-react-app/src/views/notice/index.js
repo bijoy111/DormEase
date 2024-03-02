@@ -3,38 +3,34 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import MainCard from 'ui-component/cards/MainCard';
 const options = [
-  { value: 1, label: 'Personal Notice' },
-  { value: 2, label: 'Generel Notice' },
+  { value: 'private', label: 'Private Notice' },
+  { value: 'public', label: 'Public Notice' },
 ];
 const SamplePage = () => {
   const [cardHovered, setCardHovered] = useState(null);
   const handleDownloadClick = (Title, createdAt, Text) => {
     // Store data in localStorage
     localStorage.setItem('noticeboardData', JSON.stringify({ Title, createdAt, Text }));
-
     // Navigate to the noticeboard module
     window.open('/free/noticeboard', '_self');
   };
 
+  const [cardData1, setCardData1] = useState([]);
   // State for storing card data
   const [cardData, setCardData] = useState([]);
-
   // Function to fetch card data from the database
   const fetchCardDataFromDatabase = async () => {
-    console.log('hello');
-
     try {
       // Fetch data from your database API
       const response = await fetch('http://localhost:3000/notice');
       const data = await response.json();
-      console.log(data);
       // Update the state with the fetched data
+      setCardData1(data);
       setCardData(data);
     } catch (error) {
       console.error('Error fetching card data:', error);
     }
   };
-
   // useEffect to fetch data when the component mounts
   useEffect(() => {
     fetchCardDataFromDatabase();
@@ -44,6 +40,28 @@ const SamplePage = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const handleChange = (selectedOption) => {
     setSelectedOptions(selectedOption);
+  };
+
+  const handleFilterClick = () => {
+    // Filter cardData based on selected options
+    const filteredData = cardData1.filter((card) => {
+      if (selectedOptions.length === 0) {
+        // If no options selected, show all notices
+        return true;
+      } else {
+        // Otherwise, check if the notice matches any selected option
+        return selectedOptions.some((option) => {
+          if (option.value === 'private') {
+            return card.is_private;
+          } else if (option.value === 'public') {
+            return !card.is_private;
+          }
+          return false;
+        });
+      }
+    });
+    // Update cardData state with filtered data
+    setCardData(filteredData);
   };
 
   return (
@@ -77,7 +95,7 @@ const SamplePage = () => {
           color: 'white',
           backgroundColor: '#673AB7',
         }}
-        onClick={() => handleSubmit()}
+        onClick={() => handleFilterClick()}
         onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
         onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
       >
