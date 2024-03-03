@@ -10,9 +10,9 @@ const get_student_info = async (req, res, next) => {
     const stu_id = req.user.id;
     const student = await dashboard_model.get_student_info(stu_id);
 
-    if (!student.photo) {
-        student.photo = 'default.webp';
-    }
+    // if (!student.photo) {
+    //     student.photo = 'default.webp';
+    // }
 
     const { password, ...rest } = student;
     rest.applied_for_room = await dashboard_model.has_applied_for_room(stu_id, student.room_no);
@@ -49,7 +49,7 @@ const update_student_edit_info = async (req, res, next) => {
         });
     }
 
-    
+
     const stu_id = req.user.id;
     const photo = req.file ? req.file : null;
     const { old_password, new_password, email, phone, guardian_name, guardian_phone } = req.body;

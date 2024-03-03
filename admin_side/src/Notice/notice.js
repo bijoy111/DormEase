@@ -85,6 +85,9 @@ export function Notice() {
         fetchNotices();
         setIsPrivate(false);
         setStudents('');
+        setTitle('');
+        setContent('');
+
         closeModal();
     }
 

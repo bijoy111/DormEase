@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Navbar } from '../Navbar/Navbar';
+import './dashboard.css';
+
 export function Dashboard() {
   const [students, setStudents] = useState([]); // State to store fetched notices
   // Function to fetch notices from backend
@@ -91,16 +93,15 @@ export function Dashboard() {
     <div style={{ fontFamily: 'Arial, sans-serif', display: 'flex' }}>
       <Navbar />
 
-      <div className="students-list" style={{ marginLeft: '15px', marginRight: '15px', marginTop: '50px' }}>
-        <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '220px' }} onClick={() => handleRequire()}>Open Manager Application</button>
-        <br />
-        <br />
+      <div className="students-list" style={{ marginLeft: '15px', marginRight: '15px', marginTop: '20px' }}>
+        <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '220px', marginRight: '20px' }} onClick={() => handleRequire()}>Open Manager Application</button>
         <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '220px' }} onClick={() => handleStopApplication()}>Close Manager Application</button>
         <br />
         <br />
 
-        <div className='student-table'>
-          <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
+
+        <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
+          <div className='student-table'>
             <thead>
               <tr>
                 <th style={{ border: '1px solid black', padding: '8px' }}>ID</th>
@@ -120,8 +121,7 @@ export function Dashboard() {
               </tr>
             </thead>
             <tbody>
-
-              {students.map((student, index) => (
+              {students.filter(student => student.resident).map((student, index) => (
                 <tr key={index}>
                   <td style={{ border: '1px solid black', padding: '8px' }}>{student.stu_id}</td>
                   <td style={{ border: '1px solid black', padding: '8px' }}>{student.name}</td>
@@ -160,8 +160,8 @@ export function Dashboard() {
               ))}
 
             </tbody>
-          </table>
-        </div>
+          </div>
+        </table>
       </div>
     </div>
   );
