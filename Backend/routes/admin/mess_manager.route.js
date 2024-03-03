@@ -6,4 +6,6 @@ module.exports = (router) => {
   router.get('/get_students', mess_manager_controller.get_students);
   router.post('/approve_manager', mess_manager_controller.approve_manager);
   router.post('/delete_manager', mess_manager_controller.delete_manager);
+  router.post('/require_mess_manager_application', mess_manager_controller.require_manager);
+  router.post('/stop_mess_manager_application', mess_manager_controller.stop_managerApplication);
 }

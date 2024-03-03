@@ -42,10 +42,26 @@ const delete_manager = async (req, res) => {
     });
 }
 
+const require_manager = async (req, res) => {
+    const result = await mess_manager_model.require_manager();
+    return res.status(200).json({
+        message: 'OK'
+    });
+}
+
+const stop_managerApplication = async (req, res) => {
+    const result = await mess_manager_model.stop_managerApplication();
+    return res.status(200).json({
+        message: 'OK'
+    });
+}
+
 module.exports = {
     get_mess_manager_application,
     approve_mess_manager,
     get_students,
     approve_manager,
-    delete_manager
+    delete_manager,
+    require_manager,
+    stop_managerApplication
 }

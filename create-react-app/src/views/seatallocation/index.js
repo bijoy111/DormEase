@@ -1,6 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import CardContent from '@mui/material/CardContent';
 import logo from 'assets/images/common_user10.png';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import Select from 'react-select';
@@ -318,6 +319,55 @@ function StudentPage() {
     setCardData(filteredData);
   };
 
+  const handleApplySubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/seat_allocation/apply_room_allotment', {
+        room_no: selectedOptions.value,
+        seat_no: selectedOptions2.value,
+        home_district: selectedOptions3.value,
+        school: school,
+        college: college
+      }, { withCredentials: true });
+      setSchool('');
+      setCollege('');
+      console.log(response.body);
+    } catch (error) {
+      console.error('Error submitting post:', error);
+    }
+    // window.open('/free/seatAllocation/default', '_self');
+    closeApplyModal();
+  };
+
+  const handleChangeSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/seat_allocation/apply_room_change', {
+        room_no: selectedOptions.value,
+        seat_no: selectedOptions2.value,
+        reason: reason
+      }, { withCredentials: true });
+      setReason('');
+      console.log(response.body);
+    } catch (error) {
+      console.error('Error submitting post:', error);
+    }
+    // window.open('/free/seatAllocation/default', '_self');
+    closeChangeModal();
+  };
+
+  const handleCancelSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/seat_allocation/apply_room_cancel', {
+        reason: reason
+      }, { withCredentials: true });
+      setReason('');
+      console.log(response.body);
+    } catch (error) {
+      console.error('Error submitting post:', error);
+    }
+    // window.open('/free/seatAllocation/default', '_self');
+    closeCancelModal();
+  };
+
   return (
     <div className="StudentPage">
       <div className="room-list">
@@ -508,18 +558,6 @@ function StudentPage() {
               onChange={(e) => setCollege(e.target.value)}
             />
           </div>
-          {/* <div>
-            <label htmlFor="reason" className="input-label" style={{ color: 'black', fontSize: '20px' }}>Why do you want room?</label>
-            <textarea
-              className="form-control custom-input"
-              style={{ color: 'black', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '5px', width: '100%', minHeight: '80px', backgroundColor: 'transparent' }}
-              rows={3}
-              cols={46}
-              id="reason"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-            />
-          </div> */}
           <div className="row gutters">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div className="text-center mr-8">
@@ -569,7 +607,7 @@ function StudentPage() {
                     color: 'white',
                     backgroundColor: '#673AB7',
                   }}
-                  onClick={() => handleSubmit()}
+                  onClick={() => handleApplySubmit()}
                   onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
                   onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                 >
@@ -754,7 +792,7 @@ function StudentPage() {
                     color: 'white',
                     backgroundColor: '#673AB7',
                   }}
-                  onClick={() => handleSubmit()}
+                  onClick={() => handleChangeSubmit()}
                   onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
                   onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                 >
@@ -835,7 +873,7 @@ function StudentPage() {
                     color: 'white',
                     backgroundColor: '#673AB7',
                   }}
-                  onClick={() => handleSubmit()}
+                  onClick={() => handleCancelSubmit()}
                   onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
                   onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
                 >

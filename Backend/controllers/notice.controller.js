@@ -32,6 +32,7 @@ const get_notices = async (req, res, next) => {
     }
 
     const id = req.user.id;
+    console.log(id);
     const notices = await notice_model.get_notices(id);
     return res.status(200).json([
         ...notices

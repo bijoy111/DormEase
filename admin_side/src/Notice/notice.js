@@ -1,6 +1,7 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../Navbar/Navbar.js";
-import axios from "axios";
+import './notice.css';
 
 export function Notice() {
     const [notices, setNotices] = useState([]); // State to store fetched notices
@@ -161,29 +162,31 @@ export function Notice() {
                             </button>
                         </div>
 
-                        {notices.map((notice) => (
-                            <div key={notice.id} class="mt-3 border-gray-200 border-2 shadow-lg rounded-b-2xl">
-                                <div className="flex border-b-2 w-full items-center justify-between p-3">
-                                    <div>
-                                        <p className="text-2xl font-bold">{notice.title}</p>
-                                        <p className="text-sm">{notice.created_at}</p>
-                                        {/*loop through student_list */}
-                                        <p className="text-sm mt-2" style={{ color: 'red' }}>
-                                            <b>{notice.student_list && notice.student_list.length > 0 ?
-                                                notice.student_list.map(student => student.stu_id).join(', ') : ''}</b>
+                        <div className="notices">
+                            {notices.map((notice) => (
+                                <div key={notice.id} class="mt-3 border-gray-200 border-2 shadow-lg rounded-b-2xl">
+                                    <div className="flex border-b-2 w-full items-center justify-between p-3">
+                                        <div>
+                                            <p className="text-2xl font-bold">{notice.title}</p>
+                                            <p className="text-sm">{notice.created_at}</p>
+                                            {/*loop through student_list */}
+                                            <p className="text-sm mt-2" style={{ color: 'red' }}>
+                                                <b>{notice.student_list && notice.student_list.length > 0 ?
+                                                    notice.student_list.map(student => student.stu_id).join(', ') : ''}</b>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <button onClick={() => removeNotice(notice.post_id)} className="bg-red-600 text-white py-1 px-3 hover:bg-red-700 rounded-sm">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3">
+                                        <p>
+                                            {notice.text}
                                         </p>
                                     </div>
-                                    <div>
-                                        <button onClick={() => removeNotice(notice.post_id)} className="bg-red-600 text-white py-1 px-3 hover:bg-red-700 rounded-sm">Remove</button>
-                                    </div>
                                 </div>
-                                <div class="p-3">
-                                    <p>
-                                        {notice.text}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div >
             </div >

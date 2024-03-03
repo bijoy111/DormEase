@@ -1,0 +1,5 @@
+.notices{
+    overflow-y: auto;
+    max-height: 520px;
+    background-color: white;
+}

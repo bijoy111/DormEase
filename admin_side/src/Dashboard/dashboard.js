@@ -1,8 +1,8 @@
+import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Navbar } from '../Navbar/Navbar';
 export function Dashboard() {
   const [students, setStudents] = useState([]); // State to store fetched notices
-
   // Function to fetch notices from backend
   const fetchStudents = async () => {
     try {
@@ -67,70 +67,102 @@ export function Dashboard() {
     }
   };
 
+  const handleRequire = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/require_mess_manager_application', {
+      }, { withCredentials: true });
+      console.log(response.body);
+    } catch (error) {
+      console.error('Error submitting post:', error);
+    }
+  };
+
+  const handleStopApplication = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/stop_mess_manager_application', {
+      }, { withCredentials: true });
+      console.log(response.body);
+    } catch (error) {
+      console.error('Error submitting post:', error);
+    }
+  };
+
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', display: 'flex' }}>
       <Navbar />
+
       <div className="students-list" style={{ marginLeft: '15px', marginRight: '15px', marginTop: '50px' }}>
-        <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              <th style={{ border: '1px solid black', padding: '8px' }}>ID</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Name</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Dept</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>L/T</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Phone</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Email</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>CGPA</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Resident</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Guardian name</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Guardian phone</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Mess Manager</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Applied for Mess Manager</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Actions</th>
+        <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '220px' }} onClick={() => handleRequire()}>Open Manager Application</button>
+        <br />
+        <br />
+        <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '220px' }} onClick={() => handleStopApplication()}>Close Manager Application</button>
+        <br />
+        <br />
 
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((student, index) => (
-              <tr key={index}>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.stu_id}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.name}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.dept}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.level_term}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.phone}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.email}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.cgpa}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{String(student.resident)}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.guardian_name}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{student.guardian_phone}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{String(student.mess_manager)}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>{String(student.mess_manager_applied)}</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>
-                  {student.approvalSent ? (
-                    "Accepted"
-                  ) : (
-                    <>
-                      {student.mess_manager ? (
-                        <button style={{ backgroundColor: 'red', color: 'white', marginBottom: '5px', padding: '5px', width: '80px' }} onClick={() => handleReject(student.stu_id, index)}>Cancel</button>
-                      )
-                        : (
+        <div className='student-table'>
+          <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                <th style={{ border: '1px solid black', padding: '8px' }}>ID</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Name</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Dept</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>L/T</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Phone</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Email</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>CGPA</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Resident</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Guardian name</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Guardian phone</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Mess Manager</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Applied for Mess Manager</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Actions</th>
 
-                          student.mess_manager_applied ? (
-                            <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '80px' }} onClick={() => handleAccept(student.stu_id, index)}>Accept</button>
-                          ) : (
-                            <button style={{ backgroundColor: 'purple', color: 'white', marginBottom: '5px', padding: '5px', width: '80px' }} onClick={() => handleAccept(student.stu_id, index)}>Make Manager</button>
-                          )
-
-                        )
-                      }
-                    </>
-                  )}
-                </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+
+              {students.map((student, index) => (
+                <tr key={index}>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.stu_id}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.name}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.dept}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.level_term}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.phone}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.email}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.cgpa}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{String(student.resident)}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.guardian_name}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{student.guardian_phone}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{String(student.mess_manager)}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{String(student.mess_manager_applied)}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                    {student.approvalSent ? (
+                      "Accepted"
+                    ) : (
+                      <>
+                        {student.mess_manager ? (
+                          <button style={{ backgroundColor: 'red', color: 'white', marginBottom: '5px', padding: '5px', width: '80px' }} onClick={() => handleReject(student.stu_id, index)}>Cancel</button>
+                        )
+                          : (
+
+                            student.mess_manager_applied ? (
+                              <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '5px', padding: '5px', width: '80px' }} onClick={() => handleAccept(student.stu_id, index)}>Accept</button>
+                            ) : (
+                              <button style={{ backgroundColor: 'purple', color: 'white', marginBottom: '5px', padding: '5px', width: '80px' }} onClick={() => handleAccept(student.stu_id, index)}>Make Manager</button>
+                            )
+
+                          )
+                        }
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div >
+    </div>
   );
 }
