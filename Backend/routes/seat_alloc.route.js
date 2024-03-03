@@ -5,6 +5,7 @@ const { get_rooms,
 } = require('../controllers/seat_alloc.controller');
 
 module.exports = (router) => {
+    router.get('/allocation', get_rooms);
     router.post('/seat_allocation/apply_room_allotment', apply_room_allotment);
     router.post('/seat_allocation/apply_room_change', apply_room_change);
     router.post('/seat_allocation/apply_room_cancel', apply_room_cancel);

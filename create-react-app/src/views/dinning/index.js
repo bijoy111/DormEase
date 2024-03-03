@@ -32,6 +32,7 @@ const MyCalendar = () => {
   const [dinnerItems, setDinnerItems] = useState([]);
   const [newLunchItem, setNewLunchItem] = useState('');
   const [newDinnerItem, setNewDinnerItem] = useState('');
+  const [reason, setReason] = useState('');
 
   const handleDateChange = (selectedDate) => {
     setDate(selectedDate, () => {
@@ -135,7 +136,6 @@ const MyCalendar = () => {
   // Function to fetch card data from the database
   const fetchCardDataFromDatabase = async () => {
     console.log('hello');
-
     try {
       // Fetch data from the database API
       const response = await fetch('http://localhost:3000/dashboard', {
@@ -153,7 +153,6 @@ const MyCalendar = () => {
       console.error('Error fetching card data:', error);
     }
   };
-
   // useEffect to fetch data when the component mounts
   useEffect(() => {
     fetchCardDataFromDatabase();
@@ -161,7 +160,53 @@ const MyCalendar = () => {
 
 
   const Messmanager = cardData.mess_manager || '';
+  // const applied = cardData.mess_manager_applied || '';
   console.log(Messmanager);
+
+  // State for storing card data
+  const [cardData1, setCardData1] = useState([]);
+  // Function to fetch card data from the database
+  const fetchCardDataFromDatabase1 = async () => {
+    try {
+      // Fetch data from the database API
+      const response = await fetch('http://localhost:3000/dining/mess_manager_application/abcd', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log(data);
+      // Update the state with the fetched data
+      setCardData1(data);
+    } catch (error) {
+      console.error('Error fetching card data:', error);
+    }
+  };
+  // useEffect to fetch data when the component mounts
+  useEffect(() => {
+    fetchCardDataFromDatabase1();
+  }, []); // Empty dependency array ensures it only runs once on mount
+
+  //const Messmanager_application = cardData1[0].mess_manager_application || '';
+  const Messmanager_application = cardData1.length > 0 ? cardData1[0].mess_manager_application : '';
+  console.log(Messmanager_application);
+
+
+  const handleApplyForManagerSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/dining/apply_manager/abcd', {
+      }, { withCredentials: true });
+      setSchool('');
+      setCollege('');
+      console.log(response.body);
+    } catch (error) {
+      console.error('Error submitting post:', error);
+    }
+    // window.open('/free/seatAllocation/default', '_self');
+    handleCloseMenu();
+  };
 
 
 
@@ -259,6 +304,154 @@ const MyCalendar = () => {
                 </Menu>
               </>
             )}
+
+
+
+
+
+            {!Messmanager && Messmanager_application && (
+              <>
+                <Button
+                  variant="outlined"
+                  type="button"
+                  id="filter"
+                  name="filter"
+                  className="btn btn-secondary mr-3"
+                  style={{
+                    marginTop: '5px',
+                    marginBottom: '15px',
+                    fontSize: '1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    borderRadius: '15px',
+                    height: '40px',
+                    width: '260px',
+                    boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease-in-out',
+                    color: 'white',
+                    backgroundColor: '#673AB7',
+                  }}
+                  onClick={handleBoxClick}
+                  onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                  onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                >
+                  Apply For Mess Manager
+                </Button>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleCloseMenu}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  PaperProps={{
+                    className: 'menu-paper', // Assign the menu-paper class directly
+                    style: {
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: '300px',
+                      width: '450px',
+                      backgroundColor: '#EDE7F6',
+                      marginLeft: '50px',
+                      marginTop: '15px',
+                      transition: 'transform 0.5s ease-in-out',
+                      transformStyle: 'preserve-3d',
+                      perspective: '1000px',
+                    },
+                  }}
+                  onMouseEnter={() => {
+                    document.querySelector('.menu-paper').style.transform = 'rotateY(-10deg) scale(1.20)';
+                  }}
+                  onMouseLeave={() => {
+                    document.querySelector('.menu-paper').style.transform = 'rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <h2 style={{ marginLeft: '60px' }}>Mess Manager Application Form</h2>
+                  <form>
+
+                    <div style={{ marginLeft: '60px' }}>
+                      <label htmlFor="reason">Why do you want to become mess manager?</label>
+                      <textarea
+                        rows={5}
+                        cols={36}
+                        id="reason"
+                        value={reason}
+                        onChange={(e) => setReason(e.target.value)}
+                      />
+                    </div>
+                    <div className="row gutters" style={{ marginLeft: '60px' }}>
+                      <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div className="text-center mr-8">
+                          <Button
+                            variant="outlined"
+                            type="button"
+                            id="cancel"
+                            name="cancel"
+                            className="btn btn-secondary mr-3"
+                            style={{
+                              marginTop: '20px',
+                              fontSize: '1.1rem',
+                              fontFamily: 'Arial, sans-serif',
+                              borderRadius: '15px',
+                              height: '50px',
+                              width: '100px',
+                              boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                              cursor: 'pointer',
+                              transition: 'background-color 0.3s ease-in-out',
+                              color: 'white',
+                              backgroundColor: '#673AB7',
+                            }}
+                            onClick={() => handleCloseMenu()}
+                            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                          >
+                            Cancel
+                          </Button>
+
+                          <Button
+                            variant="outlined"
+                            type="button"
+                            id="cancel"
+                            name="cancel"
+                            className="btn btn-secondary mr-3"
+                            style={{
+                              marginTop: '20px',
+                              marginLeft: '15px',
+                              fontSize: '1.1rem',
+                              fontFamily: 'Arial, sans-serif',
+                              borderRadius: '15px',
+                              height: '50px',
+                              width: '100px',
+                              boxShadow: '0px 4px 8px rgba(2, 48, 32, 0.5)',
+                              cursor: 'pointer',
+                              transition: 'background-color 0.3s ease-in-out',
+                              color: 'white',
+                              backgroundColor: '#673AB7',
+                            }}
+                            onClick={() => handleApplyForManagerSubmit()}
+                            onMouseEnter={(e) => { e.target.style.backgroundColor = ''; e.target.style.color = 'black'; }} // Change to desired color
+                            onMouseLeave={(e) => { e.target.style.backgroundColor = '#673AB7'; e.target.style.color = 'white'; }} // Change back to default color
+                          >
+                            Submit
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </Menu>
+              </>
+            )}
+
+
+
+
             <div className="column" style={{ color: '#673AB7', marginRight: '370px' }}>
               <div className="calendar-container" style={{ backgroundColor: '#edeafd' }}>
                 <div className="calendar-header" style={{ color: '#673AB7' }}>

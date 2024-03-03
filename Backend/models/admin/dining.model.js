@@ -49,11 +49,31 @@ async function get_student_monthly_dining_count(month) {
     return result.rows;
 }
 
+async function get_mess_manager_application() {
+    const sql = `
+        SELECT * FROM mess_manager_application
+    `;
+    const result = await db_query(sql);
+    return result.rows;
+}
+
+async function apply_manager(stu_id) {
+    const sql = `
+        UPDATE student
+        SET mess_manager_applied = true
+        WHERE stu_id = $1;
+    `;
+    const result = await db_query(sql);
+    return result.rows;
+}
+
 module.exports = {
     get_menu_from_date,
     get_mess_manager,
     add_dining_student_entry,
     get_dining_student_entry,
-    get_student_monthly_dining_count
+    get_student_monthly_dining_count,
+    get_mess_manager_application,
+    apply_manager
 }
 

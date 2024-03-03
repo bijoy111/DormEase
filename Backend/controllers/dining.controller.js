@@ -38,6 +38,13 @@ const get_menu = async (req, res, next) => {
     });
 }
 
+const get_mess_manager_application = async (req, res, next) => {
+    const result = await dining_model.get_mess_manager_application();
+    return res.status(200).json(
+        result
+    );
+}
+
 const post_menu = async (req, res, next) => {
     if (!req.user || req.user.role !== 'student') {
         return res.status(401).json({
@@ -83,9 +90,25 @@ const cancel_mess_manager = async (req, res, next) => {
     });
 }
 
+const apply_manager = async (req, res, next) => {
+    if (!req.user || req.user.role !== 'student') {
+        return res.status(401).json({
+            error: 'Unauthorized'
+        });
+    }
+
+    const stu_id = req.user.id;
+    const result = await dining_model.apply_manager(stu_id);
+    return res.status(200).json({
+        message: 'OK',
+    });
+}
+
 module.exports = {
     get_menu,
+    get_mess_manager_application,
     post_menu,
     apply_mess_manager,
-    cancel_mess_manager
+    cancel_mess_manager,
+    apply_manager
 }

@@ -66,10 +66,32 @@ async function get_students() {
     return result.rows;
 }
 
+async function require_manager() {
+    let sql = `
+        UPDATE mess_manager_application
+        SET mess_manager_application = true
+    `;
+    let result = await db_query(sql);
+    console.log(result);
+    return result;
+}
+
+async function stop_managerApplication() {
+    let sql = `
+        UPDATE mess_manager_application
+        SET mess_manager_application = false
+    `;
+    let result = await db_query(sql);
+    console.log(result);
+    return result;
+}
+
 module.exports = {
     get_mess_manager_application,
     approve_mess_manager,
     get_students,
     approve_manager,
-    delete_manager
+    delete_manager,
+    require_manager,
+    stop_managerApplication
 }

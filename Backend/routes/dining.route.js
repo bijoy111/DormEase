@@ -1,10 +1,12 @@
-const { get_menu, post_menu, apply_mess_manager, cancel_mess_manager } = require('../controllers/dining.controller');
+const { get_menu, get_mess_manager_application, post_menu, apply_mess_manager, cancel_mess_manager, apply_manager } = require('../controllers/dining.controller');
 
 module.exports = (router) => {
   router.get('/dining/:date', get_menu);
+  router.get('/dining/mess_manager_application/abcd', get_mess_manager_application);
   router.post('/dining/:date/entry/meal', post_menu);
   router.post('/dining/apply_mess_manager', apply_mess_manager);
   router.post('/dining/cancel_mess_manager', cancel_mess_manager);
+  router.post('/dining/apply_manager/abcd', apply_manager);
 }
 
 /**

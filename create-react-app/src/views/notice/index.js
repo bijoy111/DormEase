@@ -19,22 +19,43 @@ const SamplePage = () => {
   // State for storing card data
   const [cardData, setCardData] = useState([]);
   // Function to fetch card data from the database
+
   const fetchCardDataFromDatabase = async () => {
     try {
-      // Fetch data from your database API
-      const response = await fetch('http://localhost:3000/notice');
+      const response = await fetch('http://localhost:3000/notice', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+      });
       const data = await response.json();
-      // Update the state with the fetched data
       setCardData1(data);
       setCardData(data);
     } catch (error) {
       console.error('Error fetching card data:', error);
     }
   };
-  // useEffect to fetch data when the component mounts
   useEffect(() => {
     fetchCardDataFromDatabase();
-  }, []); // Empty dependency array ensures it only runs once on mount
+  }, []);
+
+  // const fetchCardDataFromDatabase = async () => {
+  //   try {
+  //     // Fetch data from your database API
+  //     const response = await fetch('http://localhost:3000/notice');
+  //     const data = await response.json();
+  //     // Update the state with the fetched data
+  //     setCardData1(data);
+  //     setCardData(data);
+  //   } catch (error) {
+  //     console.error('Error fetching card data:', error);
+  //   }
+  // };
+  // // useEffect to fetch data when the component mounts
+  // useEffect(() => {
+  //   fetchCardDataFromDatabase();
+  // }, []); // Empty dependency array ensures it only runs once on mount
 
 
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -44,24 +65,26 @@ const SamplePage = () => {
 
   const handleFilterClick = () => {
     // Filter cardData based on selected options
-    const filteredData = cardData1.filter((card) => {
-      if (selectedOptions.length === 0) {
-        // If no options selected, show all notices
-        return true;
-      } else {
-        // Otherwise, check if the notice matches any selected option
-        return selectedOptions.some((option) => {
-          if (option.value === 'private') {
-            return card.is_private;
-          } else if (option.value === 'public') {
-            return !card.is_private;
-          }
-          return false;
-        });
-      }
-    });
-    // Update cardData state with filtered data
-    setCardData(filteredData);
+    if (cardData1.length > 0) {
+      const filteredData = cardData1.filter((card) => {
+        if (selectedOptions.length === 0) {
+          // If no options selected, show all notices
+          return true;
+        } else {
+          // Otherwise, check if the notice matches any selected option
+          return selectedOptions.some((option) => {
+            if (option.value === 'private') {
+              return card.is_private;
+            } else if (option.value === 'public') {
+              return !card.is_private;
+            }
+            return false;
+          });
+        }
+      });
+      // Update cardData state with filtered data
+      setCardData(filteredData);
+    }
   };
 
   return (
@@ -102,7 +125,7 @@ const SamplePage = () => {
         Filter
       </Button>
       <br />
-      {cardData.map((card, index) => (
+      {cardData.length > 0 && cardData.map((card, index) => (
         <React.Fragment key={index}>
           <MainCard title={card.title} style={{ boxShadow: '0 4px 8px rgba(0, 0, 255, 2.5)', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '28px', backgroundColor: cardHovered === index ? 'transparent' : '#EDE7F6', cursor: 'pointer', color: cardHovered === index ? 'black' : 'black', width: '80%', margin: 'auto' }}
             onMouseEnter={() => setCardHovered(index)} // Set index when mouse enters

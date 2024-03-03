@@ -33,7 +33,7 @@ const NoticeboardPage = () => {
 
     // Add text to PDF
     pdf.text(data.Title, textX, textY);
-    textX -= 20;
+    textX = 20;
     textY += 10;
     pdf.text(data.createdAt, textX, textY);
 
@@ -48,12 +48,28 @@ const NoticeboardPage = () => {
     pdf.addImage(img, 'PNG', imageX, imageY, imageWidth, 90);
 
     // Calculate center position for text
-    textWidth = pdf.getStringUnitWidth(data.Text) * 16; // Width of the text in the PDF (assuming font size 16)
-    textX = (pdf.internal.pageSize.getWidth() - textWidth) / 2;
     textY = imageY + 100; // Adjust the vertical position as needed
 
     // Add text to PDF
-    pdf.text(data.Text, textX, textY);
+    const fontSize = 12;
+    const lineHeight = fontSize * 1.2; // Line height based on font size
+    const maxWidth = pdf.internal.pageSize.getWidth() - 40; // Maximum width available for the text
+
+    // Split the text into lines based on the available width
+    const textLines = pdf.splitTextToSize(data.Text, maxWidth, { fontSize: fontSize });
+
+    // Calculate the height of the text block
+    const textHeight = textLines.length * lineHeight;
+
+    // Check if the text block exceeds the available height
+    if (textY + textHeight > pdf.internal.pageSize.getHeight() - 20) {
+      // Adjust vertical position to start a new page
+      textY = 20;
+      pdf.addPage();
+    }
+
+    // Add text to PDF
+    pdf.text(textLines, 20, textY, { maxWidth: maxWidth });
 
     // Save PDF
     pdf.save(`${data.Title}.pdf`);
