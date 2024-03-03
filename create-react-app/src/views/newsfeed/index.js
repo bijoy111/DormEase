@@ -406,7 +406,7 @@ const SamplePage = () => {
                             {comment.text}
                           </small>
                         </div>
-                        <strong>Reply</strong>
+                        {/* <strong>Reply</strong> */}
                       </div>
                       {/* {comments.map((comment, index) => (
                 <div key={index}>
