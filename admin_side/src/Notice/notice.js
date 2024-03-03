@@ -83,8 +83,8 @@ export function Notice() {
 
         const response = await axios.post('http://localhost:3000/notice/compose', obj, { withCredentials: true });
         fetchNotices();
-        is_private = false;
-        students = '';
+        setIsPrivate(false);
+        setStudents('');
         closeModal();
     }
 
