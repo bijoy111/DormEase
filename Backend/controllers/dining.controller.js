@@ -4,11 +4,6 @@ const get_menu = async (req, res, next) => {
     // read from params
     const date = req.params.date;
     const menu = await dining_model.get_menu_from_date(date);
-    if (menu.length === 0) {
-        return res.status(404).json({
-            error: 'Menu not found'
-        });
-    }
 
     // array of json objects containing name, price_per_unit and quantity
     const lunch_arr = [];

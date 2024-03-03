@@ -7,8 +7,8 @@ function DisbursementPage() {
   const [receiverName, setReceiverName] = useState('');
   const [amount, setAmount] = useState('');
   const [disbursements, setDisbursements] = useState([
-    { giverName: 'Alice Johnson', receiverName: 'Bob Brown', amount: '300', date: '2024-02-11 14:45:00' },
-    { giverName: 'John Doe', receiverName: 'Jane Smith', amount: '500', date: '2024-02-12 10:30:00' },
+    { giverName: 'Saiful Islam', receiverName: 'Bijoy Ahmed Saiem', amount: '300', date: '2024-02-11 14:45:00' },
+    { giverName: 'Saiful Islam', receiverName: 'Bijoy Ahmed Saiem', amount: '500', date: '2024-02-12 10:30:00' },
     // Add more previous disbursements as needed
   ]);
   const [selectedMonth, setSelectedMonth] = useState('');
