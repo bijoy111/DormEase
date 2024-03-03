@@ -9,6 +9,7 @@ const seatallocation_router = require('./seat_alloc.route');
 
 const mess_manager_router = require('./admin/mess_manager.route');
 const seat_allocation_admin_router = require('./admin/seat_allocation.route');
+const admin_dining_router = require('./admin/dining.route');
 
 const initiateRoutes = (router) => {
     // add routes
@@ -22,6 +23,7 @@ const initiateRoutes = (router) => {
 
     mess_manager_router(router);
     seat_allocation_admin_router(router);
+    admin_dining_router(router);
 }
 
 module.exports = initiateRoutes;

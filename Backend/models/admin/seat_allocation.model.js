@@ -22,7 +22,11 @@ async function get_applicants() {
 async function allocate_room(stu_id, room_no, seat_no) {
     const sql = `
         INSERT INTO seat_allocation (room_no, stu_id, seat_no)
-        VALUES ($1, $2, $3)
+        VALUES ($1, $2, $3);
+
+        UPDATE student
+        SET resident = true
+        WHERE stu_id = $2;
     `;
     const result = await db_query(sql, [room_no, stu_id, seat_no]);
 

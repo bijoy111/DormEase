@@ -22,28 +22,61 @@ async function get_mess_manager() {
 
 async function add_dining_student_entry(stu_id, date, meal_time) {
     const sql = `
-        INSERT INTO student_dining_entry (stu_id, date, meal_time)
+        INSERT INTO dining_student_entry (stu_id, date, meal_time)
         VALUES ($1, $2, $3)
     `;
     const result = await db_query(sql, [stu_id, date, meal_time]);
     return result;
 }
 
-async function get_dining_student_entry(stu_id, date) {
+async function get_dining_student_entry(date, meal_time) {
     const sql = `
-        SELECT * FROM student_dining_entry
-        WHERE stu_id = $1 AND date = $2
+        SELECT stu_id, level_term FROM student
     `;
-    const result = await db_query(sql, [stu_id, date]);
-    return result.rows;
+    const stu_ids = await db_query(sql);
+
+    result = [];
+    for (let i = 0; i < stu_ids.rows.length; i++) {
+        const sql = `
+            SELECT * FROM dining_student_entry JOIN student ON dining_student_entry.stu_id = student.stu_id
+            WHERE student.stu_id = $1 AND date = $2 AND meal_time = $3
+        `;
+        const res = await db_query(sql, [stu_ids.rows[i].stu_id, date, meal_time]);
+
+        let level_term = stu_ids.rows[i].level_term.split('-');
+
+        if (res.rows.length > 0) {
+            result.push({
+                stu_id: stu_ids.rows[i].stu_id,
+                level: level_term[0],
+                term: level_term[1],
+                entry: true
+            });
+        }
+        else {
+            result.push({
+                stu_id: stu_ids.rows[i].stu_id,
+                level: level_term[0],
+                term: level_term[1],
+                entry: false
+            });
+        }
+    }
+
+    return result;
 }
 
 async function get_student_monthly_dining_count(month) {
     // for each student for a given month, we need to get the number of times the student has eaten in the dining hall
+    // total dates of the current month
+    let days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     const sql = `
-        SELECT COUNT(*) FROM student_dining_entry
-        WHERE date_part('month', date) = $2
-        GROUP BY stu_id
+        SELECT s.stu_id, s.name,
+        (SELECT COUNT(*) as present_meal_count
+         FROM dining_student_entry
+         WHERE date_part('MM', date) = $1 AND s.stu_id = stu_id
+        )
+        FROM student s
     `;
     const result = await db_query(sql, [month]);
     return result.rows;

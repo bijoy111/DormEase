@@ -87,6 +87,7 @@ export function Notice() {
         setStudents('');
         setTitle('');
         setContent('');
+
         closeModal();
     }
 
