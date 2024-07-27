@@ -11,9 +11,7 @@ const get_complaints = async (req, res, next) => {
     const stu_id = req.user.id;
     const complaints = await complaint_model.get_complaints(role, stu_id);
 
-    return res.status(200).json([
-        ...complaints.rows
-    ]);
+    return res.status(200).json(complaints);
 }
 
 const post_complaint = async (req, res, next) => {
@@ -61,13 +59,11 @@ const delete_complaint = async (req, res, next) => {
     }
 
     const complaint_id = req.params.comp_id;
-    const result = await complaint_model.delete_complaint(complaint_id);
-    if (result.error) {
-        return res.status(404).json({
-            error: result.error
-        });
-    }
+    const id = req.user.id;
 
+    const result = await complaint_model.delete_complaint(complaint_id, id);
+
+    console.log("complaint deleted");
     return res.status(200).json({
         message: 'OK',
     });

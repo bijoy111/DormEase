@@ -5,7 +5,8 @@ complaint_model = require('./complaint.model');
 notice_model = require('./notice.model');
 dining_model = require('./dining.model');
 feed_model = require('./feed.model');
-seatAlloc_model = require('./seat_alloc.model');
+seat_alloc_model = require('./seat_alloc.model');
+mess_manager_model = require('./mess_manager.model');
 
 module.exports = {
     // add models
@@ -15,5 +16,6 @@ module.exports = {
     notice_model,
     dining_model,
     feed_model,
-    seatAlloc_model
+    seat_alloc_model,
+    mess_manager_model
 }

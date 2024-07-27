@@ -1,44 +1,70 @@
-const { db_query } = require('../db');
 const { hash, compare } = require('bcryptjs');
+const { supabase } = require('../db/connection');
 
-// creates a new user
-async function create_student(stu_id, name, dept, level_term, phone, email, password, cgpa, photo, hall, resident, guardian_name, guardian_phone) {
-    const hashedPassword = await hash(password, 10);
-    const sql = `
-        INSERT INTO student (stu_id, name, dept, level_term, phone, email, password, cgpa, photo, hall, resident, guardian_name, guardian_phone, mess_manager, mess_manager_applied)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
-    `;
-    const result = await db_query(sql, [stu_id, name, dept, level_term, phone, email, hashedPassword, cgpa, photo, hall, resident, guardian_name, guardian_phone, false, false]);
-    return result;
+async function create_student(stu_id, name, dept, level_term, phone, email, password, photo, hall, resident, room_no) {
+    const { data, error } = await supabase
+        .from('student')
+        .insert([
+            {
+                stu_id: stu_id,
+                name: name,
+                dept: dept,
+                level_term: level_term,
+                phone_no: phone,
+                email: email,
+                password: password,
+                photo: photo,
+                hall: hall,
+                resident_status: resident,
+                room_no: room_no
+            }
+        ]);
+
+    if (data) {
+        return data;
+    }
+
+    return true;
 }
 
 async function find_student_by_id(stu_id) {
-    const sql = `
-        SELECT * FROM student
-        WHERE stu_id = $1
-    `;
-    const result = await db_query(sql, [stu_id]);
-    return result.rows[0];
+    const { data, error } = await supabase
+        .from('student')
+        .select('*')
+        .eq('stu_id', stu_id);
+
+    if (error) {
+        return error;
+    }
+
+    return data[0];
 }
 
 async function find_admin_by_id(admin_id, role) {
-    const sql = `
-        SELECT * FROM admin
-        WHERE admin_id = $1
-        AND role = $2
-    `;
-    const result = await db_query(sql, [admin_id, role]);
-    return result.rows[0];
+    const { data, error } = await supabase
+        .from('admin')
+        .select('*')
+        .eq('admin_id', admin_id)
+        .eq('role', role);
+
+    if (error) {
+        return error;
+    }
+
+    return data[0];
 }
 
 async function login_student(stu_id, password) {
     const student = await find_student_by_id(stu_id);
+
     if (!student) return {
         student: null,
         error: 'No student with this id'
     }
 
-    const isMatch = await compare(password, student.password);
+    // const isMatch = await compare(password, student.password);
+    const isMatch = password == student.password;
+    
     if (!isMatch) return {
         student: null,
         error: 'Incorrect password'
@@ -51,25 +77,20 @@ async function login_student(stu_id, password) {
 }
 
 async function login_admin(admin_id, password) {
-    const sql = `
-        SELECT * FROM admin
-        WHERE admin_id = $1
-    `;
-    const result = await db_query(sql, [admin_id]);
-    admin = result.rows[0];
+    const admin = await find_admin_by_id(admin_id, 'admin');
 
     if (!admin) return {
         admin: null,
         error: 'No admin with this id'
     }
 
-    const isMatch = await compare(password, admin.password);
+    // const isMatch = await compare(password, admin.password);
+    const isMatch = password == admin.password;
+
     if (!isMatch) return {
         admin: null,
         error: 'Incorrect password'
     }
-
-    console.log(admin);
 
     return {
         admin,

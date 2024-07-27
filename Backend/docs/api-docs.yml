@@ -1,0 +1,1716 @@
+swagger: "2.0"
+info:
+  description: "API documentation for Dormitory Management System"
+  version: "1.0.0"
+  title: "Dormitory Management System"
+host: "localhost:3000"
+basePath: "/api"
+
+tags:
+  - name: "Auth"
+    description: "Authentication operations"
+  - name: "Dashboard"
+    description: "Dashboard operations"
+  - name: "Complaints"
+    description: "Complaint operations"
+  - name: "Dining"
+    description: "Dining operations"
+  - name: "Feed"
+    description: "Feed operations"
+  - name: "Notices"
+    description: "Notice operations"
+  - name: "Mess Manager"
+    description: "Mess manager operations"
+  - name: "Room Allotment"
+    description: "Room allotment operations"
+
+schemes:
+  - "http"
+  - "https"
+
+/dashboard/edit:
+  get:
+    tags:
+      - "Dashboard"
+    summary: "Get student information"
+    description: "Retrieve information for the logged-in student"
+    responses:
+      200:
+        description: "Student information retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stu_id:
+                  type: integer
+                  example: 1905024
+                name:
+                  type: string
+                  example: "John Doe"
+                dept:
+                  type: string
+                  example: "CSE"
+                level_term:
+                  type: string
+                  example: "4-1"
+                phone_no:
+                  type: string
+                  example: "0123456789"
+                email:
+                  type: string
+                  example: "johndoe@example.com"
+                password:
+                  type: string
+                  example: "password123"
+                photo:
+                  type: string
+                  example: "photo_url"
+                hall:
+                  type: string
+                  example: "Sohrawardy"
+                resident_status:
+                  type: boolean
+                  example: true
+                room_no:
+                  type: number
+                  example: 101
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "Unauthorized"
+  put:
+    tags:
+      - "Dashboard"
+    summary: "Update student information"
+    description: "Update editable information for the logged-in student"
+    requestBody:
+      description: "New student information"
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              old_pass:
+                type: string
+                example: "oldpassword123"
+              new_pass:
+                type: string
+                example: "newpassword456"
+              email:
+                type: string
+                example: "rakib_new@example.com"
+              phone_no:
+                type: string
+                example: "0987654321"
+              photo:
+                type: string
+                format: binary
+    responses:
+      200:
+        description: "Student information updated successfully"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "OK"
+      400:
+        description: "Bad request"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "Validation error"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "Unauthorized"
+
+/auth/create-student:
+  post:
+    tags:
+      - "Auth"
+    summary: "Create a new student"
+    description: "Create a new student record in the dormitory management system"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              stu_id:
+                type: integer
+                example: 1905024
+              name:
+                type: string
+                example: "John Doe"
+              dept:
+                type: string
+                example: "CSE"
+              level_term:
+                type: string
+                example: "4-1"
+              phone:
+                type: string
+                example: "0123456789"
+              email:
+                type: string
+                example: "johndoe@example.com"
+              password:
+                type: string
+                example: "password123"
+              photo:
+                type: string
+                example: "photo_url"
+              hall:
+                type: string
+                example: "Sohrawardy"
+              resident:
+                type: boolean
+                example: true
+              room_no:
+                type: number
+                example: 101
+    responses:
+      200:
+        description: "Student created successfully"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "OK"
+      400:
+        description: "User ID already exists"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "User ID already exists"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "Unauthorized"
+      500:
+        description: "Unsuccessful registration"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "Unsuccessful registration"
+/auth/login:
+    post:
+      tags: 
+        - "Auth"
+      summary: "Login for admin or student"
+      description: "Login for either an admin or a student"
+      requestBody:
+        description: "User credentials"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                  example: 1905024
+                password:
+                  type: "string"
+                  example: "password123"
+      responses:
+        200:
+          description: "Login successful"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                    example: "OK"
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+                    example: "Unauthorized"
+    
+/complaints:
+  get:
+    tags:
+      - "Complaints"
+    summary: "Get all complaints"
+    description: "Retrieve a list of all complaints"
+    responses:
+      200:
+        description: "Successful operation"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  complaint_id:
+                    type: "integer"
+                  stu_id:
+                    type: "integer"
+                  title:
+                    type: "string"
+                  description:
+                    type: "string"
+                  status:
+                    type: "string"
+                  created_at:
+                    type: "string"
+                    format: "date-time"
+                  last_modified:
+                    type: "string"
+                    format: "date-time"
+    requestBody:
+      required: false
+  post:
+    tags:
+      - "Complaints"
+    summary: "Post a new complaint"
+    description: "Post a new complaint to the system"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              title:
+                type: "string"
+                example: "Issue with the heater"
+              text:
+                type: "string"
+                example: "The heater in my room is not working properly."
+    responses:
+      200:
+        description: "Complaint posted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/complaints/{comp_id}:
+  put:
+    tags:
+      - "Complaints"
+    summary: "Update the stage of a complaint"
+    description: "Update the stage of an existing complaint"
+    parameters:
+      - in: "path"
+        name: "comp_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the complaint to be updated"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stage:
+                type: "string"
+                example: "In Progress"
+    responses:
+      200:
+        description: "Complaint stage updated successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+      404:
+        description: "Complaint not found"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Complaint not found"
+  delete:
+    tags:
+      - "Complaints"
+    summary: "Delete a complaint"
+    description: "Delete an existing complaint"
+    parameters:
+      - in: "path"
+        name: "comp_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the complaint to be deleted"
+    responses:
+      200:
+        description: "Complaint deleted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+      404:
+        description: "Complaint not found"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Complaint not found"
+
+/dining/menu/{date}:
+  get:
+    tags:
+      - "Dining"
+    summary: "Get menu for a specific date"
+    description: "Retrieve the dining menu for a specific date"
+    parameters:
+      - in: "path"
+        name: "date"
+        required: true
+        schema:
+          type: "string"
+          format: "date"
+        description: "Date for which the menu is to be retrieved"
+    responses:
+      200:
+        description: "Menu retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                date:
+                  type: "string"
+                  format: "date"
+                menu_items:
+                  type: "array"
+                  items:
+                    type: "string"
+      404:
+        description: "Menu not found"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Menu not found"
+/dining/menu:
+  post:
+    tags:
+      - "Dining"
+    summary: "Post a new menu"
+    description: "Post a new menu for a specific date and meal time"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              lunch:
+                type: "string"
+                example: "Rice, Fish Curry, Daal"
+              dinner:
+                type: "string"
+                example: "Rice, Chicken Curry, Daal"
+              special:
+                type: boolean
+                example: false
+    responses:
+      200:
+        description: "Menu posted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/dining/entry/{date}:
+  get:
+    tags:
+      - "Dining"
+    summary: "Get dining entries"
+    description: "Retrieve dining entries for all students"
+    parameters:
+      - in: "path"
+        name: "date"
+        required: true
+        schema:
+          type: "string"
+          format: "date"
+        description: "Date for which the dining entries are to be retrieved"
+    responses:
+      200:
+        description: "Dining entries retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  stu_id:
+                    type: "integer"
+                  date:
+                    type: "string"
+                    format: "date"
+                  meal_time:
+                    type: "string"
+                    enum:
+                      - "Breakfast"
+                      - "Lunch"
+                      - "Dinner"
+                  level_term:
+                    type: "string"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/dining/entry:
+  post:
+    tags:
+      - "Dining"
+    summary: "Add a dining entry"
+    description: "Add a dining entry for a student"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stu_id:
+                type: "integer"
+              meal_time:
+                type: "string"
+                enum:
+                  - "lunch"
+                  - "dinner"
+    responses:
+      200:
+        description: "Dining entry added successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+
+/feed:
+  get:
+    tags:
+      - "Feed"
+    summary: "Get the feed"
+    description: "Retrieve all posts in the feed"
+    responses:
+      200:
+        description: "Feed retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  post_id:
+                    type: "integer"
+                  stu_id:
+                    type: "integer"
+                  title:
+                    type: "string"
+                  text:
+                    type: "string"
+                  media:
+                    type: "string"
+                  timestamp:
+                    type: "string"
+                    format: "date-time"
+  post:
+    tags:
+      - "Feed"
+    summary: "Create a new post"
+    description: "Create a new post in the feed"
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: "object"
+            properties:
+              title:
+                type: "string"
+                example: "Urgent Blood Needed!"
+              text:
+                type: "string"
+                example: "A student needs blood urgently. Blood group: A+ve. Contact 0123456789 for more information"
+              media:
+                type: "array"
+                items:
+                  type: "string"
+                  format: "binary"
+    responses:
+      200:
+        description: "Post created successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}:
+  put:
+    tags:
+      - "Feed"
+    summary: "Edit a post"
+    description: "Edit an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to be edited"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              title:
+                type: "string"
+              text:
+                type: "string"
+              media:
+                type: "string"
+    responses:
+      200:
+        description: "Post edited successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+
+  delete:
+    tags:
+      - "Feed"
+    summary: "Delete a post"
+    description: "Delete an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to be deleted"
+    responses:
+      200:
+        description: "Post deleted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}/comment:
+  post:
+    tags:
+      - "Feed"
+    summary: "Comment on a post"
+    description: "Comment on an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to be commented on"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              text:
+                type: "string"
+    responses:
+      200:
+        description: "Comment added successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}/comment/{comment_id}:
+  delete:
+    tags:
+      - "Feed"
+    summary: "Delete a comment"
+    description: "Delete an existing comment"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to delete the comment from"
+      - in: "path"
+        name: "comment_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the comment to be deleted"
+    responses:
+      200:
+        description: "Comment deleted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}/upvote:
+  post:
+    tags:
+      - "Feed"
+    summary: "Upvote a post"
+    description: "Upvote an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to be upvoted"
+    responses:
+      200:
+        description: "Post upvoted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}/upvote/cancel:
+  post:
+    tags:
+      - "Feed"
+    summary: "Cancel upvote on a post"
+    description: "Cancel the upvote on an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to cancel upvote"
+    responses:
+      200:
+        description: "Upvote cancelled successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}/downvote:
+  post:
+    tags:
+      - "Feed"
+    summary: "Downvote a post"
+    description: "Downvote an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to be downvoted"
+    responses:
+      200:
+        description: "Post downvoted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/feed/post/{post_id}/downvote/cancel:
+  post:
+    tags:
+      - "Feed"
+    summary: "Cancel downvote on a post"
+    description: "Cancel the downvote on an existing post"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the post to cancel downvote"
+    responses:
+      200:
+        description: "Downvote cancelled successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+
+/notice:
+  get:
+    tags:
+      - "Notices"
+    summary: "Get all notices"
+    description: "Retrieve all notices for the authenticated user"
+    responses:
+      200:
+        description: "Notices retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  notice_id:
+                    type: "integer"
+                  title:
+                    type: "string"
+                  text:
+                    type: "string"
+                  is_private:
+                    type: "boolean"
+                  media:
+                    type: "array"
+                    items:
+                      type: "string"
+                  timestamp:
+                    type: "string"
+                    format: "date-time"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+  post:
+    tags:
+      - "Notices"
+    summary: "Create a new notice"
+    description: "Create a new notice"
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: "Important Notice"
+              text:
+                type: string
+                example: "This is an important notice for all students. Please read carefully. Thank you"
+              is_private:
+                type: boolean
+                example: false
+              student_list:
+                type: array
+                items:
+                  type: integer
+              media:
+                type: array
+                items:
+                  type: string
+                  format: binary
+    responses:
+      200:
+        description: "Notice created successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/notice/{post_id}:
+  get:
+    tags:
+      - "Notices"
+    summary: "Get a specific notice"
+    description: "Retrieve a specific notice by ID"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the notice to be retrieved"
+    responses:
+      200:
+        description: "Notice retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                notice_id:
+                  type: "integer"
+                title:
+                  type: "string"
+                text:
+                  type: "string"
+                is_private:
+                  type: "boolean"
+                media:
+                  type: "array"
+                  items:
+                    type: "string"
+                timestamp:
+                  type: "string"
+                  format: "date-time"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+      404:
+        description: "Notice not found"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Not Found"
+
+  delete:
+    tags:
+      - "Notices"
+    summary: "Delete a specific notice"
+    description: "Delete a specific notice by ID"
+    parameters:
+      - in: "path"
+        name: "post_id"
+        required: true
+        schema:
+          type: "integer"
+        description: "ID of the notice to be deleted"
+    responses:
+      200:
+        description: "Notice deleted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+      404:
+        description: "Notice not found"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Not Found"
+
+/mess_manager:
+  post:
+    tags:
+      - "Mess Manager"
+    summary: "Apply for mess manager"
+    description: "Students apply for mess manager position"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stu_id_array:
+                type: "array"
+                items:
+                  type: "integer"
+    responses:
+      200:
+        description: "Application successful"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+
+  get:
+    tags:
+      - "Mess Manager"
+    summary: "Get current mess manager"
+    description: "Retrieve the current mess manager"
+    responses:
+      200:
+        description: "Mess manager retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                stu_id:
+                  type: "integer"
+                name:
+                  type: "string"
+                dept:
+                  type: "string"
+                level_term:
+                  type: "string"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+
+  delete:
+    tags:
+      - "Mess Manager"
+    summary: "Cancel mess manager"
+    description: "Cancel current mess manager"
+    responses:
+      200:
+        description: "Cancellation successful"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/mess_manager/applicants:
+  get:
+    tags:
+      - "Mess Manager"
+    summary: "Get mess manager applicants"
+    description: "Admin retrieves list of mess manager applicants"
+    responses:
+      200:
+        description: "Applicants retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                8:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: "Rakib Ahsan"
+                      photo:
+                        type: string
+                        example: "photo_url"
+                      stu_id:
+                        type: integer
+                        example: 1905024
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/mess_manager/assign:
+  post:
+    tags:
+      - "Mess Manager"
+    summary: "Assign mess manager"
+    description: "Admin assigns mess manager"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              applicant_id:
+                type: "integer"
+    responses:
+      200:
+        description: "Assignment successful"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+
+/rooms:
+  get:
+    tags:
+      - "Room Allotment"
+    summary: "Get rooms"
+    description: "Retrieve a list of rooms"
+    responses:
+      200:
+        description: "Rooms retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  room_no:
+                    type: "integer"
+                  capacity:
+                    type: "integer"
+                  occupied:
+                    type: "integer"
+/rooms/apply:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Apply for room allotment"
+    description: "Students apply for room allotment"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              home_district:
+                type: "string"
+                example: "Dhaka"
+              school:
+                type: "string"
+                example: "Dhaka Residential Model College"
+              college:
+                type: "string"
+                example: "Notre Dame College"
+    responses:
+      200:
+        description: "Application submitted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+                example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/change:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Apply for room change"
+    description: "Students apply for room change"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              prev_room_no:
+                type: "integer"
+                example: 102
+              new_room_no:
+                type: "integer"
+                example: 501
+              reason:
+                type: "string"
+                example: "Need to change room due to personal reasons"
+    responses:
+      200:
+        description: "Application submitted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+                example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/leave:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Leave room"
+    description: "Students apply to leave their room"
+    responses:
+      200:
+        description: "Application submitted successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+                example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/allotment/applicants:
+  get:
+    tags:
+      - "Room Allotment"
+    summary: "Get room allotment applicants"
+    description: "Admin retrieves list of room allotment applicants"
+    responses:
+      200:
+        description: "Applicants retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  stu_id:
+                    type: "integer"
+                    example: 123456
+                  home_district:
+                    type: "string"
+                    example: "Chittagong"
+                  school:
+                    type: "string"
+                    example: "Chittagong Collegiate School"
+                  college:
+                    type: "string"
+                    example: "Chittagong College"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/change/applicants:
+  get:
+    tags:
+      - "Room Allotment"
+    summary: "Get room change applicants"
+    description: "Admin retrieves list of room change applicants"
+    responses:
+      200:
+        description: "Applicants retrieved successfully"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  stu_id:
+                    type: "integer"
+                    example: 123456
+                  reason:
+                    type: "string"
+                    example: "Need to change room due to noise"
+                  prev_room_no:
+                    type: "integer"
+                    example: 101
+                  new_room_no:
+                    type: "integer"
+                    example: 105
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/allotment/approve:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Approve room allotment"
+    description: "Admin approves room allotment"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stu_id:
+                type: "integer"
+                example: 123456
+              room_no:
+                type: "integer"
+                example: 101
+    responses:
+      200:
+        description: "Room allotment approved successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+                example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/change/approve:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Approve room change"
+    description: "Admin approves room change"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stu_id:
+                type: "integer"
+                example: 123456
+              room_no:
+                type: "integer"
+                example: 105
+    responses:
+      200:
+        description: "Room change approved successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                message:
+                  type: "string"
+                  example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/allotment/reject:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Reject room allotment"
+    description: "Admin rejects room allotment"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stu_id:
+                type: "integer"
+                example: 123456
+    responses:
+      200:
+        description: "Room allotment rejected successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+                example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+/rooms/change/reject:
+  post:
+    tags:
+      - "Room Allotment"
+    summary: "Reject room change"
+    description: "Admin rejects room change"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              stu_id:
+                type: "integer"
+                example: 123456
+    responses:
+      200:
+        description: "Room change rejected successfully"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              additionalProperties:
+                type: "string"
+                example: "OK"
+      401:
+        description: "Unauthorized"
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"

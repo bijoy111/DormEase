@@ -1,50 +1,81 @@
-const { db_query } = require('../db');
+const { supabase } = require('../db/connection');
 
-async function create_post(stu_id, text, media) {
-    let sql = `
-        INSERT INTO post(post_id, created_at)
-        VALUES (DEFAULT, DEFAULT)
-        RETURNING post_id
-    `;
-    const result = await db_query(sql);
-    const post_id = result.rows[0].post_id;
+async function create_post(stu_id, title, description, media) {
+    const { data, error } = await supabase
+        .from('post')
+        .insert([
+            { title: title, description: description }
+        ])
+        .select('post_id')
+        .single();
 
-    sql = `
-        INSERT INTO status (post_id, stu_id, text)
-        VALUES ($1, $2, $3)
-    `;
-    await db_query(sql, [post_id, stu_id, text]);
+    pid = data.post_id;
+
+    const { statusText } = await supabase
+        .from('student_post')
+        .insert([
+            { post_id: pid, stu_id: stu_id }
+        ]);
 
     if (media) {
         for (let i = 0; i < media.length; i++) {
-            sql = `
-                INSERT INTO media (post_id, index, media_type, media_link)
-                VALUES ($1, $2, $3, $4)
-            `;
-
-            // check media type
-            let media_type = 'image';
-            if (media[i].endsWith('.pdf') || media[i].endsWith('.doc') || media[i].endsWith('.docx')) {
-                media_type = 'document';
-            }
-            else if (media[i].endsWith('.mp4') || media[i].endsWith('.mkv') || media[i].endsWith('.avi')) {
-                media_type = 'video';
-            }
-
-            await db_query(sql, [post_id, i, media_type, media[i]]);
+            const data = await supabase
+                .from('media')
+                .insert([
+                    { post_id: pid, link: media[i] }
+                ]);
         }
     }
 
-    return result;
+    return data;
 }
 
 async function post_auth(post_id, stu_id) {
-    const sql = `
-        SELECT * FROM status
-        WHERE post_id = $1 AND stu_id = $2
-    `;
-    const result = await db_query(sql, [post_id, stu_id]);
-    return result.rows.length > 0;
+    const { data, error } = await supabase
+        .from('student_post')
+        .select('*')
+        .eq('post_id', post_id)
+        .eq('stu_id', stu_id);
+
+    if (error) {
+        return false;
+    }
+
+    if (data.length > 0) {
+        return true;
+    }
+    return false;
+}
+
+async function edit_post(post_id, stu_id, title, description, media) {
+    // check if the post is created by the student
+    if (!post_auth(post_id, stu_id)) {
+        console.log('Unauthorized');
+        return {
+            error: 'Unauthorized'
+        };
+    }
+
+    const { data, error } = await supabase
+        .from('post')
+        .update({ title: title, description: description })
+        .eq('post_id', post_id);
+
+    if (error) {
+        return error;
+    }
+
+    if (media) {
+        for (let i = 0; i < media.length; i++) {
+            const { data, error } = await supabase
+                .from('media')
+                .insert([
+                    { post_id: post_id, link: media[i] }
+                ]);
+        }
+    }
+
+    return { message: 'OK' };
 }
 
 async function delete_post(post_id, stu_id) {
@@ -56,188 +87,189 @@ async function delete_post(post_id, stu_id) {
         };
     }
 
-    sql = `
-        DELETE FROM post
-        WHERE post_id = $1
-    `;
-    const result = await db_query(sql, [post_id]);
-    return result;
+    const { data, error } = await supabase
+        .from('post')
+        .delete()
+        .eq('post_id', post_id);
+
+    if (error) {
+        return error;
+    }
+
+    return { message: 'OK' };
 }
 
-async function comment(parent_id, stu_id, text, media) {
-    let sql = `
-        INSERT INTO post(post_id, created_at)
-        VALUES (DEFAULT, DEFAULT)
-        RETURNING post_id
-    `;
-    const result = await db_query(sql);
-    const post_id = result.rows[0].post_id;
+async function comment(post_id, stu_id, text) {
+    const { data, error } = await supabase
+        .from('comment')
+        .insert([
+            { post_id: post_id, stu_id: stu_id, description: text }
+        ]);
 
-    sql = `
-        INSERT INTO comment (post_id, stu_id, parent_id, text)
-        VALUES ($1, $2, $3, $4)
-    `;
-    await db_query(sql, [post_id, stu_id, parent_id, text]);
+    if (error) {
+        return error;
+    }
 
-    if (media) {
-        for (let i = 0; i < media.length; i++) {
-            sql = `
-                INSERT INTO media (post_id, index, media_type, media_link)
-                VALUES ($1, $2, $3, $4)
-            `;
+    return data;
+}
 
-            // check media type
-            let media_type = 'image';
-            if (media[i].endsWith('.pdf') || media[i].endsWith('.doc') || media[i].endsWith('.docx')) {
-                media_type = 'document';
-            }
-            else if (media[i].endsWith('.mp4') || media[i].endsWith('.mkv') || media[i].endsWith('.avi')) {
-                media_type = 'video';
-            }
+async function delete_comment(comment_id, stu_id) {
+    // check if the comment is created by the student
+    console.log(comment_id, stu_id);
+    const { data: comment, error_ } = await supabase
+        .from('comment')
+        .select('*')
+        .eq('comment_id', comment_id)
+        .eq('stu_id', stu_id)
+        .single();
 
-            await db_query(sql, [post_id, i, media_type, media[i]]);
+    if (!comment) {
+        return {
+            error: 'Unauthorized'
+        };
+    }
+
+    const { data, error } = await supabase
+        .from('comment')
+        .delete()
+        .eq('comment_id', comment_id)
+        .eq('stu_id', stu_id);
+
+    if (error) {
+        return error;
+    }
+
+    return { message: 'OK' };
+}
+
+async function vote(post_id, stu_id, value) {
+    // check if user already voted before. if true, update vote to value
+    const { data: opposite_vote, error: error_ } = await supabase
+        .from('post_vote')
+        .select('*')
+        .eq('post_id', post_id)
+        .eq('stu_id', stu_id)
+        .eq('vote', !value)
+        .single();
+
+    if (opposite_vote) {
+        const { data, error } = await supabase
+            .from('post_vote')
+            .update({ vote: value })
+            .eq('post_id', post_id)
+            .eq('stu_id', stu_id)
+
+        if (error) {
+            return error;
         }
+
+        return data;
     }
 
-    return result;
-}
+    const { data, error } = await supabase
+        .from('post_vote')
+        .insert([
+            { post_id: post_id, stu_id: stu_id, vote: value }
+        ]);
 
-async function upvote(post_id, stu_id) {
-    const updateSql = `
-            UPDATE upvote
-            SET upvoted = true
-            WHERE post_id = $1 AND stu_id = $2 AND upvoted = false
-        `;
-    let updateResult = await db_query(updateSql, [post_id, stu_id]);
-    if (updateResult.rowCount === 0) {
-        const insertSql = `
-                INSERT INTO upvote (post_id, stu_id, upvoted)
-                VALUES ($1, $2, true)
-            `;
-        updateResult = await db_query(insertSql, [post_id, stu_id]);
+    if (error) {
+        return error;
     }
 
-    return updateResult;
-    // console.log(post_id, stu_id);
-    // const sql = `
-    //     INSERT INTO upvote (post_id, stu_id, upvoted)
-    //     VALUES ($1, $2, true)
-    // `;
-    // const result = await db_query(sql, [post_id, stu_id]);
-    // console.log('bijoy');
-    // console.log(result);
-    // return result;
+    return data;
 }
 
-async function cancel_upvote(post_id, stu_id) {
-    const sql = `
-        DELETE FROM upvote
-        WHERE post_id = $1 AND stu_id = $2
-    `;
-    const result = await db_query(sql, [post_id, stu_id]);
-    return result;
-}
 
-async function downvote(post_id, stu_id) {
-    const updateSql = `
-            UPDATE upvote
-            SET upvoted = false
-            WHERE post_id = $1 AND stu_id = $2 AND upvoted = true
-        `;
-    let updateResult = await db_query(updateSql, [post_id, stu_id]);
-    if (updateResult.rowCount === 0) {
-        const insertSql = `
-                INSERT INTO upvote (post_id, stu_id, upvoted)
-                VALUES ($1, $2, false)
-            `;
-        updateResult = await db_query(insertSql, [post_id, stu_id]);
+async function cancel_upvote(post_id, stu_id, value = true) {
+    const { data, error } = await supabase
+        .from('post_vote')
+        .delete()
+        .eq('post_id', post_id)
+        .eq('stu_id', stu_id)
+        .eq('vote', value);
+
+    if (error) {
+        return error;
     }
 
-    return updateResult;
-
-    // console.log(post_id, stu_id);
-    // const sql = `
-    //     INSERT INTO upvote (post_id, stu_id, upvoted)
-    //     VALUES ($1, $2, false)
-    // `;
-    // const result = await db_query(sql, [post_id, stu_id]);
-    // return result;
+    return data;
 }
 
 async function cancel_downvote(post_id, stu_id) {
-    const sql = `
-        DELETE FROM upvote
-        WHERE post_id = $1 AND stu_id = $2
-    `;
-    const result = await db_query(sql, [post_id, stu_id]);
-    return result;
+    cancel_upvote(post_id, stu_id, false);
 }
 
-async function get_feed() {
-    sql = `
-        SELECT post.post_id, student.stu_id, name, created_at, text
-         FROM post JOIN status ON post.post_id = status.post_id JOIN student ON status.stu_id = student.stu_id
-        ORDER BY created_at DESC
-    `;
-    const result = await db_query(sql);
+async function get_feed(stu_id) {
+    const { data: postIDs, error_ } = await supabase
+        .from('student_post')
+        .select('post_id, student (stu_id, name, photo)')
 
-    // get comments
-    for (let i = 0; i < result.rows.length; i++) {
-        sql = `
-            SELECT post.post_id, student.stu_id, name, created_at, text
-            FROM post JOIN comment ON post.post_id = comment.post_id JOIN student ON comment.stu_id = student.stu_id
-            WHERE parent_id = $1
-            ORDER BY created_at DESC
-        `;
-        const comments = await db_query(sql, [result.rows[i].post_id]);
-        result.rows[i].comments = comments.rows;
+
+    for (let i = 0; i < postIDs.length; i++) {
+        const { data: post, error } = await supabase
+            .from('post')
+            .select('*')
+            .eq('post_id', postIDs[i].post_id)
+            .single();
+
+        postIDs[i].title = post.title;
+        postIDs[i].description = post.description;
+        postIDs[i].created_at = post.created_at;
     }
 
-    // get upvote and downvote count
-    for (let i = 0; i < result.rows.length; i++) {
-        sql = `
-            SELECT COUNT(*)
-            FROM upvote
-            WHERE post_id = $1 AND upvoted = true
-        `;
-        const upvote = await db_query(sql, [result.rows[i].post_id]);
-        result.rows[i].upvote = upvote.rows[0].count;
+    let posts = postIDs;
 
-        sql = `
-            SELECT COUNT(*)
-            FROM upvote
-            WHERE post_id = $1 AND upvoted = false
-        `;
-        const downvote = await db_query(sql, [result.rows[i].post_id]);
-        result.rows[i].downvote = downvote.rows[0].count;
-    }
+    for (let i = 0; i < posts.length; i++) {
+        const { data: media, error } = await supabase
+            .from('media')
+            .select('link')
+            .eq('post_id', posts[i].post_id);
+        posts[i].media = media.map(m => m.link);
 
-    // check if user has upvoted or downvoted
-    for (let i = 0; i < result.rows.length; i++) {
-        sql = `
-            SELECT upvoted
-            FROM upvote
-            WHERE post_id = $1 AND stu_id = $2
-        `;
-        const upvoted = await db_query(sql, [result.rows[i].post_id, result.rows[i].stu_id]);
-        if (upvoted.rows.length > 0) {
-            result.rows[i].upvoted = upvoted.rows[0].upvoted;
+        const { data: comments, error_ } = await supabase
+            .from('comment')
+            .select('*, student (stu_id, name, photo)')
+            .eq('post_id', posts[i].post_id);
+        posts[i].comments = comments;
+
+        const { data: votes, error__ } = await supabase
+            .from('post_vote')
+            .select('*')
+            .eq('post_id', posts[i].post_id);
+
+        posts[i].upvotes = 0;
+        posts[i].downvotes = 0;
+
+        for (let j = 0; j < votes.length; j++) {
+            if (votes[j].vote) {
+                posts[i].upvotes += 1;
+            } else {
+                posts[i].downvotes += 1;
+            }
         }
-        else {
-            result.rows[i].upvoted = null;
-        }
+
+        console.log(posts[i].post_id, stu_id)
+        const { data: user_vote, error____ } = await supabase
+            .from('post_vote')
+            .select('*')
+            .eq('post_id', posts[i].post_id)
+            .eq('stu_id', stu_id)
+            .single();
+
+        posts[i].voted = !user_vote ? null : user_vote.vote;
     }
 
-    return result.rows;
+    return posts;
 }
 
 module.exports = {
     create_post,
+    edit_post,
     delete_post,
     comment,
-    upvote,
+    delete_comment,
+    vote,
     cancel_upvote,
-    downvote,
     cancel_downvote,
-    get_feed
+    get_feed,
 }

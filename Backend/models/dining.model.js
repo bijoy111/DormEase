@@ -1,67 +1,109 @@
-const { db_query } = require('../db');
+const { supabase } = require('../db/connection');
 
 async function get_menu_from_date(date) {
-    // console.log(date);
-    const sql = `
-        SELECT * FROM dining_menu
-        WHERE date = $1
-    `;
-    const result = await db_query(sql, [date]);
-    // console.log(result.rows);
-    return result.rows;
+    const { data, error } = await supabase
+        .from('dining_menu')
+        .select('*')
+        .eq('date', date)
+        .single();
+
+    if (error) {
+        return error;
+    }
+
+    return data;
 }
 
-async function get_mess_manager_application() {
-    const sql = `
-        SELECT * FROM mess_manager_application
-    `;
-    const result = await db_query(sql);
-    return result.rows;
+async function post_menu(lunch, dinner, special = false) {
+    const { data, error } = await supabase
+        .from('dining_menu')
+        .insert([
+            { lunch: lunch, dinner: dinner, special: special }
+        ]);
+
+    if (error) {
+        return error;
+    }
+
+    return data;
 }
 
-async function post_menu(date, item_name, meal_time) {
-    const sql = `
-        INSERT INTO dining_menu ( date, item_name, meal_time, price_per_unit, amount)
-        VALUES ($1, $2, $3,20,200)
-    `;
-    const result = await db_query(sql, [date, item_name, meal_time]);
-    return result;
+async function add_dining_entry(stu_id, meal_time) {
+    // check if (date, stu_id) already exists
+    const currentDate = new Date().toISOString().split('T')[0];
+    const { data: copy, error } = await supabase
+        .from('dining_entry')
+        .select('*')
+        .eq('stu_id', stu_id)
+        .eq('date', currentDate)
+        .single();
+    
+    if (copy) {
+        const { data, error } = await supabase
+            .from('dining_entry')
+            .update(meal_time == 'lunch' ? { lunch: true } : { dinner: true })
+            .eq('stu_id', stu_id)
+            .eq('date', currentDate);
+    } else {
+        const { data, error } = await supabase
+            .from('dining_entry')
+            .insert([
+                { stu_id: stu_id, lunch: meal_time == 'lunch', dinner: meal_time == 'dinner' }
+            ]);
+    }
 }
 
-async function apply_mess_manager(stu_id_1, stu_id_2) {
-    const sql = `
-            INSERT INTO mess_manager_application (stu_id_1, stu_id_2)
-            VALUES ($1, $2)
-        `;
-    const result = await db_query(sql, [stu_id_1, stu_id_2]);
-    return result;
+async function get_dining_entry(stu_id, date) {
+    const { data, error } = await supabase
+        .from('dining_entry')
+        .select('*')
+        .eq('stu_id', stu_id)
+        .eq('date', date)
+        .single();
+
+    if (error) {
+        return {
+            stu_id: stu_id,
+            date: date,
+            lunch: false,
+            dinner: false
+        }
+    }
+
+    return data;
 }
 
-async function cancel_mess_manager(stu_id_1, stu_id_2) {
-    const sql = `
-            DELETE FROM mess_manager_application
-            WHERE stu_id_1 = $1 AND stu_id_2 = $2
-        `;
-    const result = await db_query(sql, [stu_id_1, stu_id_2]);
-    return result;
+async function is_mess_manager(stu_id) {
+    const { data, error } = await supabase
+        .from('mess_manager')
+        .select('*')
+        .eq('stu_id', stu_id)
+        .single();
+
+    if (error) {
+        return error;
+    }
+
+    return data;
 }
 
-async function apply_manager(stu_id) {
-    const sql = `
-            UPDATE student
-            SET mess_manager_applied = true
-            WHERE stu_id = $1;
-        `;
+async function get_all_stu_id() {
+    const { data, error } = await supabase
+        .from('student')
+        .select('stu_id', 'level_term');
 
-    const result = await db_query(sql, [stu_id]);
-    return result;
+    if (error) {
+        return error;
+    }
+
+    return data;
 }
 
 module.exports = {
     get_menu_from_date,
-    get_mess_manager_application,
     post_menu,
-    apply_mess_manager,
-    cancel_mess_manager,
-    apply_manager
+    add_dining_entry,
+    get_dining_entry,
+    is_mess_manager,
+    get_all_stu_id
 }

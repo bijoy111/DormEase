@@ -1,149 +1,24 @@
 const { get_rooms,
     apply_room_allotment,
     apply_room_change,
-    apply_room_cancel
+    leave_room,
+    get_room_allotment_applicants,
+    get_room_change_applicants,
+    approve_room_allotment,
+    approve_room_change,
+    reject_room_allotment,
+    reject_room_change
 } = require('../controllers/seat_alloc.controller');
 
 module.exports = (router) => {
-    router.get('/allocation', get_rooms);
-    router.post('/seat_allocation/apply_room_allotment', apply_room_allotment);
-    router.post('/seat_allocation/apply_room_change', apply_room_change);
-    router.post('/seat_allocation/apply_room_cancel', apply_room_cancel);
+    router.get('/rooms', get_rooms);
+    router.post('/rooms/apply', apply_room_allotment);
+    router.post('/rooms/change', apply_room_change);
+    router.post('/rooms/leave', leave_room);
+    router.get('/room/allotment/applicants', get_room_allotment_applicants);
+    router.get('/rooms/change/applicants', get_room_change_applicants);
+    router.post('/rooms/allotment/approve', approve_room_allotment);
+    router.post('/rooms/change/approve', approve_room_change);
+    router.post('/rooms/allotment/reject', reject_room_allotment);
+    router.post('/rooms/change/reject', reject_room_change);
 }
-
-/**
- * @swagger
- * tags:
- *   name: Seat Allocation
- */
-
-/**
- * @swagger
- * /allocation:
- *    get:
- *      summary: Show all seat allocations
- *      tags: [Seat Allocation]
- *      responses:
- *        "200":
- *          content:
- *            application/json:
- *              schema:
- *                type: array
- *                items:
- *                  properties:
- *                    seat_no:
- *                      type: array
- *                      items:
- *                        type: number
- *                    room_no:
- *                      type: number
- *              example:
- *                [{
- *                seat_no: [1905024, 1905048, 1905052, 1905020],
- *                room_no: 506
- *                },
- *                {
- *                seat_no: [1905025, 1905049, null, 1905021],
- *                room_no: 507
- *                }]
- */
-
-/**
- * @swagger
- * /auto_allocate:
- *    get:
- *      summary: Automatically allocate seats
- *      tags: [Seat Allocation]
- *      responses:
- *        "200":
- *          content:
- *            application/json:
- *              schema:
- *                type: array
- *                items:
- *                  properties:
- *                    seat_no:
- *                      type: array
- *                      items:
- *                        type: number
- *                    room_no:
- *                      type: number
- *              example:
- *                [{
- *                seat_no: [1905024, 1905048, 1905052, 1905020],
- *                room_no: 506
- *                },
- *                {
- *                seat_no: [1905042, 1905046, 1905047, 1905021],
- *                room_no: 507
- *                }]
- */
-
-/**
- * @swagger
- * /allocation/assign:
- *    post:
- *      summary: Assign a seat to a student [Admin privilege required]
- *      tags: [Seat Allocation]
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              required:
- *                - seat_no
- *                - room_no
- *                - stu_id
- *              properties:
- *                  seat_no:
- *                      type: number
- *                  room_no:
- *                      type: number
- *                  stu_id:
- *                      type: number
- *              example:
- *                seat_no: 1
- *                room_no: 105
- *                stu_id: 1905024 
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/Success'
- */
-
-/**
- * @swagger
- * /allocation/change:
- *    get:
- *      summary: Show all applicants for seat change [Admin privilege required]
- *      tags: [Seat Allocation]
- *      requestBody:
- *        content:
- *          application/json: {}
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/SeatChange'
- *    post:
- *      summary: Grant or reject a seat change request [Admin privilege required]
- *      tags: [Seat Allocation]
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              required:
- *                - stu_id
- *                - granted
- *              properties:
- *                stu_id:
- *                  type: number
- *                granted:
- *                  type: boolean  
- *              example:
- *                stu_id: 1905024 
- *                granted: true 
- *      responses:
- *        "200":
- *          $ref: '#/components/responses/Success'
- */

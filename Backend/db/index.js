@@ -1,7 +1,7 @@
-const { db_connect, db_disconnect, db_query } = require("./connection");
+function db_query(query) {
+    return null
+}
 
 module.exports = {
-    db_connect,
-    db_disconnect,
-    db_query
-};
+    db_query,
+}

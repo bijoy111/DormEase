@@ -8,8 +8,18 @@ const get_mess_manager_application = async (req, res) => {
 }
 
 const approve_mess_manager = async (req, res) => {
-    const { stu_id_1, stu_id_2 } = req.body;
-    const result = await mess_manager_model.approve_mess_manager(stu_id_1, stu_id_2);
+    const { stu_id } = req.body;
+    const result = await mess_manager_model.approve_mess_manager(stu_id);
+    console.log('approved');
+    return res.status(200).json({
+        message: 'OK'
+    });
+}
+
+const remove_mess_manager = async (req, res) => {
+    const { stu_id } = req.body;
+    const result = await mess_manager_model.remove_mess_manager(stu_id);
+    console.log('removed');
     return res.status(200).json({
         message: 'OK'
     });

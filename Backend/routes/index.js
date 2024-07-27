@@ -5,9 +5,10 @@ const complaint_router = require('./complaint.route');
 const notice_router = require('./notice.route');
 const dining_router = require('./dining.route');
 const feed_router = require('./feed.route');
+const mess_manager_router = require('./mess_manager.route');
+
 const seatallocation_router = require('./seat_alloc.route');
 
-const mess_manager_router = require('./admin/mess_manager.route');
 const seat_allocation_admin_router = require('./admin/seat_allocation.route');
 
 const initiateRoutes = (router) => {

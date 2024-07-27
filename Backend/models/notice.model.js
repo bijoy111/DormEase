@@ -1,131 +1,143 @@
-const { db_query } = require('../db');
+const { supabase } = require('../db/connection');
 
-async function get_notices(stu_id) {
+async function get_notices(id) {
+    let noticeIDs = [];
+
+    const { data: public_notice, error } = await supabase
+        .from('notice')
+        .select('notice_id')
+        .eq('is_private', false);
+    noticeIDs.push(...public_notice);
+
+    const { data: private_notice, error_ } = await supabase
+        .from('private_notice')
+        .select('notice_id')
+        .eq('stu_id', id);
+    noticeIDs.push(...private_notice);
+
+    // for admin
+    if (id < 1000000) {
+        const { data: private_notice_, error__ } = await supabase
+            .from('notice')
+            .select('notice_id')
+            .eq('is_private', true);
+        noticeIDs.push(...private_notice_);
+    }
+
     let notices = [];
-    const sql = `
-        SELECT post_id FROM notice
-    `;
-    const noticeIDs = await db_query(sql);
-
-    for (let i = 0; i < noticeIDs.rows.length; i++) {
-        let notice = await get_notice(noticeIDs.rows[i].post_id);
+    for (let i = 0; i < noticeIDs.length; i++) {
+        let notice = await get_notice(noticeIDs[i].notice_id);
         notices.push(notice);
     }
 
-    for (let i = 0; i < notices.length; i++) {
-        if (notices[i].is_private && stu_id > 10) {
-            let sql = `SELECT * FROM private_notice WHERE post_id = $1 AND stu_id = $2`;
-            let result = await db_query(sql, [notices[i].post_id, stu_id]);
-            if (result.rows.length === 0) {
-                notices.splice(i, 1);
-                i--;
-            }
-        }
-    }
+    // sort notices by date
+    notices.sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+    });
 
     return notices;
 }
 
 async function get_notice(post_id) {
-    let sql = `
-        SELECT * FROM notice JOIN post USING (post_id)
-        WHERE post_id = $1
-    `;
-    const data = await db_query(sql, [post_id]);
+    const { data: notice_post, error } = await supabase
+        .from('post')
+        .select('*, notice(*), private_notice(*, student(stu_id, name, photo)))')
+        .eq('post_id', post_id)
+        .single();
+    
+    notice_post.is_private = notice_post.notice[0].is_private;
+    notice_post.students = notice_post.private_notice.map(pn => pn.student);
+    delete notice_post.notice;
+    delete notice_post.private_notice;
 
-    sql = `
-        SELECT index, media_type, media_link FROM media JOIN post USING (post_id)
-        WHERE post_id = $1
-    `;
-    const media = await db_query(sql, [post_id]);
-
-    if (data.rows[0].is_private) {
-        sql = `
-            SELECT stu_id FROM private_notice
-            WHERE post_id = $1
-        `;
-        const students = await db_query(sql, [post_id]);
-        data.rows[0].student_list = students.rows;
+    if (error) {
+        return error;
     }
 
-    return {
-        ...data.rows[0],
-        media: media.rows
-    }
+    const pid = notice_post.post_id;
+
+    const { data, error_ } = await supabase
+        .from('media')
+        .select('link')
+        .eq('post_id', pid);
+
+    notice_post.media = data.map(m => m.link);
+
+    return notice_post;
 }
 
 async function create_notice(title, text, media, is_private, student_list) {
-    let sql = `
-        INSERT INTO post(post_id, created_at)
-        VALUES (DEFAULT, DEFAULT)
-        RETURNING post_id
-    `;
-    const result = await db_query(sql);
-    const post_id = result.rows[0].post_id;
+    const { data, error } = await supabase
+        .from('post')
+        .insert([
+            { title: title, description: text }
+        ])
+        .select('post_id')
+        .single();
 
-    sql = `
-        INSERT INTO notice (post_id, title, text, is_private)
-        VALUES ($1, $2, $3, $4)
-    `;
-    await db_query(sql, [post_id, title, text, is_private]);
+    const post_id = data.post_id;
+
+    if (!is_private) {
+        const { data, error } = await supabase
+            .from('notice')
+            .insert([
+                { notice_id: post_id, is_private: false }
+            ]);
+    }
+    else {
+        const { data, error } = await supabase
+            .from('notice')
+            .insert([
+                { notice_id: post_id, is_private: true }
+            ]);
+
+        for (let i = 0; i < student_list.length; i++) {
+            const { data, error } = await supabase
+                .from('private_notice')
+                .insert([
+                    { notice_id: post_id, stu_id: student_list[i] }
+                ]);
+        }
+    }
 
     if (media) {
         for (let i = 0; i < media.length; i++) {
-            sql = `
-                INSERT INTO media (post_id, index, media_type, media_link)
-                VALUES ($1, $2, $3, $4)
-            `;
-
-            // check media type
-            let media_type = 'image';
-            if (media[i].endsWith('.pdf') || media[i].endsWith('.doc') || media[i].endsWith('.docx')) {
-                media_type = 'document';
-            }
-            else if (media[i].endsWith('.mp4') || media[i].endsWith('.mkv') || media[i].endsWith('.avi')) {
-                media_type = 'video';
-            }
-
-            await db_query(sql, [post_id, i, media_type, media[i]]);
+            const { data, error } = await supabase
+                .from('media')
+                .insert([
+                    { post_id: post_id, link: media[i] }
+                ]);
         }
     }
-
-    if (is_private) {
-        sql = `
-            INSERT INTO private_notice (post_id, stu_id)
-            VALUES ($1, $2)
-        `;
-        for (let i = 0; i < student_list.length; i++) {
-            await db_query(sql, [post_id, student_list[i]]);
-        }
-    }
-    return result;
 }
 
 async function delete_notice(post_id) {
-    const sql = `
-        DELETE FROM post
-        WHERE post_id = $1
-    `;
-    const result = await db_query(sql, [post_id]);
-    return result;
+    const { data, error } = await supabase
+        .from('post')
+        .delete()
+        .eq('post_id', post_id);
+
+    if (error) {
+        return error;
+    }
+
+    return { message: 'OK' };
 }
 
 async function is_notice_available(post_id) {
-    const sql = `
-        SELECT * FROM post
-        WHERE post_id = $1
-    `;
-    const result = await db_query(sql, [post_id]);
-    return result.rows.length > 0;
-}
+    const { data, error } = await supabase
+        .from('notice')
+        .select('post_id')
+        .eq('post_id', post_id);
 
-async function get_media(post_id) {
-    const sql = `
-        SELECT media_link FROM media
-        WHERE post_id = $1
-    `;
-    const result = await db_query(sql, [post_id]);
-    return result.rows;
+    if (error) {
+        return error;
+    }
+
+    if (data.length > 0) {
+        return true;
+    }
+    return false;
 }
 
 module.exports = {
@@ -133,6 +145,5 @@ module.exports = {
     get_notice,
     create_notice,
     delete_notice,
-    is_notice_available,
-    get_media
+    is_notice_available
 }

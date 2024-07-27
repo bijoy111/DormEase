@@ -1,46 +1,140 @@
-const { db_query } = require('../db');
+const { supabase } = require('../db/connection');
+
+//--- student functions ---//
 
 async function get_rooms() {
-    sql = `
-        SELECT seat_allocation.room_no, seat_allocation.seat_no, student.name, student.stu_id, student.dept, student.level_term
-        FROM seat_allocation
-        INNER JOIN student ON seat_allocation.stu_id = student.stu_id
-        ORDER BY seat_allocation.room_no ASC;
-    `;
-    const result = await db_query(sql);
-    return result.rows;
+    rooms = {};
+    for (i = 1; i <= 5; i++) {
+        num1 = i * 100;
+        num2 = i * 1000;
+
+        for (j = 1; j <= 5; j++) {
+            const { data, error } = await supabase
+                .from('student')
+                .select('*')
+                .eq('room_no', num1 + j)
+            rooms[num1 + j] = data;
+
+            const { data: data_, error: error_ } = await supabase
+                .from('student')
+                .select('*')
+                .eq('room_no', num2 + j)
+            rooms[num2 + j] = data_;
+        }
+    }
+    return rooms;
 }
 
-async function apply_room_allotment(stu_id, room_no, seat_no, home_district, school, college) {
-    sql = `
-        INSERT INTO applicant (stu_id, room_no, seat_no, home_district, school, college)
-        VALUES ($1, $2, $3, $4, $5, $6);
-    `;
-    const result = await db_query(sql, [stu_id, room_no, seat_no, home_district, school, college]);
-    return result;
+async function apply_room_allotment(stu_id, home_district, school, college) {
+    const { data, error } = await supabase
+        .from('room_allot_applicant')
+        .insert([
+            { stu_id: stu_id, home_district: home_district, school: school, college: college }
+        ]);
 }
 
-async function apply_room_change(stu_id, room_no, seat_no, reason) {
-    sql = `
-        INSERT INTO applicant_room_change (stu_id, new_room_no, new_seat_no, reason)
-        VALUES ($1, $2, $3, $4);
-    `;
-    const result = await db_query(sql, [stu_id, room_no, seat_no, reason]);
-    return result;
+async function apply_room_change(stu_id, reason, prev_room_no, new_room_no) {
+    const { data, error } = await supabase
+        .from('room_change_applicant')
+        .insert([
+            { stu_id: stu_id, reason: reason, prev_room_no: prev_room_no, new_room_no: new_room_no }
+        ]);
 }
 
-async function apply_room_cancel(stu_id, reason) {
-    sql = `
-        INSERT INTO applicant_room_cancel (stu_id, reason)
-        VALUES ($1, $2);
-    `;
-    const result = await db_query(sql, [stu_id, reason]);
-    return result;
+async function leave_room(stu_id) {
+    const { data, error } = await supabase
+        .from('student')
+        .update({ room_no: null, is_resident: false })
+        .eq('stu_id', stu_id)
+
+    if (error) {
+        return error;
+    }
+
+    return data;
+}
+
+//--- admin functions ---//
+
+async function get_room_allotment_applicants() {
+    const { data, error } = await supabase
+        .from('room_allot_applicant')
+        .join('student', { 'room_allot_applicant.stu_id': 'student.stu_id' })
+        .select('*')
+
+    return data;
+}
+
+async function get_room_change_applicants() {
+    const { data, error } = await supabase
+        .from('room_change_applicant')
+        .join('student', { 'room_change_applicant.stu_id': 'student.stu_id' })
+        .select('*')
+
+    return data;
+}
+
+async function approve_room_allotment(stu_id, room_no) {
+    const { data, error } = await supabase
+        .from('student')
+        .update({ room_no: room_no, is_resident: true })
+        .eq('stu_id', stu_id)
+
+    if (error) {
+        return error;
+    }
+
+    return data;
+}
+
+async function approve_room_change(stu_id, room_no) {
+    const { data, error } = await supabase
+        .from('student')
+        .update({ room_no: room_no })
+        .eq('stu_id', stu_id)
+
+    if (error) {
+        return error;
+    }
+
+    return data;
+}
+
+async function reject_room_allotment(stu_id) {
+    const { data, error } = await supabase
+        .from('room_allot_applicant')
+        .delete()
+        .eq('stu_id', stu_id)
+
+    if (error) {
+        return error;
+    }
+
+    return data;
+}
+
+async function reject_room_change(stu_id) {
+    const { data, error } = await supabase
+        .from('room_change_applicant')
+        .delete()
+        .eq('stu_id', stu_id)
+
+    if (error) {
+        return error;
+    }
+
+    return data;
 }
 
 module.exports = {
     get_rooms,
     apply_room_allotment,
     apply_room_change,
-    apply_room_cancel
+    leave_room,
+    get_room_allotment_applicants,
+    get_room_change_applicants,
+    approve_room_allotment,
+    approve_room_change,
+    reject_room_allotment,
+    reject_room_change
 }
