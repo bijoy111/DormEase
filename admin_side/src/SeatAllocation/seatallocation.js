@@ -69,6 +69,7 @@ export function SeatAllocation() {
 
   const fetchRooms = async () => {
     const response = await axios.get('http://localhost:3000/seat_allocation');
+    console.log('data', response.data);
     setRooms(response.data);
   };
 

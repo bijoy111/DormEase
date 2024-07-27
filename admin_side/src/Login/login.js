@@ -61,9 +61,11 @@ export function LoginCard() {
                     <br />
                     <div className="d-grid gap-2 mt-3">
                         {/* <NavLink to="/dashboard"> */}
-                        <button type="submit" className="btn btn-primary" style={{ width: '320px', color: 'black' }} onClick={handleSubmitClick}>
+                        <button type="submit" className="btn btn-primary" style={{ width: '320px', color: 'black', marginBottom: '20px' }} onClick={handleSubmitClick}>
                             Submit
                         </button>
+                        <br />
+                        <br />
                         {/* </NavLink> */}
                     </div>
                 </div>
