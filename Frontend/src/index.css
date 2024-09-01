@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.basic-btn {
+  @apply mt-auto ml-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded;
+}
+
+.basic-card {
+  @apply bg-white shadow-md rounded-lg p-6;
+}
+
+.input-box {
+  @apply border-2 border-gray-300 hover:border-black w-full p-2 mb-4;
+}
