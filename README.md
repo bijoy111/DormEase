@@ -1,5 +1,36 @@
-# DormEase
-Team Project for CSE408 (Software Development Sessional) course.
+# DormEase  
+
+DormEase is a web platform designed to simplify managing hall operations. It helps students and hall authorities stay connected and easily handle daily tasks.  
+
+## Features  
+
+1. **Newsfeed for Students**  
+   - Keep students updated with hall news and events.  
+   - Share important updates like cultural programs, maintenance schedules, and more.  
+
+2. **Notice Board**  
+   - Share public announcements for all students, like exam schedules or event details.  
+   - Send private notices to specific students or groups for important matters.  
+
+3. **Seat Allocation**  
+   - Students can see available seats, apply for them, and check their application status.  
+   - Authorities can manage and assign seats transparently.  
+
+4. **Complaint Management**  
+   - Students can report issues (e.g., broken furniture, maintenance problems) directly through the platform.  
+   - Complaints are organized for quick action, and students can track the resolution process.  
+
+5. **Dining Coordination**  
+   - Plan meal options and manage meal schedules efficiently.  
+   - Track attendance and ensure smooth dining operations for everyone.  
+
+## Why DormEase?  
+- Improves communication between students and hall authorities.  
+- Makes everyday hall operations more straightforward to manage.  
+- Saves time and effort for everyone involved.  
+
+DormEase is built to create a better experience for dorm students and make hall management stress-free for authorities.  
+
 
 Architecture:
 ---
