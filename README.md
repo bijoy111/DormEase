@@ -93,3 +93,19 @@ DormEase is built to create a better experience for dorm students and make hall 
      ```
      
      Now the frontend server will be available at `localhost:3002`
+
+
+
+# Picture of some pages of this project are given 
+>
+>SignUp Page
+>
+><img src ="./README_assets/signup.JPG"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+>
+>Login Page
+>
+><img src ="./README_assets/login.JPG"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+> 
+>Home Page
+>
+><img src ="./README_assets/user_home1.JPG"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
