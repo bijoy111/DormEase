@@ -96,16 +96,32 @@ DormEase is built to create a better experience for dorm students and make hall 
 
 
 
-# Picture of some pages of this project are given 
+# some pages of this project are shown 
 >
->SignUp Page
+>login page (student end)
 >
-><img src ="./README_assets/signup.JPG"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+><img src ="./assets/login.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
 >
->Login Page
+>dashboard Page (student end)
 >
-><img src ="./README_assets/login.JPG"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+><img src ="./assets/dashboard.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
 > 
->Home Page
+>notice page (student end)
 >
-><img src ="./README_assets/user_home1.JPG"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+><img src ="./assets/notices.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+>
+>view profile page (student end)
+>
+><img src ="./assets/view_profile.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+>
+>complain profile page (student end)
+>
+><img src ="./assets/complain.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+>
+>notice page (admin end)
+>
+><img src ="./assets/admin_notice.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
+>
+>seat allocation page (admin end)
+>
+><img src ="./assets/admin_seat_allocation.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
