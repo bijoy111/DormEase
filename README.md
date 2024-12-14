@@ -2,6 +2,21 @@
 
 DormEase is a web platform designed to simplify managing hall operations. It helps students and hall authorities stay connected and easily handle daily tasks.  
 
+Youtube Link: [here](https://youtu.be/5yHGhPkHLYI?si=smDduKCGdDzLPtOj)
+
+Architecture:
+---
+Model-View-Controller architecture
+
+Tech Stack & Tools:
+---
+- Frontend: <code>React</code>, <code>HTML</code>, <code>CSS</code>
+- Backend: <code>node js</code>, <code>express js</code>
+- Database: <code>PostgreSQL</code>
+- multipart/form-data: <code>multer</code>
+- API documentation: <code>swagger-jsdoc</code>, <code>swagger-ui-express</code>
+- API testing: <code>postman</code>
+
 ## Features  
 
 1. **Newsfeed for Students**  
@@ -22,30 +37,9 @@ DormEase is a web platform designed to simplify managing hall operations. It hel
 
 5. **Dining Coordination**  
    - Plan meal options and manage meal schedules efficiently.  
-   - Track attendance and ensure smooth dining operations for everyone.  
-
-## Why DormEase?  
-- Improves communication between students and hall authorities.  
-- Makes everyday hall operations more straightforward to manage.  
-- Saves time and effort for everyone involved.  
-
+   - Track attendance and ensure smooth dining operations for everyone.
+     
 DormEase is built to create a better experience for dorm students and make hall management stress-free for authorities.  
-
-
-Architecture:
----
-Model-View-Controller architecture
-
-Tech Stack & Tools:
----
-- Frontend: <code>React</code>, <code>HTML</code>, <code>CSS</code>
-- Backend: <code>node js</code>, <code>express js</code>
-- Database: <code>PostgreSQL</code>
-- multipart/form-data: <code>multer</code>
-- API documentation: <code>swagger-jsdoc</code>, <code>swagger-ui-express</code>
-- API testing: <code>postman</code>
-
-Youtube Link: [here](https://youtu.be/5yHGhPkHLYI?si=smDduKCGdDzLPtOj)
 
 ## Things to do after pulling or cloning
 
