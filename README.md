@@ -35,7 +35,7 @@ Youtube Link: [here](https://youtu.be/5yHGhPkHLYI?si=smDduKCGdDzLPtOj)
      
      Now the Backend server will be available at `localhost:3000`
 
-- For frontend
+- For frontend (student)
 
   1. Go to the `create-react-app` directory and install dependencies by
 
@@ -51,3 +51,20 @@ Youtube Link: [here](https://youtu.be/5yHGhPkHLYI?si=smDduKCGdDzLPtOj)
      ```
      
      Now the frontend server will be available at `localhost:3001`
+
+- For frontend (admin)
+
+  1. Go to the `admin_side` directory and install dependencies by
+
+     ```
+     cd admin_side
+     npm install
+     ```
+
+  2. Now start the server by
+     
+     ```
+     npm start
+     ```
+     
+     Now the frontend server will be available at `localhost:3002`
