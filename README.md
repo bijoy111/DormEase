@@ -114,7 +114,7 @@ DormEase is built to create a better experience for dorm students and make hall 
 >
 ><img src ="./assets/view_profile.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
 >
->complain profile page (student end)
+>complain page (student end)
 >
 ><img src ="./assets/complain.png"  width="60%" style="display: block;margin-left: auto;margin-right: auto;">
 >
