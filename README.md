@@ -21,14 +21,18 @@ Youtube Link: [here](https://youtu.be/5yHGhPkHLYI?si=smDduKCGdDzLPtOj)
 - For backend
 
   1. Go to the `Backend` directory and install dependencies by
+     
      ```
      cd Backend
      npm install
      ```
-  2. Now start the server by
+     
+  3. Now start the server by
+     
      ```
      npm start
      ```
+     
      Now the Backend server will be available at `localhost:3000`
 
 - For frontend
@@ -38,11 +42,12 @@ Youtube Link: [here](https://youtu.be/5yHGhPkHLYI?si=smDduKCGdDzLPtOj)
      ```
      cd create-react-app
      npm install
-
      ```
 
   2. Now start the server by
+     
      ```
      npm start
      ```
+     
      Now the frontend server will be available at `localhost:3001`
